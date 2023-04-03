@@ -74,13 +74,13 @@ public class App {
 		while (!done) {
 
 			System.out.println("What would you like to do with " + selectedStation.getName() + "?");
-			System.out.println("(0) Update Name and/or ID, (1) Update Stopping Information, (4) Show Station Info, (E) Edit Different Station or (Q) Quit:");
+			System.out.println("(0) Update Name and/or ID, (1) Update Stopping Information, (I) Show Station Info, (E) Edit Different Station or (Q) Quit:");
 			String response = input.nextLine().toUpperCase();
 
 			switch (response) {
 				case "0" -> updateNameAndID();
 				case "1" -> updateStoppingInfo();
-				case "4" -> System.out.println(selectedStation.stationInfo());
+				case "I" -> System.out.println(selectedStation.stationInfo());
 				case "E" -> done = true;
 				case "Q" -> shutDown();
 				default -> System.out.println("Not a valid input please try again");
@@ -149,7 +149,7 @@ public class App {
 				System.out.print("What would you like to change " + selectedStation.getName() + "'s Stopped At date to be: ");
 				date = input.nextLine();
 
-				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s Stopped At date to be " + date + " (Y = yes or N = No) ");
+				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s Stopped At date to be " + date + " (Y = yes or N = No): ");
 				confirmed = input.nextLine().toUpperCase();
 			} while (confirmed.equals("N"));
 			stationList.updateStoppedAt(selectedStation, date);
@@ -161,7 +161,7 @@ public class App {
 				System.out.print("What would you like to change " + selectedStation.getName() + "'s Passed Through (Stopping) date to be: ");
 				date = input.nextLine();
 
-				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s Passed Through (Stopping) date to be " + date + " (Y = yes or N = No) ");
+				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s Passed Through (Stopping) date to be " + date + " (Y = yes or N = No): ");
 				confirmed = input.nextLine().toUpperCase();
 			} while (confirmed.equals("N"));
 			stationList.updatePassedThroughStopping(selectedStation, date);
@@ -173,7 +173,7 @@ public class App {
 				System.out.print("What would you like to change " + selectedStation.getName() + "'s Passed Through (Not Stopping) date to be: ");
 				date = input.nextLine();
 
-				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s Passed Through (Not Stopping) date to be " + date + " (Y = yes or N = No) ");
+				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s Passed Through (Not Stopping) date to be " + date + " (Y = yes or N = No): ");
 				confirmed = input.nextLine().toUpperCase();
 			} while (confirmed.equals("N"));
 			stationList.updatePassedThrough(selectedStation, date);

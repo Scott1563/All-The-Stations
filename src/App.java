@@ -18,18 +18,45 @@ public class App {
 
 		while (!quit) {
 			System.out.println("What would you like to do: ");
-			System.out.print("(1) Edit/Select A Station, (2) Show Stats, (3) Show All Station Info or (Q) Quit: ");
+			System.out.print("(1) Edit/Select A Station, (2) Show Stats, (3) Show All Station Info, (4) Add New Station or (Q) Quit: ");
 			String response = input.next().toUpperCase();
 
 			switch (response) {
 				case "1" -> stationSelected();
-				case "2" -> System.out.println("No ones here :)");
-				case "3" -> System.out.println("No ones here :)");
+				case "2" -> statShower();
+				case "3" -> allTheStationsDisplay();
+				case "4" -> System.out.println("No ones here ;)");
 				case "Q" -> quit = true;
 				default -> System.out.println("Not a valid input please try again");
 			}
 		}
 		shutDown();
+	}
+
+	private void statShower() {
+
+		System.out.println("No ones here :)");
+	}
+
+	private void allTheStationsDisplay() {
+
+		String response;
+		boolean back = false;
+
+		do {
+			System.out.print("What would you like to see (1) = Trains, (2) = Trams, (3) = Underground (B) = Back: ");
+			response = input.next().toUpperCase();
+
+			switch (response) {
+				case "1" -> stationList.showList("Train");
+				case "2" -> stationList.showList("Tram");
+				case "3" -> stationList.showList("Underground");
+				case "B" -> back = true;
+				default -> System.out.println("Not a valid input please try again");
+			}
+
+		} while (!(response.equals("1") || response.equals("2") || response.equals("3") || back));
+
 	}
 
 	private void stationSelected() {

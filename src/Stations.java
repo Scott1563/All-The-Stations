@@ -7,6 +7,7 @@ public class Stations {
 	private static Stations stationsInstance;
 	private final ArrayList<Station> stationList;
 	private final File stationFile;
+	private int largestName = 0;
 
 	private Stations() {
 		stationList = new ArrayList<>();
@@ -32,6 +33,9 @@ public class Stations {
 			while ((line = br.readLine()) != null) {
 				String[] stationInfo = line.split(",");
 				stationList.add(new Station(stationInfo[0], stationInfo[1], stationInfo[2], stationInfo[3], stationInfo[4], stationInfo[5], stationInfo[6]));
+				if (stationInfo[1].length() > largestName) {
+					largestName = stationInfo[1].length();
+				}
 			}
 			br.close();
 		} catch(IOException e) {
@@ -135,5 +139,48 @@ public class Stations {
 		}
 
 		station.setPassedThrough(date);
+	}
+
+	public void showList(String stationType) {
+
+		for (Station station : stationList) {
+			if (station.getStopType().equals(stationType)) {
+				System.out.print("ID: " + station.getId() + ", Name: ");
+
+				String name = station.getName() + ",";
+
+				while (name.length() != largestName + 1) {
+					name += " ";
+				}
+
+				System.out.print(name + " Is Request Stop: " + (station.getRequestStop() ? "Yes," : "No, ") + " Stopped At: ");
+
+				if (station.getStoppedAt().equals("NULL")) {
+					System.out.print("NULL,      ");
+				} else if (station.getStoppedAt().equals("N/A")) {
+					System.out.print("N/A,       ");
+				} else {
+					System.out.print(station.getStoppedAt()+ ",");
+				}
+				System.out.print(" Passed Through (Stopping): ");
+				if (station.getPassedThroughStopping().equals("NULL")) {
+					System.out.print("NULL,      ");
+				} else if (station.getPassedThroughStopping().equals("N/A")) {
+					System.out.print("N/A,       ");
+				} else {
+					System.out.print(station.getPassedThroughStopping()+ ",");
+				}
+				System.out.print(" Passed Through (Not Stopping): ");
+				if (station.getPassedThrough().equals("NULL")) {
+					System.out.print("NULL");
+
+				} else if (station.getPassedThrough().equals("N/A")) {
+					System.out.print("N/A");
+				} else {
+					System.out.print(station.getPassedThrough());
+				}
+				System.out.println();
+			}
+		}
 	}
 }

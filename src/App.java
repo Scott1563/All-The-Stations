@@ -14,24 +14,48 @@ public class App {
 
 	public void start() {
 
-		// Station input
-		ArrayList<Station> stations = stationInput();
+		boolean quit = false;
 
-		// Station select
-		selectedStation = stationSelect(stations);
+		while (!quit) {
+			System.out.println("What would you like to do: ");
+			System.out.print("(1) Edit/Select A Station, (2) Show Stats, (3) Show All Station Info or (Q) Quit: ");
+			String response = input.next().toUpperCase();
 
-		// Station activities
-		stationActivities();
+			switch (response) {
+				case "1" -> stationSelected();
+				case "2" -> System.out.println("No ones here :)");
+				case "3" -> System.out.println("No ones here :)");
+				case "Q" -> quit = true;
+				default -> System.out.println("Not a valid input please try again");
+			}
+		}
+		shutDown();
 	}
 
-	public ArrayList<Station> stationInput() {
+	private void stationSelected() {
+
+		boolean quit = false;
+
+		while (!quit) {
+			// Station input
+			ArrayList<Station> stations = stationInput();
+
+			// Station select
+			selectedStation = stationSelect(stations);
+
+			// Station activities
+			quit = stationActivities() ;
+		}
+	}
+
+	private ArrayList<Station> stationInput() {
 
 		ArrayList<Station> stations;
 		String response;
 
 		do {
 			System.out.print("Which station would you like to modify (please enter station ID or name): ");
-			response = input.nextLine();
+			response = input.next();
 			stations = stationList.findStationByID(response);
 			if (stations.size() == 0) {
 				stations = stationList.findStationByName(response);
@@ -45,7 +69,7 @@ public class App {
 		return stations;
 	}
 
-	public Station stationSelect(ArrayList<Station> stations) {
+	private Station stationSelect(ArrayList<Station> stations) {
 
 		Station currentStation = null;
 		int i = 1;
@@ -67,38 +91,41 @@ public class App {
 		return currentStation;
 	}
 
-	public void stationActivities() {
+	private boolean stationActivities() {
 
 		boolean done = false;
+		String response = "";
 
 		while (!done) {
 
 			System.out.println("What would you like to do with " + selectedStation.getName() + "?");
 			System.out.println("(0) Update Name and/or ID, (1) Update Stopping Information, (I) Show Station Info, (E) Edit Different Station or (Q) Quit:");
-			String response = input.nextLine().toUpperCase();
+			response = input.next().toUpperCase();
 
 			switch (response) {
 				case "0" -> updateNameAndID();
 				case "1" -> updateStoppingInfo();
 				case "I" -> System.out.println(selectedStation.stationInfo());
-				case "E" -> done = true;
-				case "Q" -> shutDown();
+				case "E", "Q" -> done = true;
 				default -> System.out.println("Not a valid input please try again");
 			}
-
 		}
-		start();
+		return !response.equals("E");
 	}
 
 	private void updateNameAndID() {
 
-		System.out.print("What would you like to update (N = name, I = ID or B = Both): ");
+		System.out.print("What would you like to update (N = name, I = ID or B = Both, Q = Back): ");
 		String response = input.nextLine().toUpperCase();
 
-		while (!(response.equals("N") || response.equals("I") || response.equals("B"))) {
+		while (!(response.equals("N") || response.equals("I") || response.equals("B") || response.equals("Q"))) {
 			System.out.println("Invalid input");
-			System.out.print("What would you like to update (N = name, I = ID or B = Both): ");
+			System.out.print("What would you like to update (N = name, I = ID or B = Both, Q = Back): ");
 			response = input.nextLine().toUpperCase();
+		}
+
+		if (response.equals("Q")) {
+			return;
 		}
 
 		String name = "";
@@ -110,8 +137,16 @@ public class App {
 				System.out.print("What would you like to change " + selectedStation.getName() + "'s name to be: ");
 				name = input.nextLine();
 
-				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s name to be " + name + " (Y = yes or N = No) ");
+				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s name to be " + name + " (Y = yes or N = No, B = Back) ");
 				confirmed = input.nextLine().toUpperCase();
+
+				if (confirmed.equals("B")) {
+					System.out.print("Are you sure you wanna leave without changing anything (Y = yes or N = No, B = Back) ");
+					confirmed = input.nextLine().toUpperCase();
+					if (confirmed.equals("Y")) {
+						return;
+					}
+				}
 			} while (confirmed.equals("N"));
 		}
 
@@ -121,8 +156,16 @@ public class App {
 				System.out.print("What would you like to change " + selectedStation.getName() + "'s ID to be: ");
 				ID = input.nextLine();
 
-				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s ID to be " + ID + " (Y = yes or N = No) ");
+				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s ID to be " + ID + " (Y = yes or N = No, B = Back)");
 				confirmed = input.nextLine().toUpperCase();
+
+				if (confirmed.equals("B")) {
+					System.out.print("Are you sure you wanna leave without changing anything (Y = yes or N = No, B = Back) ");
+					confirmed = input.nextLine().toUpperCase();
+					if (confirmed.equals("Y")) {
+						return;
+					}
+				}
 			} while (confirmed.equals("N"));
 		}
 
@@ -184,5 +227,4 @@ public class App {
 		stationList.saveFile();
 		System.exit(0);
 	}
-
 }

@@ -46,7 +46,7 @@ public class Station {
 	public void setPassedThrough(String passedThrough) { this.passedThrough = passedThrough; }
 
 	public String stationInfo() {
-		return "ID: " + id + ", name: " + name + ", Is Request Stop: " + (requestStop ? "Yes": "No") + ", Stopped At: " + stoppedAt + ", Passed Through (Stopping) " + passedThroughStopping + ", Passed Through (Not Stopping): " + passedThrough + "\n";
+		return "ID: " + id + ", name: " + name + ", Is Request Stop: " + (requestStop ? "Yes": "No") + ", Stopped At: " + stoppedAt + ", Passed Through (Stopping): " + passedThroughStopping + ", Passed Through (Not Stopping): " + passedThrough + "\n";
 	}
 
 	@Override

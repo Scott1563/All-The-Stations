@@ -5,7 +5,7 @@ import com.opencsv.*;
 public class Stations {
 
 	private static Stations stationsInstance;
-	private final ArrayList<Station> stationList;
+	private ArrayList<Station> stationList;
 	private final File stationFile;
 	private int largestName = 0;
 
@@ -21,6 +21,36 @@ public class Stations {
 			stationsInstance = new Stations();
 		}
 		return stationsInstance;
+	}
+
+	public void addStation(Station station) {
+		stationList.add(station);
+		quickSort(0, stationList.size()-1);
+	}
+
+	private void quickSort(int low, int high) {
+		if (low < high) {
+			int pivot = partition(low, high);
+			quickSort(low, pivot - 1);
+			quickSort(pivot + 1, high);
+		}
+	}
+
+	private int partition(int low, int high) {
+		Station pivot = stationList.get(high);
+		int i = low - 1;
+		for (int j = low; j < high; j++) {
+			if (stationList.get(j).getName().compareTo(pivot.getName()) < 0) {
+				i++;
+				Station temp = stationList.get(i);
+				stationList.set(i, stationList.get(j));
+				stationList.set(j, temp);
+			}
+		}
+		Station temp = stationList.get(i + 1);
+		stationList.set(i + 1, stationList.get(high));
+		stationList.set(high, temp);
+		return i + 1;
 	}
 
 	private void loadFile() {
@@ -44,10 +74,9 @@ public class Stations {
 	}
 
 	public void saveFile() {
+
 		try {
-
 			FileWriter outputFile = new FileWriter(stationFile);
-
 			CSVWriter writer = new CSVWriter(outputFile);
 
 			// adding header to csv
@@ -145,41 +174,41 @@ public class Stations {
 
 		for (Station station : stationList) {
 			if (station.getStopType().equals(stationType)) {
-				System.out.print("ID: " + station.getId() + ", Name: ");
+				System.out.print("|ID: " + station.getId() + " |Name: ");
 
-				String name = station.getName() + ",";
+				StringBuilder name = new StringBuilder(station.getName());
 
-				while (name.length() != largestName + 1) {
-					name += " ";
+				while (name.length() != largestName) {
+					name.append(" ");
 				}
 
-				System.out.print(name + " Is Request Stop: " + (station.getRequestStop() ? "Yes," : "No, ") + " Stopped At: ");
+				System.out.print(name + " |Is Request Stop: " + (station.getRequestStop() ? "Yes" : "No ") + " |Stopped At: ");
 
 				if (station.getStoppedAt().equals("NULL")) {
-					System.out.print("NULL,      ");
+					System.out.print("NULL      ");
 				} else if (station.getStoppedAt().equals("N/A")) {
-					System.out.print("N/A,       ");
+					System.out.print("N/A       ");
 				} else {
-					System.out.print(station.getStoppedAt()+ ",");
+					System.out.print(station.getStoppedAt());
 				}
-				System.out.print(" Passed Through (Stopping): ");
+				System.out.print(" |Passed Through (Stopping): ");
 				if (station.getPassedThroughStopping().equals("NULL")) {
-					System.out.print("NULL,      ");
+					System.out.print("NULL      ");
 				} else if (station.getPassedThroughStopping().equals("N/A")) {
-					System.out.print("N/A,       ");
+					System.out.print("N/A       ");
 				} else {
-					System.out.print(station.getPassedThroughStopping()+ ",");
+					System.out.print(station.getPassedThroughStopping());
 				}
-				System.out.print(" Passed Through (Not Stopping): ");
+				System.out.print(" |Passed Through (Not Stopping): ");
 				if (station.getPassedThrough().equals("NULL")) {
-					System.out.print("NULL");
+					System.out.print("NULL      ");
 
 				} else if (station.getPassedThrough().equals("N/A")) {
-					System.out.print("N/A");
+					System.out.print("N/A       ");
 				} else {
 					System.out.print(station.getPassedThrough());
 				}
-				System.out.println();
+				System.out.println("|");
 			}
 		}
 	}

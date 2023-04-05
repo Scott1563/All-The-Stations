@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
@@ -19,18 +20,120 @@ public class App {
 		while (!quit) {
 			System.out.println("What would you like to do: ");
 			System.out.print("(1) Edit/Select A Station, (2) Show Stats, (3) Show All Station Info, (4) Add New Station or (Q) Quit: ");
-			String response = input.next().toUpperCase();
+			String response = input.nextLine().toUpperCase();
 
 			switch (response) {
 				case "1" -> stationSelected();
 				case "2" -> statShower();
 				case "3" -> allTheStationsDisplay();
-				case "4" -> System.out.println("No ones here ;)");
+				case "4" -> addStation();
 				case "Q" -> quit = true;
 				default -> System.out.println("Not a valid input please try again");
 			}
 		}
 		shutDown();
+	}
+
+	private void addStation() {
+
+		System.out.print("What station Info do you have: \n(A) All (Basic & Dates), (S) Some (Basic & No Dates) or (B) Back: ");
+		String dataType = input.nextLine().toUpperCase();
+
+		while (!(dataType.equals("A") || dataType.equals("S") || dataType.equals("B"))) {
+			System.out.println("Invalid input");
+			System.out.print("What station Info do you have: \n(A) All (Basic & Dates), (S) Some (Basic & No Dates) or (B) Back: ");
+			dataType = input.nextLine().toUpperCase();
+		}
+
+		String stationType = "";
+
+		if (!(dataType.equals("B"))) {
+			System.out.print("What type of station is it: \n(1) Train, (2) Tram, (3) Underground or (B) Back): ");
+			stationType = input.nextLine().toUpperCase();
+
+			while (!(stationType.equals("1") || stationType.equals("2") || stationType.equals("3") || stationType.equals("B"))) {
+				System.out.println("Invalid input");
+				System.out.print("What type of station is it: \n(1) Train, (2) Tram, (3) Underground or (B) Back): ");
+				stationType = input.nextLine().toUpperCase();
+			}
+		}
+
+		if (dataType.equals("B") || stationType.equals("B")) {
+			return;
+		}
+
+		String ID;
+		String name = "";
+		String confirmed = "";
+		String requestStop;
+		String stopType = "";
+
+		// Grabs Station ID
+		if (stationType.equals("1")) {
+			do {
+				System.out.print("What is the new stations ID: ");
+				ID = input.nextLine();
+
+				if (ID.length() == 3 && stationList.findStationByID(ID).isEmpty()) {
+					System.out.print("Are you sure that " + ID + " is correct (Y) yes, (N) No or (B) = Back: ");
+					confirmed = input.nextLine().toUpperCase();
+
+					if (confirmed.equals("B")) {
+						System.out.print("Are you sure you wanna leave without adding a new Station (Y) yes or (N) No ");
+						confirmed = input.nextLine().toUpperCase();
+						if (confirmed.equals("Y")) {
+							return;
+						}
+					}
+				} else if (ID.length() != 3) {
+					System.out.println("Not a valid length!");
+				} else {
+					System.out.println("Station ID is already in use!");
+				}
+			} while (confirmed.equals("N"));
+		} else {
+			ID = "N/A";
+		}
+
+		do {
+			System.out.print("What is the new stations name: ");
+			name = input.nextLine();
+
+			System.out.print("Are you sure that " + name + " is correct (Y) yes, (N) No or (B) Back: ");
+			confirmed = input.nextLine().toUpperCase();
+			if (confirmed.equals("B")) {
+				System.out.print("Are you sure you wanna leave without adding a new Station (Y) yes or (N) No ");
+				confirmed = input.nextLine().toUpperCase();
+				if (confirmed.equals("Y")) {
+					return;
+				}
+			}
+		} while (confirmed.equals("N"));
+
+		do {
+			System.out.print("Is it a request Stop (YES) Yes or (NO) or (B) Back: ");
+			requestStop = input.nextLine();
+
+			if (confirmed.equals("B")) {
+				System.out.print("Are you sure you wanna leave without adding a new Station (Y) yes or (N) No ");
+				confirmed = input.nextLine().toUpperCase();
+				if (confirmed.equals("Y")) {
+					return;
+				}
+			}
+		} while (!(requestStop.equals("NO") || requestStop.equals("YES") || requestStop.equals("B")));
+
+		switch (stationType) {
+			case "1" -> stopType = "Train";
+			case "2" -> stopType = "Tram";
+			case "3" -> stopType = "Underground";
+		}
+
+		if (dataType.equals("S")) {
+			stationList.addStation(new Station(ID, name, stopType, requestStop));
+			return;
+		}
+		System.out.println("Not implemented yet :(");
 	}
 
 	private void statShower() {
@@ -45,7 +148,7 @@ public class App {
 
 		do {
 			System.out.print("What would you like to see (1) = Trains, (2) = Trams, (3) = Underground (B) = Back: ");
-			response = input.next().toUpperCase();
+			response = input.nextLine().toUpperCase();
 
 			switch (response) {
 				case "1" -> stationList.showList("Train");
@@ -82,7 +185,9 @@ public class App {
 
 		do {
 			System.out.print("Which station would you like to modify (please enter station ID or name): ");
-			response = input.next();
+			response = input.nextLine();
+
+
 			stations = stationList.findStationByID(response);
 			if (stations.size() == 0) {
 				stations = stationList.findStationByName(response);
@@ -99,20 +204,29 @@ public class App {
 	private Station stationSelect(ArrayList<Station> stations) {
 
 		Station currentStation = null;
-		int i = 1;
 
 		while (currentStation == null) {
+			int i = 1;
 			System.out.println("Which station is it:");
 			for (Station station : stations) {
 				System.out.println(i + ": " + station.getName() + " " + station.getId() + " (" + station.getStopType() + ")");
 				i++;
 			}
-
-			int index = input.nextInt() - 1;
-			if (index < 0 || index >= stations.size()) {
-				System.out.println("Invalid input");
-			} else {
-				currentStation = stations.get(index);
+			int index = 0;
+			boolean error = false;
+			try {
+				index = input.nextInt() - 1;
+			} catch (InputMismatchException e) {
+				System.out.println("Input Should be an integer");
+				error = true;
+			}
+			input.nextLine();
+			if (!error) {
+				if (index < 0 || index >= stations.size()) {
+					System.out.println("Invalid input");
+				} else {
+					currentStation = stations.get(index);
+				}
 			}
 		}
 		return currentStation;
@@ -127,7 +241,7 @@ public class App {
 
 			System.out.println("What would you like to do with " + selectedStation.getName() + "?");
 			System.out.println("(0) Update Name and/or ID, (1) Update Stopping Information, (I) Show Station Info, (E) Edit Different Station or (Q) Quit:");
-			response = input.next().toUpperCase();
+			response = input.nextLine().toUpperCase();
 
 			switch (response) {
 				case "0" -> updateNameAndID();

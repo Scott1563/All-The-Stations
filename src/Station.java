@@ -17,6 +17,10 @@ public class Station {
 		this.passedThrough = passedThrough;
 	}
 
+	public Station(String id, String name, String stopType, String requestStop) {
+		this(id, name, stopType, requestStop, "NULL", "NULL", "NULL");
+	}
+
 	public String getId() { return id; }
 
 	public String getName() { return name; }

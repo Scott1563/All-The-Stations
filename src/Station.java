@@ -2,23 +2,25 @@ public class Station {
 	private String id;
 	private String name;
 	private String stopType;
+	private String manager;
 	private boolean requestStop;
 	private String stoppedAt;
 	private String passedThroughStopping;
 	private String passedThrough;
 
-	public Station(String id, String name, String stopType, String requestStop, String stoppedAt, String passedThroughStopping,  String passedThrough) {
+	public Station(String id, String name, String stopType, String manager, String requestStop, String stoppedAt, String passedThroughStopping,  String passedThrough) {
 		this.id = id;
 		this.name = name;
 		this.stopType = stopType;
+		this.manager = manager;
 		this.requestStop = requestStop.equals("YES");
 		this.stoppedAt = stoppedAt;
 		this.passedThroughStopping = passedThroughStopping;
 		this.passedThrough = passedThrough;
 	}
 
-	public Station(String id, String name, String stopType, String requestStop) {
-		this(id, name, stopType, requestStop, "NULL", "NULL", "NULL");
+	public Station(String id, String name, String stopType, String manager, String requestStop) {
+		this(id, name, stopType, manager, requestStop, "NULL", "NULL", "NULL");
 	}
 
 	public String getId() { return id; }
@@ -26,6 +28,8 @@ public class Station {
 	public String getName() { return name; }
 
 	public String getStopType() { return stopType; }
+
+	public String getManager() { return manager; }
 
 	public boolean getRequestStop() { return requestStop; }
 
@@ -40,6 +44,8 @@ public class Station {
 	public void setName(String name) { this.name = name; }
 
 	public void setStopType(String stopType) { this.stopType = stopType; }
+
+	public void setManager(String manager) { this.manager = manager; }
 
 	public void setRequestStop(boolean requestStop) { this.requestStop = requestStop; }
 

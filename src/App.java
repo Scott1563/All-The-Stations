@@ -67,6 +67,7 @@ public class App {
 		String confirmed = "";
 		String requestStop;
 		String stopType = "";
+		String manager = "";
 
 		// Grabs Station ID
 		if (stationType.equals("1")) {
@@ -95,6 +96,7 @@ public class App {
 			ID = "N/A";
 		}
 
+		// Station Name
 		do {
 			System.out.print("What is the new stations name: ");
 			name = input.nextLine();
@@ -110,6 +112,7 @@ public class App {
 			}
 		} while (confirmed.equals("N"));
 
+		// Request Stop
 		do {
 			System.out.print("Is it a request Stop (YES) Yes or (NO) or (B) Back: ");
 			requestStop = input.nextLine();
@@ -123,16 +126,35 @@ public class App {
 			}
 		} while (!(requestStop.equals("NO") || requestStop.equals("YES") || requestStop.equals("B")));
 
+		// Station Manager
+		do {
+			System.out.print("Who manages the station: ");
+			manager = input.nextLine();
+
+			System.out.print("Are you sure that " + manager + " manages the station (Y) yes, (N) No or (B) Back: ");
+			confirmed = input.nextLine().toUpperCase();
+			if (confirmed.equals("B")) {
+				System.out.print("Are you sure you wanna leave without adding a new Station (Y) yes or (N) No ");
+				confirmed = input.nextLine().toUpperCase();
+				if (confirmed.equals("Y")) {
+					return;
+				}
+			}
+		} while (!confirmed.equals("Y"));
+
+		// Station Type
 		switch (stationType) {
 			case "1" -> stopType = "Train";
 			case "2" -> stopType = "Tram";
 			case "3" -> stopType = "Underground";
 		}
 
+		// No Date data
 		if (dataType.equals("S")) {
-			stationList.addStation(new Station(ID, name, stopType, requestStop));
+			stationList.addStation(new Station(ID, name, stopType, manager, requestStop));
 			return;
 		}
+
 		System.out.println("Not implemented yet :(");
 	}
 

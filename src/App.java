@@ -63,11 +63,11 @@ public class App {
 		}
 
 		String ID;
-		String name = "";
+		String name;
 		String confirmed = "";
 		String requestStop;
 		String stopType = "";
-		String manager = "";
+		String manager;
 
 		// Grabs Station ID
 		if (stationType.equals("1")) {

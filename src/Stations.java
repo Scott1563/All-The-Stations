@@ -5,7 +5,7 @@ import com.opencsv.*;
 public class Stations {
 
 	private static Stations stationsInstance;
-	private ArrayList<Station> stationList;
+	private final ArrayList<Station> stationList;
 	private final File stationFile;
 	private int largestName = 0;
 

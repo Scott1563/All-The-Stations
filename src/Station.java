@@ -1,4 +1,5 @@
 public class Station {
+
 	private String id;
 	private String name;
 	private String stopType;

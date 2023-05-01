@@ -20,7 +20,7 @@ ARD,Ardgay,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
 AUI,Ardlui,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
 ADS,Ardrossan Harbour,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
 ASB,Ardrossan South Beach,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
-AND,Ardrossan Town,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ADN,Ardrossan Town,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
 AGS,Argyle Street,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
 ARG,Arisaig,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
 ARM,Armadale,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
@@ -194,7 +194,7 @@ HLW,Hillington West,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
 HLY,Holytown,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
 HOZ,Howwood,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
 HNT,Huntly,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
-HTN,Hyndland,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HYN,Hyndland,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
 IBM,IBM,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
 INS,Insch,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
 IGD,Invergordon,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL

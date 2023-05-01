@@ -1,363 +1,363 @@
-Station ID,Station Name,Stop Type,Managed By,Request Stop,Stopped At,Passed Through (Stopped),Passed Through (Not Stopped)
-ABD,Aberdeen,Train,Scotrail,NO,NULL,NULL,NULL
-AUR,Aberdour,Train,Scotrail,NO,NULL,NULL,NULL
-AAT,Achanalt,Train,Scotrail,YES,NULL,NULL,NULL
-ACN,Achnasheen,Train,Scotrail,NO,NULL,NULL,NULL
-ACH,Achnashellach,Train,Scotrail,YES,NULL,NULL,NULL
-ADW,Addiewell,Train,Scotrail,NO,NULL,NULL,NULL
-AIR,Airbles,Train,Scotrail,NO,NULL,NULL,NULL
-ADR,Airdrie,Train,Scotrail,NO,NULL,NULL,NULL
-AXP,Alexandra Parade,Train,Scotrail,NO,NULL,NULL,NULL
-ALX,Alexandria,Train,Scotrail,NO,NULL,NULL,NULL
-ALO,Alloa,Train,Scotrail,NO,NULL,NULL,NULL
-ASS,Alness,Train,Scotrail,NO,NULL,NULL,NULL
-ABC,Altnabreac,Train,Scotrail,YES,NULL,NULL,NULL
-AND,Anderston,Train,Scotrail,NO,NULL,NULL,NULL
-ANN,Annan,Train,Scotrail,NO,NULL,NULL,NULL
-ANL,Anniesland,Train,Scotrail,NO,NULL,NULL,NULL
-ARB,Arbroath,Train,Scotrail,NO,NULL,NULL,NULL
-ARD,Ardgay,Train,Scotrail,NO,NULL,NULL,NULL
-AUI,Ardlui,Train,Scotrail,YES,NULL,NULL,NULL
-ADS,Ardrossan Harbour,Train,Scotrail,NO,NULL,NULL,NULL
-ASB,Ardrossan South Beach,Train,Scotrail,NO,NULL,NULL,NULL
-AND,Ardrossan Town,Train,Scotrail,NO,NULL,NULL,NULL
-AGS,Argyle Street,Train,Scotrail,NO,NULL,NULL,NULL
-ARG,Arisaig,Train,Scotrail,NO,NULL,NULL,NULL
-ARM,Armadale,Train,Scotrail,NO,NULL,NULL,NULL
-ART,Arrochar & Tarbet,Train,Scotrail,NO,NULL,NULL,NULL
-ASF,Ashfield,Train,Scotrail,NO,NULL,NULL,NULL
-ATT,Attadale,Train,Scotrail,YES,NULL,NULL,NULL
-AUK,Auchinleck,Train,Scotrail,NO,NULL,NULL,NULL
-AVM,Aviemore,Train,Scotrail,NO,NULL,NULL,NULL
-AYR,Ayr,Train,Scotrail,NO,NULL,NULL,NULL
-BIO,Baillieston,Train,Scotrail,NO,NULL,NULL,NULL
-BHC,Balloch,Train,Scotrail,NO,NULL,NULL,NULL
-BNV,Banavie,Train,Scotrail,NO,NULL,NULL,NULL
-BSS,Barassie,Train,Scotrail,NO,NULL,NULL,NULL
-BGI,Bargeddie,Train,Scotrail,NO,NULL,NULL,NULL
-BNL,Barnhill,Train,Scotrail,NO,NULL,NULL,NULL
-BRR,Barrhead,Train,Scotrail,NO,NULL,NULL,NULL
-BRL,Barrhill,Train,Scotrail,NO,NULL,NULL,NULL
-BYL,Barry Links,Train,Scotrail,NO,NULL,NULL,NULL
-BHG,Bathgate,Train,Scotrail,NO,NULL,NULL,NULL
-BRN,Bearsden,Train,Scotrail,NO,NULL,NULL,NULL
-BSL,Beasdale,Train,Scotrail,YES,NULL,NULL,NULL
-BEL,Beauly,Train,Scotrail,NO,NULL,NULL,NULL
-BLG,Bellgrove,Train,Scotrail,NO,NULL,NULL,NULL
-BLH,Bellshill,Train,Scotrail,NO,NULL,NULL,NULL
-BBG,Bishopbriggs,Train,Scotrail,NO,NULL,NULL,NULL
-BPT,Bishopton,Train,Scotrail,NO,NULL,NULL,NULL
-BKR,Blackridge,Train,Scotrail,NO,NULL,NULL,NULL
-BLA,Blair Atholl,Train,Scotrail,NO,NULL,NULL,NULL
-BAI,Blairhill,Train,Scotrail,NO,NULL,NULL,NULL
-BLT,Blantyre,Train,Scotrail,NO,NULL,NULL,NULL
-BGS,Bogston,Train,Scotrail,NO,NULL,NULL,NULL
-BWG,Bowling,Train,Scotrail,NO,NULL,NULL,NULL
-BCN,Branchton,Train,Scotrail,NO,NULL,NULL,NULL
-BRC,Breich,Train,Scotrail,NO,NULL,NULL,NULL
-BEA,Bridge of Allan,Train,Scotrail,NO,NULL,NULL,NULL
-BRO,Bridge of Orchy,Train,Scotrail,NO,NULL,NULL,NULL
-BDG,Bridgeton,Train,Scotrail,NO,NULL,NULL,NULL
-BRA,Brora,Train,Scotrail,NO,NULL,NULL,NULL
-BYF,Broughty Ferry,Train,Scotrail,NO,NULL,NULL,NULL
-BSU,Brunstane,Train,Scotrail,NO,NULL,NULL,NULL
-BUI,Burnside,Train,Scotrail,NO,NULL,NULL,NULL
-BTS,Burntisland,Train,Scotrail,NO,NULL,NULL,NULL
-BUS,Busby,Train,Scotrail,NO,NULL,NULL,NULL
-CAC,Caldercruix,Train,Scotrail,NO,NULL,NULL,NULL
-CBL,Cambuslang,Train,Scotrail,NO,NULL,NULL,NULL
-CMO,Camelon,Train,Scotrail,NO,NULL,NULL,NULL
-CDD,Cardenden,Train,Scotrail,NO,NULL,NULL,NULL
-CDO,Cardonald,Train,Scotrail,NO,NULL,NULL,NULL
-CDR,Cardross,Train,Scotrail,NO,NULL,NULL,NULL
-CRF,Carfin,Train,Scotrail,NO,NULL,NULL,NULL
-CLU,Carluke,Train,Avanti West Coast,NO,NULL,NULL,NULL
-CML,Carmyle,Train,Scotrail,NO,NULL,NULL,NULL
-CAN,Carnoustie,Train,Scotrail,NO,NULL,NULL,NULL
-CAY,Carntyne,Train,Scotrail,NO,NULL,NULL,NULL
-CAG,Carrbridge,Train,Scotrail,NO,NULL,NULL,NULL
-CRS,Carstairs,Train,Scotrail,NO,NULL,NULL,NULL
-CDY,Cartsdyke,Train,Scotrail,NO,NULL,NULL,NULL
-CCT,Cathcart,Train,Scotrail,NO,NULL,NULL,NULL
-CHC,Charing Cross,Train,Scotrail,NO,NULL,NULL,NULL
-CTE,Chatelherault,Train,Scotrail,NO,NULL,NULL,NULL
-CKS,Clarkston,Train,Scotrail,NO,NULL,NULL,NULL
-CEA,Cleland,Train,Scotrail,NO,NULL,NULL,NULL
-CYK,Clydebank,Train,Scotrail,NO,NULL,NULL,NULL
-CBC,Coatbridge Central,Train,Scotrail,NO,NULL,NULL,NULL
-CBS,Coatbridge Sunnyside,Train,Scotrail,NO,NULL,NULL,NULL
-COA,Coatdyke,Train,Scotrail,NO,NULL,NULL,NULL
-CON,Connel Ferry,Train,Scotrail,NO,NULL,NULL,NULL
-CBD,Conon Bridge,Train,Scotrail,NO,NULL,NULL,NULL
-CKH,Corkerhill,Train,Scotrail,NO,NULL,NULL,NULL
-CPA,Corpach,Train,Scotrail,NO,NULL,NULL,NULL
-CRR,Corrour,Train,Scotrail,NO,NULL,NULL,NULL
-COW,Cowdenbeath,Train,Scotrail,NO,NULL,NULL,NULL
-CGD,Craigendoran,Train,Scotrail,NO,NULL,NULL,NULL
-CNR,Crianlarich,Train,Scotrail,NO,NULL,NULL,NULL
-CFF,Croftfoot,Train,Scotrail,NO,NULL,NULL,NULL
-CKT,Crookston,Train,Scotrail,NO,NULL,NULL,NULL
-COI,Crosshill,Train,Scotrail,NO,NULL,NULL,NULL
-CMY,Crossmyloof,Train,Scotrail,NO,NULL,NULL,NULL
-CRO,Croy,Train,Scotrail,NO,NULL,NULL,NULL
-CUA,Culrain,Train,Scotrail,YES,NULL,NULL,NULL
-CUB,Cumbernauld,Train,Scotrail,NO,NULL,NULL,NULL
-CUP,Cupar,Train,Scotrail,NO,NULL,NULL,NULL
-CUH,Curriehill,Train,Scotrail,NO,NULL,NULL,NULL
-DAG,Dalgety Bay,Train,Scotrail,NO,NULL,NULL,NULL
-DAL,Dalmally,Train,Scotrail,NO,NULL,NULL,NULL
-DAK,Dalmarnock,Train,Scotrail,NO,NULL,NULL,NULL
-DAM,Dalmeny,Train,Scotrail,NO,NULL,NULL,NULL
-DMR,Dalmuir,Train,Scotrail,NO,NULL,NULL,NULL
-DLR,Dalreoch,Train,Scotrail,NO,NULL,NULL,NULL
-DLY,Dalry,Train,Scotrail,NO,NULL,NULL,NULL
-DLW,Dalwhinnie,Train,Scotrail,NO,NULL,NULL,NULL
-DIN,Dingwall,Train,Scotrail,NO,NULL,NULL,NULL
-DRM,Drem,Train,Scotrail,NO,NULL,NULL,NULL
-DMC,Drumchapel,Train,Scotrail,NO,NULL,NULL,NULL
-DFR,Drumfrochar,Train,Scotrail,NO,NULL,NULL,NULL
-DRU,Drumgelloch,Train,Scotrail,NO,NULL,NULL,NULL
-DMY,Drumry,Train,Scotrail,NO,NULL,NULL,NULL
-DRN,Duirinish,Train,Scotrail,YES,NULL,NULL,NULL
-DST,Duke Street,Train,Scotrail,NO,NULL,NULL,NULL
-DBC,Dumbarton Central,Train,Scotrail,NO,NULL,NULL,NULL
-DBE,Dumbarton East,Train,Scotrail,NO,NULL,NULL,NULL
-DUM,Dumbreck,Train,Scotrail,NO,NULL,NULL,NULL
-DMF,Dumfries,Train,Scotrail,NO,NULL,NULL,NULL
-DUN,Dunbar,Train,Scotrail,NO,NULL,NULL,NULL
-DBL,Dunblane,Train,Scotrail,NO,NULL,NULL,NULL
-DCG,Duncraig,Train,Scotrail,YES,NULL,NULL,NULL
-DEE,Dundee,Train,Scotrail,NO,NULL,NULL,NULL
-DFE,Dunfermline City,Train,Scotrail,NO,NULL,NULL,NULL
-DFL,Dunfermline Queen Margaret,Train,Scotrail,NO,NULL,NULL,NULL
-DKD,Dunkeld & Birnam,Train,Scotrail,NO,NULL,NULL,NULL
-DNL,Dunlop,Train,Scotrail,NO,NULL,NULL,NULL
-DNO,Dunrobin Castle,Train,Scotrail,YES,NULL,NULL,NULL
-DYC,Dyce,Train,Scotrail,NO,NULL,NULL,NULL
-EKL,East Kilbride,Train,Scotrail,NO,NULL,NULL,NULL
-ELT,East Linton,Train,Scotrail,NO,NULL,NULL,NULL
-EST,Easterhouse,Train,Scotrail,NO,NULL,NULL,NULL
-EDG,Edinburgh,Train,Scotrail,NO,NULL,NULL,NULL
-EGY,Edinburgh Gateway,Train,Scotrail,NO,NULL,NULL,NULL
-EDP,Edinburgh Park,Train,Scotrail,NO,NULL,NULL,NULL
-ELG,Elgin,Train,Network Rail,NO,NULL,NULL,NULL
-EKB,Eskbank,Train,Scotrail,NO,NULL,NULL,NULL
-EXG,Exhibition Centre,Train,Scotrail,NO,NULL,NULL,NULL
-FRL,Fairlie,Train,Scotrail,NO,NULL,NULL,NULL
-FKG,Falkirk Grahamston,Train,Scotrail,NO,NULL,NULL,NULL
-FKK,Falkirk High,Train,Scotrail,NO,NULL,NULL,NULL
-FOC,Falls of Cruachan,Train,Scotrail,NO,NULL,NULL,NULL
-FLD,Fauldhouse,Train,Scotrail,NO,NULL,NULL,NULL
-FRN,Fearn,Train,Scotrail,NO,NULL,NULL,NULL
-FOR,Forres,Train,Scotrail,NO,NULL,NULL,NULL
-FRS,Forsinard,Train,Scotrail,NO,NULL,NULL,NULL
-FTM,Fort Matilda,Train,Scotrail,NO,NULL,NULL,NULL
-FTW,Fort William,Train,Scotrail,NO,NULL,NULL,NULL
-GAL,Galashiels,Train,Scotrail,NO,NULL,NULL,NULL
-GCH,Garelochhead,Train,Scotrail,NO,NULL,NULL,NULL
-GAR,Garrowhill,Train,Scotrail,NO,NULL,NULL,NULL
-GRS,Garscadden,Train,Scotrail,NO,NULL,NULL,NULL
-GRH,Gartcosh,Train,Scotrail,NO,NULL,NULL,NULL
-GVE,Grave,Train,Scotrail,NO,NULL,NULL,NULL
-GGJ,Georgemas Junction,Train,Scotrail,NO,NULL,NULL,NULL
-GFN,Giffnock,Train,Scotrail,NO,NULL,NULL,NULL
-GSC,Gilshochill,Train,Scotrail,NO,NULL,NULL,NULL
-GIR,Girvan,Train,Scotrail,NO,NULL,NULL,NULL
-GLC,Glasgow Central,Train,Network Rail,NO,NULL,NULL,NULL
-GLQ,Glasgow Queen Street,Train,Scotrail,NO,NULL,NULL,NULL
-GLE,Gleneagles,Train,Scotrail,NO,NULL,NULL,NULL
-GLF,Glenfinnan,Train,Scotrail,NO,NULL,NULL,NULL
-GLG,Glengarnock,Train,Scotrail,NO,NULL,NULL,NULL
-GLT,Glenrothes with Thornton,Train,Scotrail,NO,NULL,NULL,NULL
-GOF,Golf Street,Train,Scotrail,NO,NULL,NULL,NULL
-GOL,Golspie,Train,Scotrail,NO,NULL,NULL,NULL
-GBG,Gorebridge,Train,Scotrail,NO,NULL,NULL,NULL
-GRK,Gourock,Train,Scotrail,NO,NULL,NULL,NULL
-GRL,Greenfaulds,Train,Scotrail,NO,NULL,NULL,NULL
-GKC,Greenock Central,Train,Scotrail,NO,NULL,NULL,NULL
-GKW,Greenock West,Train,Scotrail,NO,NULL,NULL,NULL
-GEA,Gretna Green,Train,Scotrail,NO,NULL,NULL,NULL
-HMY,Hairmyres,Train,Scotrail,NO,NULL,NULL,NULL
-HNC,Hamilton Central,Train,Scotrail,NO,NULL,NULL,NULL
-HNW,Hamilton West,Train,Scotrail,NO,NULL,NULL,NULL
-HTW,Hartwood,Train,Scotrail,NO,NULL,NULL,NULL
-HKH,Hawkhead,Train,Scotrail,NO,NULL,NULL,NULL
-HYM,Haymarket,Train,Scotrail,NO,NULL,NULL,NULL
-HLC,Helensburgh Central,Train,Scotrail,NO,NULL,NULL,NULL
-HLU,Helensburgh Upper,Train,Scotrail,NO,NULL,NULL,NULL
-HMS,Helmsdale,Train,Scotrail,NO,NULL,NULL,NULL
-HST,High Street,Train,Scotrail,NO,NULL,NULL,NULL
-HLF,Hillfoot,Train,Scotrail,NO,NULL,NULL,NULL
-HLE,Hillington East,Train,Scotrail,NO,NULL,NULL,NULL
-HLW,Hillington West,Train,Scotrail,NO,NULL,NULL,NULL
-HLY,Holytown,Train,Scotrail,NO,NULL,NULL,NULL
-HOZ,Howwood,Train,Scotrail,NO,NULL,NULL,NULL
-HNT,Huntly,Train,Scotrail,NO,NULL,NULL,NULL
-HTN,Hyndland,Train,Scotrail,NO,NULL,NULL,NULL
-IBM,IBM,Train,Scotrail,NO,NULL,NULL,NULL
-INS,Insch,Train,Scotrail,NO,NULL,NULL,NULL
-IGD,Invergordon,Train,Scotrail,NO,NULL,NULL,NULL
-ING,Invergowrie,Train,Scotrail,NO,NULL,NULL,NULL
-INK,Inverkeithing,Train,Scotrail,NO,NULL,NULL,NULL
-INP,Inverkip,Train,Scotrail,NO,NULL,NULL,NULL
-INV,Inverness,Train,Scotrail,NO,NULL,NULL,NULL
-IVA,Inverness Airport,Train,Scotrail,NO,NULL,NULL,NULL
-INH,Invershin,Train,Scotrail,YES,NULL,NULL,NULL
-INR,Inverurie,Train,Scotrail,NO,NULL,NULL,NULL
-IRV,Irvine,Train,Scotrail,NO,NULL,NULL,NULL
-JHN,Johnstone,Train,Scotrail,NO,NULL,NULL,NULL
-JOR,Jordanhill,Train,Scotrail,NO,NULL,NULL,NULL
-KEH,Keith,Train,Scotrail,NO,NULL,NULL,NULL
-KVD,Kelvindale,Train,Scotrail,NO,NULL,NULL,NULL
-KNS,Kennishead,Train,Scotrail,NO,NULL,NULL,NULL
-KIL,Kildonan,Train,Scotrail,YES,NULL,NULL,NULL
-KMK,Kilmarnock,Train,Scotrail,NO,NULL,NULL,NULL
-KLM,Kilmaurs,Train,Scotrail,NO,NULL,NULL,NULL
-KPT,Kilpatrick,Train,Scotrail,NO,NULL,NULL,NULL
-KWN,Kilwinning,Train,Scotrail,NO,NULL,NULL,NULL
-KBC,Kinbrace,Train,Scotrail,YES,NULL,NULL,NULL
-KGH,Kinghorn,Train,Scotrail,NO,NULL,NULL,NULL
-KGP,Kings Park,Train,Scotrail,NO,NULL,NULL,NULL
-KGE,Kingsknowe,Train,Scotrail,NO,NULL,NULL,NULL
-KIN,Kingussie,Train,Scotrail,NO,NULL,NULL,NULL
-KTR,Kintore,Train,Scotrail,NO,NULL,NULL,NULL
-KDY,Kirkcaldy,Train,Scotrail,NO,NULL,NULL,NULL
-KRK,Kirkconnel,Train,Scotrail,NO,NULL,NULL,NULL
-KKH,Kirkhill,Train,Scotrail,NO,NULL,NULL,NULL
-KKN,Kirknewton,Train,Scotrail,NO,NULL,NULL,NULL
-KWD,Kirkwood,Train,Scotrail,NO,NULL,NULL,NULL
-KYL,Kyle of Lochalsh,Train,Scotrail,NO,NULL,NULL,NULL
-LDY,Ladybank,Train,Scotrail,NO,NULL,NULL,NULL
-LRG,Lairg,Train,Scotrail,NO,NULL,NULL,NULL
-LNK,Lanark,Train,Scotrail,NO,NULL,NULL,NULL
-LGB,Langbank,Train,Scotrail,NO,NULL,NULL,NULL
-LGS,Langside,Train,Scotrail,NO,NULL,NULL,NULL
-LBT,Larbert,Train,Scotrail,NO,NULL,NULL,NULL
-LAR,Largs,Train,Scotrail,NO,NULL,NULL,NULL
-LRH,Larkhall,Train,Scotrail,NO,NULL,NULL,NULL
-LAU,Laurencekirk,Train,Scotrail,NO,NULL,NULL,NULL
-LNZ,Lenzie,Train,Scotrail,NO,NULL,NULL,NULL
-LEU,Leuchars,Train,Scotrail,NO,NULL,NULL,NULL
-LIN,Linlithgow,Train,Scotrail,NO,NULL,NULL,NULL
-LSN,Livingston North,Train,Scotrail,NO,NULL,NULL,NULL
-LVG,Livingston South,Train,Scotrail,NO,NULL,NULL,NULL
-LHA,Loch Awe,Train,Scotrail,NO,NULL,NULL,NULL
-LHE,Loch Eil Outward Bound,Train,Scotrail,NO,NULL,NULL,NULL
-LCL,Lochailort,Train,Scotrail,YES,NULL,NULL,NULL
-LCS,Locheilside,Train,Scotrail,YES,NULL,NULL,NULL
-LCG,Lochgelly,Train,Scotrail,NO,NULL,NULL,NULL
-LCC,Lochluichart,Train,Scotrail,YES,NULL,NULL,NULL
-LHW,Lochwinnoch,Train,Scotrail,NO,NULL,NULL,NULL
-LOC,Lockerbie,Train,Scotrail,NO,NULL,NULL,NULL
-LND,Longniddry,Train,Scotrail,NO,NULL,NULL,NULL
-MLG,Mallaig,Train,Scotrail,NO,NULL,NULL,NULL
-MNC,Markinch,Train,Scotrail,NO,NULL,NULL,NULL
-MYH,Maryhill,Train,Scotrail,NO,NULL,NULL,NULL
-MAX,Maxwell Park,Train,Scotrail,NO,NULL,NULL,NULL
-MAY,Maybole,Train,Scotrail,NO,NULL,NULL,NULL
-MEY,Merryton,Train,Scotrail,NO,NULL,NULL,NULL
-MIN,Milliken Park,Train,Scotrail,NO,NULL,NULL,NULL
-MLN,Milngavie,Train,Scotrail,NO,NULL,NULL,NULL
-MON,Monifieth,Train,Scotrail,NO,NULL,NULL,NULL
-MTS,Montrose,Train,Scotrail,NO,NULL,NULL,NULL
-MRR,Morar,Train,Scotrail,NO,NULL,NULL,NULL
-MPK,Mosspark,Train,Scotrail,NO,NULL,NULL,NULL
-MTH,Motherwell,Train,Scotrail,NO,NULL,NULL,NULL
-MFL,Mount Florida,Train,Scotrail,NO,NULL,NULL,NULL
-MTV,Mount Vernon,Train,Scotrail,NO,NULL,NULL,NULL
-MOO,Muir of Ord,Train,Scotrail,NO,NULL,NULL,NULL
-MUI,Muirend,Train,Scotrail,NO,NULL,NULL,NULL
-MUB,Musselburgh,Train,Scotrail,NO,NULL,NULL,NULL
-NRN,Nairn,Train,Scotrail,NO,NULL,NULL,NULL
-NEI,Neilston,Train,Scotrail,NO,NULL,NULL,NULL
-NCK,New Cumnock,Train,Scotrail,NO,NULL,NULL,NULL
-NEW,Newcraighall,Train,Scotrail,NO,NULL,NULL,NULL
-NTN,Newton,Train,Scotrail,NO,NULL,NULL,NULL
-NOA,Newton-on-Ayr,Train,Scotrail,NO,NULL,NULL,NULL
-NEG,Newtongrange,Train,Scotrail,NO,NULL,NULL,NULL
-NWR,Newtonmore,Train,Scotrail,NO,NULL,NULL,NULL
-NIT,Nitshill,Train,Scotrail,NO,NULL,NULL,NULL
-NBW,North Berwick,Train,Scotrail,NO,NULL,NULL,NULL
-NQU,North Queensferry,Train,Scotrail,NO,NULL,NULL,NULL
-OBN,Oban,Train,Scotrail,NO,NULL,NULL,NULL
-PCN,Paisley Canal,Train,Scotrail,NO,NULL,NULL,NULL
-PYG,Paisley Gilmour Street,Train,Scotrail,NO,NULL,NULL,NULL
-PYJ,Paisley St James,Train,Scotrail,NO,NULL,NULL,NULL
-PTK,Partick,Train,Scotrail,NO,NULL,NULL,NULL
-PTT,Patterton,Train,Scotrail,NO,NULL,NULL,NULL
-PTH,Perth,Train,Scotrail,NO,NULL,NULL,NULL
-PIT,Pitlochry,Train,Scotrail,NO,NULL,NULL,NULL
-PLK,Plockton,Train,Scotrail,NO,NULL,NULL,NULL
-PWE,Pollokshaws East,Train,Scotrail,NO,NULL,NULL,NULL
-PWW,Pollokshaws West,Train,Scotrail,NO,NULL,NULL,NULL
-PLE,Pollokshields East,Train,Scotrail,NO,NULL,NULL,NULL
-PLW,Pollokshields West,Train,Scotrail,NO,NULL,NULL,NULL
-PMT,Polmont,Train,Scotrail,NO,NULL,NULL,NULL
-PTG,Port Glasgow,Train,Scotrail,NO,NULL,NULL,NULL
-PLN,Portlethen,Train,Scotrail,NO,NULL,NULL,NULL
-PPK,Possilpark & Parkhouse,Train,Scotrail,NO,NULL,NULL,NULL
-PST,Prestonpans,Train,Scotrail,NO,NULL,NULL,NULL
-PRA,Prestwick International Airport,Train,Scotrail,NO,NULL,NULL,NULL
-PTW,Prestwick Town,Train,Scotrail,NO,NULL,NULL,NULL
-PTL,Priesthill & Darnley,Train,Scotrail,NO,NULL,NULL,NULL
-QPK,Queens Park,Train,Scotrail,NO,NULL,NULL,NULL
-RAN,Rannoch,Train,Scotrail,NO,NULL,NULL,NULL
-RTN,Renton,Train,Scotrail,NO,NULL,NULL,NULL
-RSN,Reston,Train,Scotrail,NO,NULL,NULL,NULL
-RRN,Robroyston,Train,Scotrail,NO,NULL,NULL,NULL
-ROG,Rogart,Train,Scotrail,YES,NULL,NULL,NULL
-ROS,Rosyth,Train,Scotrail,NO,NULL,NULL,NULL
-RYB,Roy Bridge,Train,Scotrail,YES,NULL,NULL,NULL
-RUT,Rutherglen,Train,Scotrail,NO,NULL,NULL,NULL
-SLT,Saltcoats,Train,Scotrail,NO,NULL,NULL,NULL
-SQH,Sanquhar,Train,Scotrail,NO,NULL,NULL,NULL
-SCT,Scotscalder,Train,Scotrail,YES,NULL,NULL,NULL
-SCH,Scotstounhill,Train,Scotrail,NO,NULL,NULL,NULL
-SFI,Shawfair,Train,Scotrail,NO,NULL,NULL,NULL
-SHL,Shawlands,Train,Scotrail,NO,NULL,NULL,NULL
-SLS,Shettleston,Train,Scotrail,NO,NULL,NULL,NULL
-SDM,Shieldmuir,Train,Scotrail,NO,NULL,NULL,NULL
-SHS,Shotts,Train,Scotrail,NO,NULL,NULL,NULL
-SIN,Singer,Train,Scotrail,NO,NULL,NULL,NULL
-SLA,Slateford,Train,Scotrail,NO,NULL,NULL,NULL
-SGL,South Gyle,Train,Scotrail,NO,NULL,NULL,NULL
-SBR,Spean Bridge,Train,Scotrail,NO,NULL,NULL,NULL
-SPR,Springburn,Train,Scotrail,NO,NULL,NULL,NULL
-SPF,Springfield,Train,Scotrail,NO,NULL,NULL,NULL
-SPS,Stepps,Train,Scotrail,NO,NULL,NULL,NULL
-STV,Stevenston,Train,Scotrail,NO,NULL,NULL,NULL
-STT,Stewarton,Train,Scotrail,NO,NULL,NULL,NULL
-STG,Stirling,Train,Scotrail,NO,NULL,NULL,NULL
-STN,Stonehaven,Train,Scotrail,NO,NULL,NULL,NULL
-SOI,Stow,Train,Scotrail,NO,NULL,NULL,NULL
-STR,Stranraer,Train,Scotrail,NO,NULL,NULL,NULL
-STC,Strathcarron,Train,Scotrail,NO,NULL,NULL,NULL
-STF,Stromeferry,Train,Scotrail,NO,NULL,NULL,NULL
-SUM,Summerston,Train,Scotrail,NO,NULL,NULL,NULL
-TAI,Tain,Train,Scotrail,NO,NULL,NULL,NULL
-TAY,Taynuilt,Train,Scotrail,NO,NULL,NULL,NULL
-THB,Thornliebank,Train,Scotrail,NO,NULL,NULL,NULL
-THT,Thorntonhall,Train,Scotrail,NO,NULL,NULL,NULL
-THS,Thurso,Train,Scotrail,NO,NULL,NULL,NULL
-TRN,Troon,Train,Scotrail,NO,NULL,NULL,NULL
-TUL,Tulloch,Train,Scotrail,NO,NULL,NULL,NULL
-TWB,Tweedbank,Train,Scotrail,NO,NULL,NULL,NULL
-TYL,Tyndrum Lower,Train,Scotrail,NO,NULL,NULL,NULL
-UDD,Uddingston,Train,Scotrail,NO,NULL,NULL,NULL
-UHA,Uphall,Train,Scotrail,NO,NULL,NULL,NULL
-UTY,Upper Tyndrum,Train,Scotrail,NO,NULL,NULL,NULL
-WAF,Wallyford,Train,Scotrail,NO,NULL,NULL,NULL
-WMS,Wemyss Bay,Train,Scotrail,NO,NULL,NULL,NULL
-WCL,West Calder,Train,Scotrail,NO,NULL,NULL,NULL
-WKB,West Kilbride,Train,Scotrail,NO,NULL,NULL,NULL
-WTA,Wester Hailes,Train,Scotrail,NO,NULL,NULL,NULL
-WES,Westerton,Train,Scotrail,NO,NULL,NULL,NULL
-WFF,Whifflet,Train,Scotrail,NO,NULL,NULL,NULL
-WNL,Whinehill,Train,Scotrail,NO,NULL,NULL,NULL
-WCR,Whitecraigs,Train,Scotrail,NO,NULL,NULL,NULL
-WCK,Wick,Train,Scotrail,NO,NULL,NULL,NULL
-WLM,Williamswood,Train,Scotrail,NO,NULL,NULL,NULL
-WSH,Wishaw,Train,Scotrail,NO,NULL,NULL,NULL
-WDL,Woodhall,Train,Scotrail,NO,NULL,NULL,NULL
-YOK,Yoker,Train,Scotrail,NO,NULL,NULL,NULL
-,,,Scotrail,,,,
+Station ID,Station Name,Stop Type,Managed By,Request Stop,No. Of Platforms,Platforms Used,Stopped At,Passed Through (Stopped),Passed Through (Not Stopped)
+ABD,Aberdeen,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+AUR,Aberdour,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+AAT,Achanalt,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+ACN,Achnasheen,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ACH,Achnashellach,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+ADW,Addiewell,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+AIR,Airbles,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ADR,Airdrie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+AXP,Alexandra Parade,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ALX,Alexandria,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ALO,Alloa,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ASS,Alness,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ABC,Altnabreac,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+AND,Anderston,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ANN,Annan,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ANL,Anniesland,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ARB,Arbroath,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ARD,Ardgay,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+AUI,Ardlui,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+ADS,Ardrossan Harbour,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ASB,Ardrossan South Beach,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+AND,Ardrossan Town,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+AGS,Argyle Street,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ARG,Arisaig,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ARM,Armadale,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ART,Arrochar & Tarbet,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ASF,Ashfield,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ATT,Attadale,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+AUK,Auchinleck,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+AVM,Aviemore,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+AYR,Ayr,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BIO,Baillieston,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BHC,Balloch,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BNV,Banavie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BSS,Barassie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BGI,Bargeddie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BNL,Barnhill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BRR,Barrhead,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BRL,Barrhill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BYL,Barry Links,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BHG,Bathgate,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BRN,Bearsden,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BSL,Beasdale,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+BEL,Beauly,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BLG,Bellgrove,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BLH,Bellshill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BBG,Bishopbriggs,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BPT,Bishopton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BKR,Blackridge,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BLA,Blair Atholl,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BAI,Blairhill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BLT,Blantyre,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BGS,Bogston,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BWG,Bowling,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BCN,Branchton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BRC,Breich,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BEA,Bridge of Allan,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BRO,Bridge of Orchy,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BDG,Bridgeton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BRA,Brora,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BYF,Broughty Ferry,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BSU,Brunstane,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BUI,Burnside,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BTS,Burntisland,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+BUS,Busby,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CAC,Caldercruix,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CBL,Cambuslang,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CMO,Camelon,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CDD,Cardenden,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CDO,Cardonald,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CDR,Cardross,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CRF,Carfin,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CAR,Carlisle,Train,Avanti West Coast,NO,0,NULL,NULL,NULL,NULL
+CLU,Carluke,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CML,Carmyle,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CAN,Carnoustie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CAY,Carntyne,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CAG,Carrbridge,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CRS,Carstairs,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CDY,Cartsdyke,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CCT,Cathcart,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CHC,Charing Cross,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CTE,Chatelherault,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CKS,Clarkston,Train,Scotrail,NO,0,NULL,N/A,NULL,NULL
+CEA,Cleland,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CYK,Clydebank,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CBC,Coatbridge Central,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CBS,Coatbridge Sunnyside,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+COA,Coatdyke,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CON,Connel Ferry,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CBD,Conon Bridge,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CKH,Corkerhill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CPA,Corpach,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CRR,Corrour,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+COW,Cowdenbeath,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CGD,Craigendoran,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CNR,Crianlarich,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CFF,Croftfoot,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CKT,Crookston,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+COI,Crosshill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CMY,Crossmyloof,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CRO,Croy,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CUA,Culrain,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+CUB,Cumbernauld,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CUP,Cupar,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+CUH,Curriehill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DAG,Dalgety Bay,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DAL,Dalmally,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DAK,Dalmarnock,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DAM,Dalmeny,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DMR,Dalmuir,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DLR,Dalreoch,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DLY,Dalry,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DLW,Dalwhinnie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DIN,Dingwall,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DRM,Drem,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DMC,Drumchapel,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DFR,Drumfrochar,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DRU,Drumgelloch,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DMY,Drumry,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DRN,Duirinish,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+DST,Duke Street,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DBC,Dumbarton Central,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DBE,Dumbarton East,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DUM,Dumbreck,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DMF,Dumfries,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DUN,Dunbar,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DBL,Dunblane,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DCG,Duncraig,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+DEE,Dundee,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DFE,Dunfermline City,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DFL,Dunfermline Queen Margaret,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DKD,Dunkeld & Birnam,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DNL,Dunlop,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+DNO,Dunrobin Castle,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+DYC,Dyce,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+EKL,East Kilbride,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ELT,East Linton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+EST,Easterhouse,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+EGY,Edinburgh Gateway,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+EDP,Edinburgh Park,Train,Scotrail,NO,2,NULL.,NULL,NULL,NULL
+EDB,Edinburgh Waverley,Train,Network Rail,NO,0,NULL,NULL,NULL,NULL
+ELG,Elgin,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+EKB,Eskbank,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+EXG,Exhibition Centre,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+FRL,Fairlie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+FKG,Falkirk Grahamston,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+FKK,Falkirk High,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+FOC,Falls of Cruachan,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+FLD,Fauldhouse,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+FRN,Fearn,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+FOR,Forres,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+FRS,Forsinard,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+FTM,Fort Matilda,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+FTW,Fort William,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GAL,Galashiels,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GCH,Garelochhead,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GAR,Garrowhill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GRS,Garscadden,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GRH,Gartcosh,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GVE,Grave,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GGJ,Georgemas Junction,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GFN,Giffnock,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GSC,Gilshochill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GIR,Girvan,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GLC,Glasgow Central,Train,Network Rail,NO,0,NULL,NULL,NULL,NULL
+GLQ,Glasgow Queen Street,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GLE,Gleneagles,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GLF,Glenfinnan,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GLG,Glengarnock,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GLT,Glenrothes with Thornton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GOF,Golf Street,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GOL,Golspie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GBG,Gorebridge,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GRK,Gourock,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GRL,Greenfaulds,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GKC,Greenock Central,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GKW,Greenock West,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+GEA,Gretna Green,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HMY,Hairmyres,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HNC,Hamilton Central,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HNW,Hamilton West,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HTW,Hartwood,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HKH,Hawkhead,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HYM,Haymarket,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HLC,Helensburgh Central,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HLU,Helensburgh Upper,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HMS,Helmsdale,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HST,High Street,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HLF,Hillfoot,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HLE,Hillington East,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HLW,Hillington West,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HLY,Holytown,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HOZ,Howwood,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HNT,Huntly,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+HTN,Hyndland,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+IBM,IBM,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+INS,Insch,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+IGD,Invergordon,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ING,Invergowrie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+INK,Inverkeithing,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+INP,Inverkip,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+INV,Inverness,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+IVA,Inverness Airport,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+INH,Invershin,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+INR,Inverurie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+IRV,Irvine,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+JHN,Johnstone,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+JOR,Jordanhill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KEH,Keith,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KVD,Kelvindale,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KNS,Kennishead,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KIL,Kildonan,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+KMK,Kilmarnock,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KLM,Kilmaurs,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KPT,Kilpatrick,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KWN,Kilwinning,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KBC,Kinbrace,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+KGH,Kinghorn,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KGP,Kings Park,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KGE,Kingsknowe,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KIN,Kingussie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KTR,Kintore,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KDY,Kirkcaldy,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KRK,Kirkconnel,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KKH,Kirkhill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KKN,Kirknewton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KWD,Kirkwood,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+KYL,Kyle of Lochalsh,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LDY,Ladybank,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LRG,Lairg,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LNK,Lanark,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LGB,Langbank,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LGS,Langside,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LBT,Larbert,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LAR,Largs,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LRH,Larkhall,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LAU,Laurencekirk,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LNZ,Lenzie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LEU,Leuchars,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LIN,Linlithgow,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LSN,Livingston North,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LVG,Livingston South,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LHA,Loch Awe,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LHE,Loch Eil Outward Bound,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LCL,Lochailort,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+LCS,Locheilside,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+LCG,Lochgelly,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LCC,Lochluichart,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+LHW,Lochwinnoch,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LOC,Lockerbie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+LND,Longniddry,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MLG,Mallaig,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MNC,Markinch,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MYH,Maryhill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MAX,Maxwell Park,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MAY,Maybole,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MEY,Merryton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MIN,Milliken Park,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MLN,Milngavie,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MON,Monifieth,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MTS,Montrose,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MRR,Morar,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MPK,Mosspark,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MTH,Motherwell,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MFL,Mount Florida,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MTV,Mount Vernon,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MOO,Muir of Ord,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MUI,Muirend,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+MUB,Musselburgh,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+NRN,Nairn,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+NEI,Neilston,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+NCK,New Cumnock,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+NEW,Newcraighall,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+NTN,Newton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+NOA,Newton-on-Ayr,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+NEG,Newtongrange,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+NWR,Newtonmore,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+NIT,Nitshill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+NBW,North Berwick,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+NQU,North Queensferry,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+OBN,Oban,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PCN,Paisley Canal,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PYG,Paisley Gilmour Street,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PYJ,Paisley St James,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PTK,Partick,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PTT,Patterton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PTH,Perth,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PIT,Pitlochry,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PLK,Plockton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PWE,Pollokshaws East,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PWW,Pollokshaws West,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PLE,Pollokshields East,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PLW,Pollokshields West,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PMT,Polmont,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PTG,Port Glasgow,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PLN,Portlethen,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PPK,Possilpark & Parkhouse,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PST,Prestonpans,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PRA,Prestwick International Airport,Train,Prestwick International Airport,NO,0,NULL,NULL,NULL,NULL
+PTW,Prestwick Town,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+PTL,Priesthill & Darnley,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+QPK,Queens Park,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+RAN,Rannoch,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+RTN,Renton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+RSN,Reston,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+RRN,Robroyston,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+ROG,Rogart,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+ROS,Rosyth,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+RYB,Roy Bridge,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+RUT,Rutherglen,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SLT,Saltcoats,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SQH,Sanquhar,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SCT,Scotscalder,Train,Scotrail,YES,0,NULL,NULL,NULL,NULL
+SCH,Scotstounhill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SFI,Shawfair,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SHL,Shawlands,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SLS,Shettleston,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SDM,Shieldmuir,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SHS,Shotts,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SIN,Singer,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SLA,Slateford,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SGL,South Gyle,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SBR,Spean Bridge,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SPR,Springburn,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SPF,Springfield,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SPS,Stepps,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+STV,Stevenston,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+STT,Stewarton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+STG,Stirling,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+STN,Stonehaven,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SOI,Stow,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+STR,Stranraer,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+STC,Strathcarron,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+STF,Stromeferry,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+SUM,Summerston,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+TAI,Tain,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+TAY,Taynuilt,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+THB,Thornliebank,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+THT,Thorntonhall,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+THS,Thurso,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+TRN,Troon,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+TUL,Tulloch,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+TWB,Tweedbank,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+TYL,Tyndrum Lower,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+UDD,Uddingston,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+UHA,Uphall,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+UTY,Upper Tyndrum,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WAF,Wallyford,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WMS,Wemyss Bay,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WCL,West Calder,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WKB,West Kilbride,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WTA,Wester Hailes,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WES,Westerton,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WFF,Whifflet,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WNL,Whinehill,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WCR,Whitecraigs,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WCK,Wick,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WLM,Williamswood,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WSH,Wishaw,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+WDL,Woodhall,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL
+YOK,Yoker,Train,Scotrail,NO,0,NULL,NULL,NULL,NULL

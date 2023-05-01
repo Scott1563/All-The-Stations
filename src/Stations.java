@@ -62,7 +62,7 @@ public class Stations {
 			br.readLine();
 			while ((line = br.readLine()) != null) {
 				String[] stationInfo = line.split(",");
-				stationList.add(new Station(stationInfo[0], stationInfo[1], stationInfo[2], stationInfo[3], stationInfo[4], stationInfo[5], stationInfo[6], stationInfo[7]));
+				stationList.add(new Station(stationInfo[0], stationInfo[1], stationInfo[2], stationInfo[3], stationInfo[4], Integer.parseInt(stationInfo[5]), stationInfo[6], stationInfo[7], stationInfo[8], stationInfo[9]));
 				if (stationInfo[1].length() > largestName) {
 					largestName = stationInfo[1].length();
 				}
@@ -80,12 +80,12 @@ public class Stations {
 			CSVWriter writer = new CSVWriter(outputFile);
 
 			// adding header to csv
-			String[] header = {"Station ID", "Station Name", "Stop Type", "Managed By", "Request Stop", "Stopped At", "Passed Through (Stopped)", "Passed Through (Not Stopped)"};
+			String[] header = {"Station ID", "Station Name", "Stop Type", "Managed By", "Request Stop", "No. Of Platforms", "Platforms Used", "Stopped At", "Passed Through (Stopped)", "Passed Through (Not Stopped)"};
 			writer.writeNext(header,false);
 
 			// add data to csv
 			for (Station station : stationList) {
-				String[] stationData = {station.getId(), station.getName(), station.getStopType(), station.getManager(), station.getRequestStop() ? "YES" : "NO", station.getStoppedAt(), station.getPassedThroughStopping(), station.getPassedThrough()};
+				String[] stationData = {station.getId(), station.getName(), station.getStopType(), station.getManager(), station.getRequestStop() ? "YES" : "NO", Integer.toString(station.getNumberOfPlatforms()), station.savePlatformsUsed(), station.getStoppedAt(), station.getPassedThroughStopping(), station.getPassedThrough()};
 				writer.writeNext(stationData, false);
 			}
 
@@ -168,6 +168,14 @@ public class Stations {
 		}
 
 		station.setPassedThrough(date);
+	}
+
+	public void updateNumOfPlatforms(Station station, int numOfPlatforms) {
+
+		if (station.getPlatformsVisitedList().get(0).equals("NULL") || station.getPlatformsVisitedList().get(0).equals("N/A")) {
+			station.getPlatformsVisitedList().set(0, "N/A");
+		}
+		station.setNumberOfPlatforms(numOfPlatforms);
 	}
 
 	public void showList(String stationType) {

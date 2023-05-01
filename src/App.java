@@ -36,6 +36,7 @@ public class App {
 
 	private void addStation() {
 
+		// Determines the amount of data to be gathered
 		System.out.print("What station Info do you have: \n(A) All (Basic & Dates), (S) Some (Basic & No Dates) or (B) Back: ");
 		String dataType = input.nextLine().toUpperCase();
 
@@ -47,6 +48,7 @@ public class App {
 
 		String stationType = "";
 
+		// Sets the station Type
 		if (!(dataType.equals("B"))) {
 			System.out.print("What type of station is it: \n(1) Train, (2) Tram, (3) Underground or (B) Back): ");
 			stationType = input.nextLine().toUpperCase();
@@ -58,6 +60,7 @@ public class App {
 			}
 		}
 
+		// Leaves
 		if (dataType.equals("B") || stationType.equals("B")) {
 			return;
 		}
@@ -149,9 +152,9 @@ public class App {
 			case "3" -> stopType = "Underground";
 		}
 
-		// No Date data
+		// No date data
 		if (dataType.equals("S")) {
-			stationList.addStation(new Station(ID, name, stopType, manager, requestStop));
+			stationList.addStation(new Station(ID, name, stopType, manager, requestStop, 0, "NULL"));
 			return;
 		}
 
@@ -262,12 +265,13 @@ public class App {
 		while (!done) {
 
 			System.out.println("What would you like to do with " + selectedStation.getName() + "?");
-			System.out.println("(0) Update Name and/or ID, (1) Update Stopping Information, (I) Show Station Info, (E) Edit Different Station or (Q) Quit:");
+			System.out.println("(0) Update Name and/or ID, (1) Update Stopping Information, (2) Update platform Information, (I) Show Station Info, (E) Edit Different Station or (Q) Quit:");
 			response = input.nextLine().toUpperCase();
 
 			switch (response) {
 				case "0" -> updateNameAndID();
 				case "1" -> updateStoppingInfo();
+				case "2" -> updatePlatformInfo();
 				case "I" -> System.out.println(selectedStation.stationInfo());
 				case "E", "Q" -> done = true;
 				default -> System.out.println("Not a valid input please try again");
@@ -383,6 +387,96 @@ public class App {
 				confirmed = input.nextLine().toUpperCase();
 			} while (confirmed.equals("N"));
 			stationList.updatePassedThrough(selectedStation, date);
+		}
+	}
+
+	private void updatePlatformInfo() {
+
+		System.out.print("What would you like to update (1 = Update No. Of Platforms, 2 = Add a Platform, 3 = Display Visited Platforms 4 = Back): ");
+		String response = input.nextLine().toUpperCase();
+
+		while (!(response.equals("1") || response.equals("2") || response.equals("3") || response.equals("4"))) {
+			System.out.println("Invalid input");
+			System.out.print("What would you like to update (1 = Update No. Of Platforms, 2 = Add a Platform, 3 = Display Visited Platforms 4 = Back): ");
+			response = input.nextLine().toUpperCase();
+		}
+
+		String confirmed = "N";
+
+		// Updates number of platforms
+		if (response.equals("1")) {
+
+			int numOfPlatforms = 0;
+			do {
+				System.out.print("How many platforms does " + selectedStation.getName() + " have: ");
+				try {
+					numOfPlatforms = Integer.parseInt(input.nextLine());
+
+					if (numOfPlatforms < 1) {
+						throw new NumberFormatException();
+					}
+				} catch (NumberFormatException e) {
+					System.out.println("It must be a number greater than 0");
+					continue;
+				}
+				System.out.print("Are you sure " + selectedStation.getName() + " has " + numOfPlatforms + (numOfPlatforms == 1 ? " platform" : " platforms") +" (Y = yes or N = No): ");
+				confirmed = input.nextLine().toUpperCase();
+
+			} while (confirmed.equals("N"));
+			stationList.updateNumOfPlatforms(selectedStation, numOfPlatforms);
+		}
+
+		// Adds new Platform
+		if (response.equals("2")) {
+
+			String data;
+
+			do {
+				System.out.print("What platform at " + selectedStation.getName() + " would you like to add or type done when finished: ");
+				data = input.nextLine().toUpperCase();
+
+				if (!data.equals("DONE")) {
+					System.out.print("Are you sure you want to add platform " + data + " to " + selectedStation.getName() + "'s list of platforms visited (Y = yes or N = No): ");
+					confirmed = input.nextLine().toUpperCase();
+
+					if (confirmed.equals("Y")) {
+						selectedStation.addPlatform(data);
+						System.out.println("platform " + data + " has been added");
+					}
+				}
+			} while (!data.equals("DONE"));
+		}
+
+		// Show current data
+		if (response.equals("3")) {
+
+			if (selectedStation.getStoppedAt().equals("NULL")) {
+				// Station has not been visited in any way (Worst Case = Red)
+				System.out.println("\nYou have not visited " + selectedStation.getName() + " station.\n");
+			} else if (selectedStation.getNumberOfPlatforms() == 0) {
+				// Station has not been visited but no data is currently held (Worst Case = Red)
+				System.out.println("\nYou have visited " + selectedStation.getName() + " station but have not inputted any platform data.\n");
+			} else if (selectedStation.getPlatformsVisitedList().get(0).equals("N/A")) {
+				// Station has been visited but did not get off (Average Case = Yellow)
+				System.out.println("\n" + selectedStation.getName() + " Has " + selectedStation.getNumberOfPlatforms() + (selectedStation.getNumberOfPlatforms() == 1 ? " platform," : " platforms,") + " You have not visited any platforms yet.\n");
+			} else {
+				// Station has been visited (Best Case = Green)
+				ArrayList<String> visitedPlatforms = selectedStation.getPlatformsVisitedList();
+				double percentage = ((double) visitedPlatforms.size() / selectedStation.getNumberOfPlatforms()) * 100;
+
+				System.out.print("\n" + selectedStation.getName() + " Has " + selectedStation.getNumberOfPlatforms() + (selectedStation.getNumberOfPlatforms() == 1 ? " platform," : " platforms,") + " You have visited " + visitedPlatforms.size() + (visitedPlatforms.size() == 1 ? " platform," : " platforms,"));
+				System.out.println(" That's " + percentage + "% " + (percentage == 100.0 ? "Well Done :)" : "Keep Going"));
+
+				StringBuilder platformList = new StringBuilder();
+
+				for (int i = 0; i < visitedPlatforms.size(); i++) {
+					platformList.append(visitedPlatforms.get(i));
+					if (i != visitedPlatforms.size()-1) {
+						platformList.append(", ");
+					}
+				}
+				System.out.println("The platforms you've visited are: " + platformList + "\n");
+			}
 		}
 	}
 

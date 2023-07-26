@@ -67,7 +67,7 @@ public class App {
 		String stopType = "";
 		String country;
 		String area;
-		String location = "";
+		String location;
 		String manager;
 		String requestStop;
 

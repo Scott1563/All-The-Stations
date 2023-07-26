@@ -22,60 +22,62 @@ public class App {
 			System.out.print("(1) Edit/Select A Station, (2) Show Stats, (3) Show All Station Info, (4) Add New Station or (Q) Quit: ");
 			String response = input.nextLine().toUpperCase();
 
+			boolean created = false;
+
 			switch (response) {
-				case "1" -> stationSelected();
+				case "1" -> stationEditor(false);
 				case "2" -> statShower();
 				case "3" -> allTheStationsDisplay();
-				case "4" -> addStation();
+				case "4" -> created = addStation();
 				case "Q" -> quit = true;
 				default -> System.out.println("Not a valid input please try again");
+			}
+
+			if (response.equals("4") && created) {
+				stationEditor(true);
 			}
 		}
 		shutDown();
 	}
 
-	private void addStation() {
+	private boolean addStation() {
 
-		// Determines the amount of data to be gathered
-		System.out.print("What station Info do you have: \n(A) All (Basic & Dates), (S) Some (Basic & No Dates) or (B) Back: ");
-		String dataType = input.nextLine().toUpperCase();
+		System.out.println("Welcome to the station creator.");
 
-		while (!(dataType.equals("A") || dataType.equals("S") || dataType.equals("B"))) {
-			System.out.println("Invalid input");
-			System.out.print("What station Info do you have: \n(A) All (Basic & Dates), (S) Some (Basic & No Dates) or (B) Back: ");
-			dataType = input.nextLine().toUpperCase();
-		}
-
-		String stationType = "";
+		String stationType;
 
 		// Sets the station Type
-		if (!(dataType.equals("B"))) {
+		System.out.print("What type of station is it: \n(1) Train, (2) Tram, (3) Underground or (B) Back): ");
+		stationType = input.nextLine().toUpperCase();
+
+		while (!(stationType.equals("1") || stationType.equals("2") || stationType.equals("3") || stationType.equals("B"))) {
+			System.out.println("Invalid input");
 			System.out.print("What type of station is it: \n(1) Train, (2) Tram, (3) Underground or (B) Back): ");
 			stationType = input.nextLine().toUpperCase();
-
-			while (!(stationType.equals("1") || stationType.equals("2") || stationType.equals("3") || stationType.equals("B"))) {
-				System.out.println("Invalid input");
-				System.out.print("What type of station is it: \n(1) Train, (2) Tram, (3) Underground or (B) Back): ");
-				stationType = input.nextLine().toUpperCase();
-			}
 		}
 
 		// Leaves
-		if (dataType.equals("B") || stationType.equals("B")) {
-			return;
+		if (stationType.equals("B")) {
+			return false;
 		}
 
+		// Station Data
 		String ID;
 		String name;
-		String confirmed = "";
-		String requestStop;
 		String stopType = "";
+		String country;
+		String area;
+		String location = "";
 		String manager;
+		String requestStop;
+
+		// Other Variables
+		String confirmed = "";
 
 		// Grabs Station ID
 		if (stationType.equals("1")) {
 			do {
-				System.out.print("What is the new stations ID: ");
+				System.out.print("What is the stations ID: ");
 				ID = input.nextLine();
 
 				if (ID.length() == 3 && stationList.findStationByID(ID).isEmpty()) {
@@ -86,7 +88,7 @@ public class App {
 						System.out.print("Are you sure you wanna leave without adding a new Station (Y) yes or (N) No ");
 						confirmed = input.nextLine().toUpperCase();
 						if (confirmed.equals("Y")) {
-							return;
+							return false;
 						}
 					}
 				} else if (ID.length() != 3) {
@@ -110,24 +112,56 @@ public class App {
 				System.out.print("Are you sure you wanna leave without adding a new Station (Y) yes or (N) No ");
 				confirmed = input.nextLine().toUpperCase();
 				if (confirmed.equals("Y")) {
-					return;
+					return false;
 				}
 			}
 		} while (confirmed.equals("N"));
 
-		// Request Stop
+		// Station Type
+		switch (stationType) {
+			case "1" -> stopType = "Train";
+			case "2" -> stopType = "Tram";
+			case "3" -> stopType = "Underground";
+		}
+
+		// Station country
 		do {
-			System.out.print("Is it a request Stop (YES) Yes or (NO) or (B) Back: ");
-			requestStop = input.nextLine();
+			System.out.print("What is the country the stations is located in: ");
+			country = input.nextLine();
+
+			System.out.print("Are you sure that " + country + " is correct (Y) yes, (N) No or (B) Back: ");
+			confirmed = input.nextLine().toUpperCase();
 
 			if (confirmed.equals("B")) {
 				System.out.print("Are you sure you wanna leave without adding a new Station (Y) yes or (N) No ");
 				confirmed = input.nextLine().toUpperCase();
 				if (confirmed.equals("Y")) {
-					return;
+					return false;
 				}
 			}
-		} while (!(requestStop.equals("NO") || requestStop.equals("YES") || requestStop.equals("B")));
+		} while (confirmed.equals("N"));
+
+		location = country;
+
+		// Station area
+		do {
+			System.out.print("What is the area the stations is located in: ");
+			area = input.nextLine();
+
+			System.out.print("Are you sure that " + area + " is correct (Y) yes, (N) No or (B) Back: ");
+			confirmed = input.nextLine().toUpperCase();
+
+			if (confirmed.equals("B")) {
+				System.out.print("Are you sure you wanna leave without adding a new Station (Y) yes or (N) No ");
+				confirmed = input.nextLine().toUpperCase();
+				if (confirmed.equals("Y")) {
+					return false;
+				}
+			}
+		} while (confirmed.equals("N"));
+
+		location += ". " + area;
+		System.out.println(location);
 
 		// Station Manager
 		do {
@@ -140,30 +174,35 @@ public class App {
 				System.out.print("Are you sure you wanna leave without adding a new Station (Y) yes or (N) No ");
 				confirmed = input.nextLine().toUpperCase();
 				if (confirmed.equals("Y")) {
-					return;
+					return false;
 				}
 			}
 		} while (!confirmed.equals("Y"));
 
-		// Station Type
-		switch (stationType) {
-			case "1" -> stopType = "Train";
-			case "2" -> stopType = "Tram";
-			case "3" -> stopType = "Underground";
-		}
+		// Request Stop
+		do {
+			System.out.print("Is the station a request Stop (YES) Yes or (NO) or (B) Back: ");
+			requestStop = input.nextLine();
 
-		// No date data
-		if (dataType.equals("S")) {
-			stationList.addStation(new Station(ID, name, stopType, manager, requestStop, 0, "NULL"));
-			return;
-		}
+			if (requestStop.equals("B")) {
+				System.out.print("Are you sure you wanna leave without adding a new Station (Y) yes or (N) No ");
+				confirmed = input.nextLine().toUpperCase();
+				if (confirmed.equals("Y")) {
+					return false;
+				}
+			}
+		} while (!(requestStop.equals("NO") || requestStop.equals("YES")));
 
-		System.out.println("Not implemented yet :(");
+		// Creates station & leaves
+		selectedStation = new Station(ID, name, stopType, location, manager, requestStop, 0, "NULL");
+		stationList.addStation(selectedStation);
+		return true;
 	}
 
 	private void statShower() {
 
-		System.out.println("No ones here :)");
+		System.out.println("Not fully done yet but here is the total amount of stations: " + stationList.totalStations());
+
 	}
 
 	private void allTheStationsDisplay() {
@@ -187,19 +226,23 @@ public class App {
 
 	}
 
-	private void stationSelected() {
+	private void stationEditor(boolean createStation) {
 
 		boolean quit = false;
+		int count = 0;
 
 		while (!quit) {
-			// Station input
-			ArrayList<Station> stations = stationInput();
+			if (!createStation || count > 0) {
+				// Station input
+				ArrayList<Station> stations = stationInput();
 
-			// Station select
-			selectedStation = stationSelect(stations);
+				// Station select
+				selectedStation = stationSelect(stations);
+			}
 
 			// Station activities
-			quit = stationActivities() ;
+			quit = stationActivities();
+			count++;
 		}
 	}
 
@@ -265,13 +308,14 @@ public class App {
 		while (!done) {
 
 			System.out.println("What would you like to do with " + selectedStation.getName() + "?");
-			System.out.println("(0) Update Name and/or ID, (1) Update Stopping Information, (2) Update platform Information, (I) Show Station Info, (E) Edit Different Station or (Q) Quit:");
+			System.out.println("(1) Update Stopping Information, (2) Update platform Information, (3) Update Name and/or ID, (4) Update Country and/or Area, (I) Show Station Info, (E) Edit Different Station or (Q) Quit:");
 			response = input.nextLine().toUpperCase();
 
 			switch (response) {
-				case "0" -> updateNameAndID();
 				case "1" -> updateStoppingInfo();
 				case "2" -> updatePlatformInfo();
+				case "3" -> updateNameAndID();
+				case "4" -> updateCountryAndArea();
 				case "I" -> System.out.println(selectedStation.stationInfo());
 				case "E", "Q" -> done = true;
 				default -> System.out.println("Not a valid input please try again");
@@ -339,14 +383,73 @@ public class App {
 		stationList.updateNameAndID(selectedStation, ID, name);
 	}
 
-	private void updateStoppingInfo() {
+	private void updateCountryAndArea() {
 
-		System.out.print("What would you like to update (1 = Stopped At, 2 = Update Passed Through (Stopping), 3 = Update Passed Through (Not Stopping) 4 = Back): ");
+		System.out.print("What would you like to update (C = country, A = area or B = Both, Q = Back): ");
 		String response = input.nextLine().toUpperCase();
 
-		while (!(response.equals("1") || response.equals("2") || response.equals("3") || response.equals("4"))) {
+		while (!(response.equals("C") || response.equals("A") || response.equals("B") || response.equals("Q"))) {
 			System.out.println("Invalid input");
-			System.out.print("What would you like to update (1 = Stopped At, 2 = Update Passed Through (Stopping), 3 = Update Passed Through (Not Stopping) 4 = Back): ");
+			System.out.print("What would you like to update (C = country, A = area or B = Both, Q = Back): ");
+			response = input.nextLine().toUpperCase();
+		}
+
+		if (response.equals("Q")) {
+			return;
+		}
+
+		String country = "";
+		String area = "";
+
+		if (response.equals("C") || response.equals("B")) {
+			String confirmed;
+			do {
+				System.out.print("What would you like to change " + selectedStation.getName() + "'s country to be: ");
+				country = input.nextLine();
+
+				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s country to be " + country + " (Y = yes or N = No, B = Back) ");
+				confirmed = input.nextLine().toUpperCase();
+
+				if (confirmed.equals("B")) {
+					System.out.print("Are you sure you wanna leave without changing anything (Y = yes or N = No, B = Back) ");
+					confirmed = input.nextLine().toUpperCase();
+					if (confirmed.equals("Y")) {
+						return;
+					}
+				}
+			} while (confirmed.equals("N"));
+		}
+
+		if (response.equals("A") || response.equals("B")) {
+			String confirmed;
+			do {
+				System.out.print("What would you like to change " + selectedStation.getName() + "'s area to be: ");
+				area = input.nextLine();
+
+				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s area to be " + area + " (Y = yes or N = No, B = Back)");
+				confirmed = input.nextLine().toUpperCase();
+
+				if (confirmed.equals("B")) {
+					System.out.print("Are you sure you wanna leave without changing anything (Y = yes or N = No, B = Back) ");
+					confirmed = input.nextLine().toUpperCase();
+					if (confirmed.equals("Y")) {
+						return;
+					}
+				}
+			} while (confirmed.equals("N"));
+		}
+
+		stationList.updateCountryAndArea(selectedStation, country, area);
+	}
+
+	private void updateStoppingInfo() {
+
+		System.out.print("What would you like to update (1 = Stopped At, 2 = Update Passed Through (Stopping), 3 = Update Passed Through (Not Stopping), 4 = Update Visited, 5 = Back): ");
+		String response = input.nextLine().toUpperCase();
+
+		while (!(response.equals("1") || response.equals("2") || response.equals("3") || response.equals("4") || response.equals("5"))) {
+			System.out.println("Invalid input");
+			System.out.print("What would you like to update (1 = Stopped At, 2 = Update Passed Through (Stopping), 3 = Update Passed Through (Not Stopping), 4 = Update Visited, 5 = Back): ");
 			response = input.nextLine().toUpperCase();
 		}
 
@@ -387,6 +490,18 @@ public class App {
 				confirmed = input.nextLine().toUpperCase();
 			} while (confirmed.equals("N"));
 			stationList.updatePassedThrough(selectedStation, date);
+		}
+
+		if (response.equals("4")) {
+
+			do {
+				System.out.print("What would you like to change " + selectedStation.getName() + "'s Visited date to be: ");
+				date = input.nextLine();
+
+				System.out.print("Are you sure you wanna change " + selectedStation.getName() + "'s Visited date to be " + date + " (Y = yes or N = No): ");
+				confirmed = input.nextLine().toUpperCase();
+			} while (confirmed.equals("N"));
+			stationList.updateVisited(selectedStation, date);
 		}
 	}
 

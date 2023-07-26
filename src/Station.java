@@ -6,6 +6,8 @@ public class Station {
 	private String id;
 	private String name;
 	private String stopType;
+	private String country;
+	private String area;
 	private String manager;
 	private boolean requestStop;
 	private int numberOfPlatforms;
@@ -13,8 +15,9 @@ public class Station {
 	private String stoppedAt;
 	private String passedThroughStopping;
 	private String passedThrough;
+	private String visited;
 
-	public Station(String id, String name, String stopType, String manager, String requestStop, int numberOfPlatforms, String platformsVisited, String stoppedAt, String passedThroughStopping,  String passedThrough) {
+	public Station(String id, String name, String stopType, String location, String manager, String requestStop, int numberOfPlatforms, String platformsVisited, String stoppedAt, String passedThroughStopping,  String passedThrough, String visited) {
 		this.id = id;
 		this.name = name;
 		this.stopType = stopType;
@@ -24,11 +27,26 @@ public class Station {
 		this.stoppedAt = stoppedAt;
 		this.passedThroughStopping = passedThroughStopping;
 		this.passedThrough = passedThrough;
+		this.visited = visited;
 		platformVisited(platformsVisited);
+		stationLocation(location);
 	}
 
-	public Station(String id, String name, String stopType, String manager, String requestStop, int numberOfPlatforms, String platformsVisited) {
-		this(id, name, stopType, manager, requestStop, numberOfPlatforms, platformsVisited, "NULL", "NULL", "NULL");
+	public Station(String id, String name, String stopType, String location, String manager, String requestStop, int numberOfPlatforms, String platformsVisited) {
+		this(id, name, stopType, location, manager, requestStop, numberOfPlatforms, platformsVisited, "NULL", "NULL", "NULL", "NULL");
+	}
+
+	private void stationLocation(String location) {
+
+		String[] locationData = location.split("\\.");
+
+		country = locationData[0].trim();
+
+		if (locationData.length == 2) {
+			area = locationData[1].trim();
+		} else {
+			area = "";
+		}
 	}
 
 	private void platformVisited(String platformsVisited) {
@@ -41,7 +59,6 @@ public class Station {
 			String[] platforms = platformsVisited.split("\\.");
 			platformsVisitedList.addAll(Arrays.asList(platforms));
 		}
-
 	}
 
 	public String getId() { return id; }
@@ -49,6 +66,10 @@ public class Station {
 	public String getName() { return name; }
 
 	public String getStopType() { return stopType; }
+
+	public String getCountry() { return country; }
+
+	public String getArea() { return area; }
 
 	public String getManager() { return manager; }
 
@@ -64,11 +85,17 @@ public class Station {
 
 	public String getPassedThrough() { return passedThrough; }
 
+	public String getVisited() { return visited; }
+
 	public void setId(String id) { this.id = id; }
 
 	public void setName(String name) { this.name = name; }
 
 	public void setStopType(String stopType) { this.stopType = stopType; }
+
+	public void setCountry(String country) { this.country = country; }
+
+	public void setArea(String area) { this.area = area; }
 
 	public void setManager(String manager) { this.manager = manager; }
 
@@ -113,6 +140,8 @@ public class Station {
 
 	public void setPassedThrough(String passedThrough) { this.passedThrough = passedThrough; }
 
+	public void setVisited(String visited) { this.visited = visited; }
+
 	public String savePlatformsUsed() {
 
 		if (numberOfPlatforms == 0 || stoppedAt.equals("N/A")) {
@@ -134,11 +163,11 @@ public class Station {
 	}
 
 	public String stationInfo() {
-		return "ID: " + id + ", name: " + name + ", Is Request Stop: " + (requestStop ? "Yes": "No") + ", Stopped At: " + stoppedAt + ", Passed Through (Stopping): " + passedThroughStopping + ", Passed Through (Not Stopping): " + passedThrough + "\n";
+		return "ID: " + id + ", name: " + name + ", location: " + area + " " + country + ", Is Request Stop: " + (requestStop ? "Yes": "No") + ", Stopped At: " + stoppedAt + ", Passed Through (Stopping): " + passedThroughStopping + ", Passed Through (Not Stopping): " + passedThrough + ", Visited: " + visited + "\n";
 	}
 
 	@Override
 	public String toString() {
-		return id + "  " + name + "  " + stopType + "  " + requestStop + "  " + stoppedAt + "  " + passedThroughStopping + "  " + passedThrough;
+		return id + "  " + name + "  " + stopType + "  " + requestStop + "  " + stoppedAt + "  " + passedThroughStopping + "  " + passedThrough + " " + visited;
 	}
 }

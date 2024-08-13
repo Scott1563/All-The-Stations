@@ -23,6 +23,7 @@ public class StationInfo extends JFrame {
 	private JTextField PassedNotStoppingField;
 	private JTextField VisitedField;
 	private JButton PlatformStats;
+	private JButton ExitButton;
 	private final Station station;
 
 	public StationInfo(Station station, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<String> operatorList) {
@@ -34,82 +35,68 @@ public class StationInfo extends JFrame {
 		dropDownFiller(AreaField, areaList, "area");
 		dropDownFiller(TOCField, operatorList, "TOC");
 
-		CountryField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedCountry = (String) CountryField.getSelectedItem();
+		CountryField.addActionListener(e -> {
+		    String selectedCountry = (String) CountryField.getSelectedItem();
 
-	            if (selectedCountry != null) {
-					if (selectedCountry.equals("Add new country")) {
-						String newCountry = showCreatorPopUp("country");
-						if (!newCountry.equals("NULL")) {
-							countryList.add(newCountry);
-							Collections.sort(countryList);
-							station.setCountry(newCountry);
-							CountryField.removeAllItems();
-							dropDownFiller(CountryField, countryList, "country");
-						}
-						CountryField.setSelectedItem(station.getCountry());
-					} else if (!selectedCountry.equals(station.getCountry())) {
-						station.setCountry(selectedCountry);
-		            }
+			if (selectedCountry != null) {
+				if (selectedCountry.equals("Add new country")) {
+					String newCountry = showCreatorPopUp("country");
+					if (!newCountry.equals("NULL")) {
+						countryList.add(newCountry);
+						Collections.sort(countryList);
+						station.setCountry(newCountry);
+						CountryField.removeAllItems();
+						dropDownFiller(CountryField, countryList, "country");
+					}
+					CountryField.setSelectedItem(station.getCountry());
+				} else if (!selectedCountry.equals(station.getCountry())) {
+					station.setCountry(selectedCountry);
 				}
-            }
-        });
+			}
+		});
 
-		AreaField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedArea = (String) AreaField.getSelectedItem();
+		AreaField.addActionListener(e -> {
+		    String selectedArea = (String) AreaField.getSelectedItem();
 
-				if (selectedArea != null) {
-					if (selectedArea.equals("Add new area")) {
-						String newArea = showCreatorPopUp("area");
-						if (!newArea.equals("NULL")) {
-							areaList.add(newArea);
-							Collections.sort(areaList);
-							station.setArea(newArea);
-							AreaField.removeAllItems();
-							dropDownFiller(AreaField, areaList, "area");
-						}
-						AreaField.setSelectedItem(station.getArea());
-					} else if (!selectedArea.equals(station.getArea())) {
-						station.setArea(selectedArea);
-		            }
+			if (selectedArea != null) {
+				if (selectedArea.equals("Add new area")) {
+					String newArea = showCreatorPopUp("area");
+					if (!newArea.equals("NULL")) {
+						areaList.add(newArea);
+						Collections.sort(areaList);
+						station.setArea(newArea);
+						AreaField.removeAllItems();
+						dropDownFiller(AreaField, areaList, "area");
+					}
+					AreaField.setSelectedItem(station.getArea());
+				} else if (!selectedArea.equals(station.getArea())) {
+					station.setArea(selectedArea);
 				}
-            }
-        });
+			}
+		});
 
-		TOCField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String SelectedTOC = (String) TOCField.getSelectedItem();
+		TOCField.addActionListener(e -> {
+			String SelectedTOC = (String) TOCField.getSelectedItem();
 
-				if (SelectedTOC != null) {
-					if (SelectedTOC.equals("Add new TOC")) {
-						String newTOC = showCreatorPopUp("TOC");
-						if (!newTOC.equals("NULL")) {
-							operatorList.add(newTOC);
-							Collections.sort(operatorList);
-							station.setManager(newTOC);
-							TOCField.removeAllItems();
-							dropDownFiller(TOCField, operatorList, "TOC");
-						}
-						TOCField.setSelectedItem(station.getManager());
-					} else if (!SelectedTOC.equals(station.getManager())) {
-						station.setManager(SelectedTOC);
-		            }
+			if (SelectedTOC != null) {
+				if (SelectedTOC.equals("Add new TOC")) {
+					String newTOC = showCreatorPopUp("TOC");
+					if (!newTOC.equals("NULL")) {
+						operatorList.add(newTOC);
+						Collections.sort(operatorList);
+						station.setManager(newTOC);
+						TOCField.removeAllItems();
+						dropDownFiller(TOCField, operatorList, "TOC");
+					}
+					TOCField.setSelectedItem(station.getManager());
+				} else if (!SelectedTOC.equals(station.getManager())) {
+					station.setManager(SelectedTOC);
 				}
-            }
-        });
+			}
+		});
 
 		// Request Stop
-		RequestStop.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-	            station.setRequestStop(RequestStop.isSelected());
-            }
-        });
+		RequestStop.addActionListener(e -> station.setRequestStop(RequestStop.isSelected()));
 
 		// Date & ID
 		NameField.addKeyListener(new KeyAdapter() {
@@ -136,10 +123,10 @@ public class StationInfo extends JFrame {
 								station.setId(IDField.getText());
 								fieldUpdate();
 							} else {
-								JOptionPane.showMessageDialog(StationInfo.this, "The ID entered already exists", "Error!", JOptionPane.INFORMATION_MESSAGE);
+								JOptionPane.showMessageDialog(StationInfo.this, "The ID entered already exists", "Error!", JOptionPane.ERROR_MESSAGE);
 							}
 						} else {
-							JOptionPane.showMessageDialog(StationInfo.this, "The ID entered must be 3 characters", "Error!", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(StationInfo.this, "The ID entered must be 3 characters", "Error!", JOptionPane.ERROR_MESSAGE);
 						}
 						IDField.setText(station.getId());
 					}
@@ -157,7 +144,7 @@ public class StationInfo extends JFrame {
 						fieldUpdate();
 					} else {
 						ExploredField.setText(station.getExplored());
-						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
 					}
                 }
             }
@@ -172,7 +159,7 @@ public class StationInfo extends JFrame {
 						fieldUpdate();
 					} else {
 						StoppedAtField.setText(station.getStoppedAt());
-						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
 					}
                 }
             }
@@ -187,7 +174,7 @@ public class StationInfo extends JFrame {
 						fieldUpdate();
 					} else {
 						PassedStoppingField.setText(station.getPassedThroughStopping());
-						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
 					}
                 }
             }
@@ -202,7 +189,7 @@ public class StationInfo extends JFrame {
 						fieldUpdate();
 					} else {
 						PassedNotStoppingField.setText(station.getPassedThrough());
-						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
 					}
                 }
             }
@@ -217,7 +204,7 @@ public class StationInfo extends JFrame {
 						fieldUpdate();
 					} else {
 						VisitedField.setText(station.getVisited());
-						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
 					}
                 }
             }
@@ -234,11 +221,11 @@ public class StationInfo extends JFrame {
 							fieldUpdate();
 						} else {
 							NumPlatformField.setText(String.valueOf(station.getNumberOfPlatforms()));
-							JOptionPane.showMessageDialog(StationInfo.this, "The number of platforms can't be less than 1", "Error!", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(StationInfo.this, "The number of platforms can't be less than 1", "Error!", JOptionPane.ERROR_MESSAGE);
 						}
 					} else {
 						NumPlatformField.setText(String.valueOf(station.getNumberOfPlatforms()));
-						JOptionPane.showMessageDialog(StationInfo.this, "The number of platforms can't be nothing", "Error!", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(StationInfo.this, "The number of platforms can't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
 					}
                 }
             }
@@ -269,27 +256,26 @@ public class StationInfo extends JFrame {
 						}
 					} else {
 						PlatformListField.setText(station.platformList());
-						JOptionPane.showMessageDialog(StationInfo.this, "The platforms list can't be empty", "Error!", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(StationInfo.this, "The platforms list can't be empty", "Error!", JOptionPane.ERROR_MESSAGE);
 					}
                 }
             }
         });
 
-		PlatformStats.addActionListener(new ActionListener() {
+		PlatformStats.addActionListener(e -> {
 
-			public void actionPerformed(ActionEvent e) {
+			final ArrayList<String> Plist = station.getPlatformsVisitedList();
+			double percentage = ((double) Plist.size() / station.getNumberOfPlatforms()) * 100;
+			String formattedPercentage = new DecimalFormat("0.00").format(percentage);
 
-				final ArrayList<String> Plist = station.getPlatformsVisitedList();
-				double percentage = ((double) Plist.size() / station.getNumberOfPlatforms()) * 100;
-				String formattedPercentage = new DecimalFormat("0.00").format(percentage);
+			String msg = station.getName() + " Has " + station.getNumberOfPlatforms() + (station.getNumberOfPlatforms() == 1 ? " platform," : " platforms,") + " You have visited " + Plist.size() + (Plist.size() == 1 ? " platform," : " platforms,");
+			msg += "\nThat's " + formattedPercentage + "% " + (percentage == 100.0 ? "Well Done :)" : "Keep Going");
 
-				String msg = station.getName() + " Has " + station.getNumberOfPlatforms() + (station.getNumberOfPlatforms() == 1 ? " platform," : " platforms,") + " You have visited " + Plist.size() + (Plist.size() == 1 ? " platform," : " platforms,");
-				msg += "\nThat's " + formattedPercentage + "% " + (percentage == 100.0 ? "Well Done :)" : "Keep Going");
-
-
-				JOptionPane.showMessageDialog(StationInfo.this, msg, "Platform Info", JOptionPane.INFORMATION_MESSAGE);
-			}
+			JOptionPane.showMessageDialog(StationInfo.this, msg, "Platform Info", JOptionPane.INFORMATION_MESSAGE);
 		});
+
+		// Other
+		ExitButton.addActionListener(e -> closeWindow());
 	}
 
 	private void dropDownFiller(JComboBox<String> dropDown, ArrayList<String> contents, String type) {
@@ -335,24 +321,18 @@ public class StationInfo extends JFrame {
 
         // Action for "Enter" button
 		final boolean[] confirmed = new boolean[1];
-        enterButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Show the second dialog for confirmation
-                confirmed[0] = showCreatorConfirmation(inputField.getText(), firstDialog, option);
-				if (confirmed[0]) {
-					firstDialog.dispose();
-				}
-            }
+        enterButton.addActionListener(e -> {
+            // Show the second dialog for confirmation
+            confirmed[0] = showCreatorConfirmation(inputField.getText(), firstDialog, option);
+			if (confirmed[0]) {
+				firstDialog.dispose();
+			}
         });
 
         // Action for "Cancel" button
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-				confirmed[0] = false;
-                firstDialog.dispose();
-            }
+        cancelButton.addActionListener(e -> {
+			confirmed[0] = false;
+            firstDialog.dispose();
         });
 
         // Center the dialog on the screen and make it visible
@@ -392,25 +372,19 @@ public class StationInfo extends JFrame {
         confirmationDialog.add(noButton, gbc);
 
         // Action for "Yes" button
-        yesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Close both dialogs
-	            confirmed[0] = true;
-                confirmationDialog.dispose();
+        yesButton.addActionListener(e -> {
+            // Close both dialogs
+	        confirmed[0] = true;
+            confirmationDialog.dispose();
 
-            }
         });
 
         // Action for "No" button
-        noButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Close the confirmation dialog and reopen the first dialog
-                confirmationDialog.dispose();
-                firstDialog.setVisible(true);
-				confirmed[0] = false;
-            }
+        noButton.addActionListener(e -> {
+            // Close the confirmation dialog and reopen the first dialog
+            confirmationDialog.dispose();
+            firstDialog.setVisible(true);
+			confirmed[0] = false;
         });
 
         // Center the dialog on the screen and make it visible
@@ -424,7 +398,7 @@ public class StationInfo extends JFrame {
 		fieldUpdate();
 		self.setContentPane(self.StationInfoMainPanel);
         self.setTitle("Station Info");
-        self.setSize(600, 600);
+        self.setSize(700, 600);
         self.setVisible(true);
         self.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
@@ -450,17 +424,26 @@ public class StationInfo extends JFrame {
 		PassedNotStoppingField.setText(station.getPassedThrough());
 		VisitedField.setText(station.getVisited());
 		ImageIcon icon = null;
+		String url = "Images/";
+
+		if (station.getStopType().equals("Train")) {
+			url += "Train";
+		} else if (station.getStopType().equals("Tram")) {
+			url += "Tram";
+		} else {
+			url += "Underground";
+		}
 
 		// Updates Icon depending on station status
 		if (!station.getStoppedAt().equals("NULL")) {
 			if (!station.getStoppedAt().equals("N/A")) {
-				icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("Images/TrainVisited.png")));
+				icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(url + "Visited.png")));
 			} else if (station.getStoppedAt().equals("N/A") && (!station.getPassedThroughStopping().equals("N/A"))) {
-				icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("Images/TrainStopped.png")));
+				icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(url + "Stopped.png")));
 			} else if (station.getStoppedAt().equals("N/A") && station.getPassedThroughStopping().equals("N/A") && (!station.getPassedThrough().equals("N/A"))) {
-				icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("Images/TrainSkipped.png")));
+				icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(url + "Skipped.png")));
 			} else if (station.getStoppedAt().equals("N/A") && station.getPassedThroughStopping().equals("N/A") && (station.getPassedThrough().equals("N/A") && !station.getVisited().equals("N/A"))) {
-				icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("Images/TrainVisitedFoot.png")));
+				icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(url + "VisitedFoot.png")));
 			}
 
 			StationIcon.setIcon(icon);

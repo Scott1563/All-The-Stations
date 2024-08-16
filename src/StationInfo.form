@@ -162,7 +162,7 @@
         </constraints>
         <properties>
           <labelFor value="5af9d"/>
-          <text value="&amp;Visited"/>
+          <text value="Visited"/>
         </properties>
       </component>
       <component id="12de4" class="javax.swing.JTextField" binding="NameField">
@@ -291,11 +291,6 @@
           <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <vspacer id="a92ea">
-        <constraints>
-          <grid row="15" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
       <component id="3db7e" class="javax.swing.JLabel" binding="StationIcon">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false">
@@ -340,6 +335,14 @@
         </constraints>
         <properties>
           <text value="Save &amp; Exit"/>
+        </properties>
+      </component>
+      <component id="824a1" class="javax.swing.JButton" binding="EditButton">
+        <constraints>
+          <grid row="15" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Edit Another"/>
         </properties>
       </component>
     </children>

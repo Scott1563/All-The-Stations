@@ -12,6 +12,7 @@ public class Start extends JFrame {
 	private final ArrayList<String> areaList = new ArrayList<>();
 	private final ArrayList<String> operatorList = new ArrayList<>();
     private Start self;
+	private boolean editMore = false;
 
     public Start() {
 
@@ -23,19 +24,23 @@ public class Start extends JFrame {
             }
         });
 
-        TempButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Open the StationSelect dialog
-                StationSelect selection = new StationSelect(self, stationList);
-                selection.setContentPane(selection.StationSelectPanel);
-                selection.setTitle("Station Selection");
-                selection.setSize(600, 400);
-                selection.setVisible(true);
-                selection.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        TempButton.addActionListener(e -> {
 
-                StationInfo stationDisplay = new StationInfo(selectedStation, stationList, countryList, areaList, operatorList);
-                stationDisplay.setUp(stationDisplay);
-            }
+	        do {
+		        StationSelect selection = new StationSelect(self, stationList);
+		        selection.setContentPane(selection.StationSelectPanel);
+		        selection.setTitle("Station Selection");
+		        selection.setSize(600, 400);
+		        selection.setVisible(true);
+		        selection.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+					StationInfo stationDisplay = new StationInfo(self, getSelectedStation(), stationList, countryList, areaList, operatorList);
+		        stationDisplay.setContentPane(stationDisplay.StationInfoMainPanel);
+			    stationDisplay.setTitle("Station Info");
+			    stationDisplay.setSize(700, 600);
+		        stationDisplay.setVisible(true);
+		        stationDisplay.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        } while (getEditMore());
         });
     }
 
@@ -80,6 +85,9 @@ public class Start extends JFrame {
 
     public void setSelectedStation(Station selectedStation) {
         this.selectedStation = selectedStation;
-        System.out.println("Station set: " + selectedStation);
     }
+
+	public boolean getEditMore() { return editMore; }
+
+	public void setEditMore(boolean editMore) { this.editMore = editMore; }
 }

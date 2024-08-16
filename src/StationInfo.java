@@ -4,9 +4,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class StationInfo extends JFrame {
+public class StationInfo extends JDialog {
 
-	private JPanel StationInfoMainPanel;
+	public JPanel StationInfoMainPanel;
 	private JLabel StationIcon;
 	private JLabel StationName;
 	private JTextField IDField;
@@ -24,16 +24,20 @@ public class StationInfo extends JFrame {
 	private JTextField VisitedField;
 	private JButton PlatformStats;
 	private JButton ExitButton;
+	private JButton EditButton;
 	private final Station station;
 
-	public StationInfo(Station station, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<String> operatorList) {
+	public StationInfo(Start start, Station station, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<String> operatorList) {
 
+		super(start, "Station Info", true);
 		this.station = station;
 
 		// Country/Area & TOC
 		dropDownFiller(CountryField, countryList, "country");
 		dropDownFiller(AreaField, areaList, "area");
 		dropDownFiller(TOCField, operatorList, "TOC");
+
+		fieldUpdate();
 
 		CountryField.addActionListener(e -> {
 		    String selectedCountry = (String) CountryField.getSelectedItem();
@@ -275,7 +279,15 @@ public class StationInfo extends JFrame {
 		});
 
 		// Other
-		ExitButton.addActionListener(e -> closeWindow());
+		ExitButton.addActionListener(e -> {
+			start.setEditMore(false);
+			closeWindow();
+		});
+
+		EditButton.addActionListener(e -> {
+			start.setEditMore(true);
+			closeWindow();
+		});
 	}
 
 	private void dropDownFiller(JComboBox<String> dropDown, ArrayList<String> contents, String type) {
@@ -393,15 +405,6 @@ public class StationInfo extends JFrame {
 
 		return confirmed[0];
     }
-
-	public void setUp(StationInfo self) {
-		fieldUpdate();
-		self.setContentPane(self.StationInfoMainPanel);
-        self.setTitle("Station Info");
-        self.setSize(700, 600);
-        self.setVisible(true);
-        self.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	}
 
 	private void fieldUpdate() {
 

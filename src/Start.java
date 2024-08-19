@@ -5,14 +5,16 @@ import java.util.*;
 public class Start extends JFrame {
 
     private JPanel StartPanel;
-    private JButton TempButton;
-    private Stations stationList;
+    private JButton EditStationButton;
+	private JButton NewStationButton;
+	private Stations stationList;
     private Station selectedStation;
     private final ArrayList<String> countryList = new ArrayList<>();
 	private final ArrayList<String> areaList = new ArrayList<>();
 	private final ArrayList<String> operatorList = new ArrayList<>();
     private Start self;
 	private boolean editMore = false;
+	private boolean canceled;
 
     public Start() {
 
@@ -24,7 +26,7 @@ public class Start extends JFrame {
             }
         });
 
-        TempButton.addActionListener(e -> {
+        EditStationButton.addActionListener(e -> {
 
 	        do {
 		        StationSelect selection = new StationSelect(self, stationList);
@@ -34,13 +36,32 @@ public class Start extends JFrame {
 		        selection.setVisible(true);
 		        selection.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-					StationInfo stationDisplay = new StationInfo(self, getSelectedStation(), stationList, countryList, areaList, operatorList);
+				StationInfo stationDisplay = new StationInfo(self, getSelectedStation(), stationList, countryList, areaList, operatorList);
 		        stationDisplay.setContentPane(stationDisplay.StationInfoMainPanel);
 			    stationDisplay.setTitle("Station Info");
 			    stationDisplay.setSize(700, 600);
 		        stationDisplay.setVisible(true);
 		        stationDisplay.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	        } while (getEditMore());
+        });
+
+		NewStationButton.addActionListener(e -> {
+
+		        StationCreator creation = new StationCreator(self, stationList, countryList, areaList, operatorList);
+		        creation.setContentPane(creation.StationCreatorMainPanel);
+		        creation.setTitle("Station Creator");
+		        creation.setSize(600, 400);
+		        creation.setVisible(true);
+		        creation.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+				if (!isCanceled()) {
+					StationInfo stationDisplay = new StationInfo(self, getSelectedStation(), stationList, countryList, areaList, operatorList);
+			        stationDisplay.setContentPane(stationDisplay.StationInfoMainPanel);
+				    stationDisplay.setTitle("Station Info");
+				    stationDisplay.setSize(700, 600);
+			        stationDisplay.setVisible(true);
+			        stationDisplay.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				}
         });
     }
 
@@ -90,4 +111,8 @@ public class Start extends JFrame {
 	public boolean getEditMore() { return editMore; }
 
 	public void setEditMore(boolean editMore) { this.editMore = editMore; }
+
+	public boolean isCanceled() { return canceled; }
+
+	public void setCanceled(boolean canceled) { this.canceled = canceled; }
 }

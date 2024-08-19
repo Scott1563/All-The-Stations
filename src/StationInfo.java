@@ -102,7 +102,7 @@ public class StationInfo extends JDialog {
 		// Request Stop
 		RequestStop.addActionListener(e -> station.setRequestStop(RequestStop.isSelected()));
 
-		// Date & ID
+		// Name & ID
 		NameField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {

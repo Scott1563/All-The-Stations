@@ -25,6 +25,7 @@ public class StationInfo extends JDialog {
 	private JButton PlatformStats;
 	private JButton ExitButton;
 	private JButton EditButton;
+	private JButton NewButton;
 	private final Station station;
 
 	public StationInfo(Start start, Station station, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<String> operatorList) {
@@ -105,166 +106,51 @@ public class StationInfo extends JDialog {
 		// Name & ID
 		NameField.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\n') {
-					if (!NameField.getText().isEmpty()) {
-						station.setName(NameField.getText());
-						fieldUpdate();
-					} else {
-						NameField.setText(station.getName());
-					}
-                }
+            public void keyTyped(KeyEvent e) {if (e.getKeyChar() == '\n') { nameChecker(); }
             }
         });
 
 		IDField.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\n') {
-					if (!IDField.getText().equals(station.getId())) {
-						if (IDField.getText().length() == 3) {
-							if (list.findStationByID(IDField.getText()).isEmpty() || IDField.getText().equals("N/A")) {
-								station.setId(IDField.getText());
-								fieldUpdate();
-							} else {
-								JOptionPane.showMessageDialog(StationInfo.this, "The ID entered already exists", "Error!", JOptionPane.ERROR_MESSAGE);
-							}
-						} else {
-							JOptionPane.showMessageDialog(StationInfo.this, "The ID entered must be 3 characters", "Error!", JOptionPane.ERROR_MESSAGE);
-						}
-						IDField.setText(station.getId());
-					}
-                }
+            public void keyTyped(KeyEvent e) { if (e.getKeyChar() == '\n') { idChecker(list); }
             }
         });
 
 		// Date Fields
 		ExploredField.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\n') {
-					if (!ExploredField.getText().isEmpty()) {
-						list.updateExplored(station, ExploredField.getText());
-						fieldUpdate();
-					} else {
-						ExploredField.setText(station.getExplored());
-						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
-					}
-                }
-            }
+            public void keyTyped(KeyEvent e) { if (e.getKeyChar() == '\n') { dateChecker(list, ExploredField, "E"); } }
         });
 
 		StoppedAtField.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\n') {
-					if (!StoppedAtField.getText().isEmpty()) {
-						list.updateStoppedAt(station, StoppedAtField.getText());
-						fieldUpdate();
-					} else {
-						StoppedAtField.setText(station.getStoppedAt());
-						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
-					}
-                }
-            }
+            public void keyTyped(KeyEvent e) { if (e.getKeyChar() == '\n') { dateChecker(list, StoppedAtField, "S");} }
         });
 
 		PassedStoppingField.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\n') {
-					if (!PassedStoppingField.getText().isEmpty()) {
-						list.updatePassedThroughStopping(station, PassedStoppingField.getText());
-						fieldUpdate();
-					} else {
-						PassedStoppingField.setText(station.getPassedThroughStopping());
-						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
-					}
-                }
-            }
+            public void keyTyped(KeyEvent e) { if (e.getKeyChar() == '\n') { dateChecker(list, PassedStoppingField, "PS"); } }
         });
 
 		PassedNotStoppingField.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\n') {
-					if (!PassedNotStoppingField.getText().isEmpty()) {
-						list.updatePassedThrough(station, PassedNotStoppingField.getText());
-						fieldUpdate();
-					} else {
-						PassedNotStoppingField.setText(station.getPassedThrough());
-						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
-					}
-                }
-            }
+            public void keyTyped(KeyEvent e) { if (e.getKeyChar() == '\n') { dateChecker(list, PassedNotStoppingField, "P"); } }
         });
 
 		VisitedField.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\n') {
-					if (!VisitedField.getText().isEmpty()) {
-						list.updateVisited(station, VisitedField.getText());
-						fieldUpdate();
-					} else {
-						VisitedField.setText(station.getVisited());
-						JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
-					}
-                }
-            }
+            public void keyTyped(KeyEvent e) { if (e.getKeyChar() == '\n') { dateChecker(list, VisitedField, "V"); } }
         });
 
 		// Platform Fields
 		NumPlatformField.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\n') {
-					if (!NumPlatformField.getText().isEmpty()) {
-						if (Integer.parseInt(NumPlatformField.getText()) > 0) {
-							list.updateNumOfPlatforms(station, Integer.parseInt(NumPlatformField.getText()));
-							fieldUpdate();
-						} else {
-							NumPlatformField.setText(String.valueOf(station.getNumberOfPlatforms()));
-							JOptionPane.showMessageDialog(StationInfo.this, "The number of platforms can't be less than 1", "Error!", JOptionPane.ERROR_MESSAGE);
-						}
-					} else {
-						NumPlatformField.setText(String.valueOf(station.getNumberOfPlatforms()));
-						JOptionPane.showMessageDialog(StationInfo.this, "The number of platforms can't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
-					}
-                }
-            }
+            public void keyTyped(KeyEvent e) { if (e.getKeyChar() == '\n') { platformAmountChecker(list); } }
         });
 
 		PlatformListField.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == '\n') {
-					if (!PlatformListField.getText().isEmpty()) {
-						String[] unEditPlatforms = PlatformListField.getText().split(",");
-						String[] platforms = new String[unEditPlatforms.length];
-						int i = 0;
-
-						for (String p : unEditPlatforms) {
-							platforms[i] = p.trim();
-							i++;
-						}
-						for (String p : platforms) {
-							if (!station.getPlatformsVisitedList().contains(p)) {
-								station.addPlatform(p);
-							}
-						}
-						fieldUpdate();
-
-						if (!station.platformList().equals("NULL") && !station.platformList().equals("N/A")) {
-							PlatformStats.setVisible(true);
-						}
-					} else {
-						PlatformListField.setText(station.platformList());
-						JOptionPane.showMessageDialog(StationInfo.this, "The platforms list can't be empty", "Error!", JOptionPane.ERROR_MESSAGE);
-					}
-                }
-            }
-        });
+            public void keyTyped(KeyEvent e) { if (e.getKeyChar() == '\n') { platformListChecker(); } }});
 
 		PlatformStats.addActionListener(e -> {
 
@@ -280,14 +166,240 @@ public class StationInfo extends JDialog {
 
 		// Other
 		ExitButton.addActionListener(e -> {
-			start.setEditMore(false);
-			closeWindow();
+
+			boolean failed = false;
+
+			if (showCreatorConfirmation(null, "Save", "Would you like to save the changes made to this station?")) {
+				failed = save(list);
+			}
+			if (!failed) {
+				start.setEditMore(false);
+				start.setNew(false);
+				closeWindow();
+			}
 		});
 
 		EditButton.addActionListener(e -> {
-			start.setEditMore(true);
-			closeWindow();
+
+			boolean failed = false;
+
+			if (showCreatorConfirmation(null, "Save", "Would you like to save the changes made to this station?")) {
+				failed = save(list);
+			}
+			if (!failed) {
+				start.setEditMore(true);
+				start.setNew(false);
+				closeWindow();
+			}
 		});
+
+		NewButton.addActionListener(e -> {
+
+			boolean failed = false;
+
+			if (showCreatorConfirmation(null, "Save", "Would you like to save the changes made to this station?")) {
+				failed = save(list);
+			}
+			if (!failed) {
+				start.setEditMore(false);
+				start.setNew(true);
+				closeWindow();
+			}
+		});
+	}
+
+	private boolean idChecker(Stations list) {
+
+		boolean valid = false;
+
+		if (!IDField.getText().equals(station.getId())) {
+			if (IDField.getText().length() == 3) {
+				if (list.findStationByID(IDField.getText()).isEmpty() || IDField.getText().equals("N/A")) {
+					station.setId(IDField.getText());
+					fieldUpdate();
+					valid = true;
+				} else {
+					JOptionPane.showMessageDialog(StationInfo.this, "The ID entered already exists", "Error!", JOptionPane.ERROR_MESSAGE);
+				}
+			} else {
+				JOptionPane.showMessageDialog(StationInfo.this, "The ID entered must be 3 characters", "Error!", JOptionPane.ERROR_MESSAGE);
+			}
+			IDField.setText(station.getId());
+		}
+		return valid;
+	}
+
+	private boolean nameChecker() {
+
+		if (!NameField.getText().isEmpty()) {
+			station.setName(NameField.getText());
+			fieldUpdate();
+			return true;
+		}
+		NameField.setText(station.getName());
+		JOptionPane.showMessageDialog(StationInfo.this, "The station must have a name", "Error!", JOptionPane.ERROR_MESSAGE);
+		return false;
+	}
+
+	private boolean platformListChecker() {
+
+		boolean valid = false;
+
+		if (!PlatformListField.getText().isEmpty()) {
+			String[] unEditPlatforms = PlatformListField.getText().split(",");
+			String[] platforms = new String[unEditPlatforms.length];
+			int i = 0;
+
+			for (String p : unEditPlatforms) {
+				platforms[i] = p.trim();
+				i++;
+			}
+			for (String p : platforms) {
+				if (!station.getPlatformsVisitedList().contains(p)) {
+					station.addPlatform(p);
+				}
+			}
+			fieldUpdate();
+			if (!station.platformList().equals("NULL") && !station.platformList().equals("N/A")) {
+				PlatformStats.setVisible(true);
+			}
+			valid = true;
+		} else {
+			PlatformListField.setText(station.platformList());
+			JOptionPane.showMessageDialog(StationInfo.this, "The platforms list can't be empty", "Error!", JOptionPane.ERROR_MESSAGE);
+		}
+		return valid;
+	}
+
+	private boolean platformAmountChecker(Stations list) {
+
+		if (!NumPlatformField.getText().isEmpty()) {
+			boolean numerical;
+			try {
+                Double.parseDouble(NumPlatformField.getText());
+			    numerical = true;
+			} catch(NumberFormatException e){
+			    numerical = false;
+			}
+			if (numerical) {
+				if (Integer.parseInt(NumPlatformField.getText()) > 0) {
+					list.updateNumOfPlatforms(station, Integer.parseInt(NumPlatformField.getText()));
+					fieldUpdate();
+					return true;
+				} else {
+					JOptionPane.showMessageDialog(StationInfo.this, "The number of platforms can't be less than 1", "Error!", JOptionPane.ERROR_MESSAGE);
+				}
+			} else {
+				JOptionPane.showMessageDialog(StationInfo.this, "The number of platforms must be a number", "Error!", JOptionPane.ERROR_MESSAGE);
+			}
+		} else {
+			JOptionPane.showMessageDialog(StationInfo.this, "The number of platforms can't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
+		}
+		NumPlatformField.setText(String.valueOf(station.getNumberOfPlatforms()));
+		return false;
+	}
+
+	private boolean dateChecker(Stations list, JTextField field, String dateType) {
+
+		boolean valid = false;
+
+		if (!field.getText().isEmpty()) {
+			switch (dateType) {
+				case "E"  -> list.updateExplored(station, field.getText());
+				case "S"  -> list.updateStoppedAt(station, field.getText());
+				case "PS" -> list.updatePassedThroughStopping(station, field.getText());
+				case "P"  -> list.updatePassedThrough(station, field.getText());
+				case "V"  -> list.updateVisited(station, field.getText());
+			}
+			fieldUpdate();
+			valid = true;
+		} else {
+			switch (dateType) {
+				case "E"  -> field.setText(station.getExplored());
+				case "S"  -> field.setText(station.getStoppedAt());
+				case "PS" -> field.setText(station.getPassedThroughStopping());
+				case "P"  -> field.setText(station.getPassedThrough());
+				case "V"  -> field.setText(station.getVisited());
+			}
+			JOptionPane.showMessageDialog(StationInfo.this, "The date shouldn't be nothing", "Error!", JOptionPane.ERROR_MESSAGE);
+		}
+		return valid;
+	}
+
+	private boolean save(Stations list) {
+
+		boolean failed = false;
+		String[] fields = new String[9];
+		fields[0] = IDField.getText();
+		fields[1] = NameField.getText();
+		fields[2] = PlatformListField.getText();
+		fields[3] = NumPlatformField.getText();
+		fields[4] = ExploredField.getText();
+		fields[5] = StoppedAtField.getText();
+		fields[6] = PassedStoppingField.getText();
+		fields[7] = PassedNotStoppingField.getText();
+		fields[8] = VisitedField.getText();
+
+		IDField.setText(fields[0]);
+		if (!IDField.getText().equals(station.getId())) {
+			if (!idChecker(list)) {
+				failed = true;
+			}
+		}
+
+		NameField.setText(fields[1]);
+		if (!failed && !NameField.getText().equals(station.getName())) {
+			if (!nameChecker()) {
+				failed = true;
+			}
+		}
+
+		PlatformListField.setText(fields[2]);
+		if (!failed && !platformListChecker()) {
+			failed = true;
+		}
+
+		NumPlatformField.setText(fields[3]);
+		if (!failed && !platformAmountChecker(list)) {
+			failed = true;
+		}
+
+		ExploredField.setText(fields[4]);
+		if (!failed && !(ExploredField.getText().equals(station.getExplored()) || fields[4].equals("NULL"))) {
+			if (!dateChecker(list, ExploredField, "E")) {
+				failed = true;
+			}
+		}
+
+		StoppedAtField.setText(fields[5]);
+		if (!failed && !(StoppedAtField.getText().equals(station.getStoppedAt()) || fields[5].equals("NULL"))) {
+			if (!dateChecker(list, StoppedAtField, "S")) {
+				failed = true;
+			}
+		}
+
+		PassedStoppingField.setText(fields[6]);
+		if (!failed && !(PassedStoppingField.getText().equals(station.getPassedThroughStopping()) || fields[6].equals("NULL"))) {
+			if (!dateChecker(list, PassedStoppingField, "PS")) {
+				failed = true;
+			}
+		}
+
+		PassedNotStoppingField.setText(fields[7]);
+		if (!failed && !(PassedNotStoppingField.getText().equals(station.getPassedThrough()) || fields[7].equals("NULL"))) {
+			if (!dateChecker(list, PassedNotStoppingField, "P")) {
+				failed = true;
+			}
+		}
+
+		VisitedField.setText(fields[8]);
+		if (!failed && !(VisitedField.getText().equals(station.getVisited()) || fields[8].equals("NULL"))) {
+			if (!dateChecker(list, VisitedField, "V")) {
+				failed = true;
+			}
+		}
+
+		return failed;
 	}
 
 	private void dropDownFiller(JComboBox<String> dropDown, ArrayList<String> contents, String type) {
@@ -335,7 +447,7 @@ public class StationInfo extends JDialog {
 		final boolean[] confirmed = new boolean[1];
         enterButton.addActionListener(e -> {
             // Show the second dialog for confirmation
-            confirmed[0] = showCreatorConfirmation(inputField.getText(), firstDialog, option);
+            confirmed[0] = showCreatorConfirmation(firstDialog, ("New " + option + " creator"), ("Is " + inputField.getText() + " the correct " + option + "?"));
 			if (confirmed[0]) {
 				firstDialog.dispose();
 			}
@@ -354,57 +466,68 @@ public class StationInfo extends JDialog {
 		return confirmed[0] ? inputField.getText() : "NULL";
     }
 
-    private boolean showCreatorConfirmation(String inputValue, JDialog firstDialog, String option) {
+    private boolean showCreatorConfirmation(JDialog firstDialog, String title, String question) {
 
-        final boolean[] confirmed = new boolean[1];
-        JDialog confirmationDialog = new JDialog(this, "New " + option + " creator", true);
-        confirmationDialog.setSize(300, 150);
-        confirmationDialog.setLayout(new GridBagLayout());
+	    final boolean[] confirmed = new boolean[1];
+	    JDialog confirmationDialog = new JDialog(this, title, true);
+	    confirmationDialog.setSize(500, 150);
+	    confirmationDialog.setLayout(new GridBagLayout());
 
-        // Components for the confirmation dialog
-        JLabel confirmationLabel = new JLabel("Is " + inputValue + " the correct " + option + "?");
-        JButton yesButton = new JButton("Yes");
-        JButton noButton = new JButton("No");
+	    // Components for the confirmation dialog
+	    JLabel confirmationLabel = new JLabel(question);
+	    JButton yesButton = new JButton("Yes");
+	    JButton noButton = new JButton("No");
 
-        // GridBagLayout setup
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
+	    // GridBagLayout setup
+	    GridBagConstraints gbc = new GridBagConstraints();
+	    gbc.insets = new Insets(5, 5, 5, 5);
+	    gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        confirmationDialog.add(confirmationLabel, gbc);
+	    // Add the confirmation label
+	    gbc.gridx = 0;
+	    gbc.gridy = 0;
+	    gbc.gridwidth = 2; // Span two columns
+	    gbc.anchor = GridBagConstraints.CENTER;
+	    confirmationDialog.add(confirmationLabel, gbc);
 
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        gbc.anchor = GridBagConstraints.CENTER;
-        confirmationDialog.add(yesButton, gbc);
+	    // Create a panel to hold the buttons
+	    JPanel buttonPanel = new JPanel();
+	    buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0)); // Center with 10px gap
 
-        gbc.gridx = 1;
-        confirmationDialog.add(noButton, gbc);
+	    // Add buttons to the panel
+	    buttonPanel.add(yesButton);
+	    buttonPanel.add(noButton);
 
-        // Action for "Yes" button
-        yesButton.addActionListener(e -> {
-            // Close both dialogs
+	    // Add the button panel to the dialog
+	    gbc.gridx = 0;
+	    gbc.gridy = 1;
+	    gbc.gridwidth = 2; // Span two columns
+	    gbc.anchor = GridBagConstraints.CENTER;
+	    confirmationDialog.add(buttonPanel, gbc);
+
+	    // Action for "Yes" button
+	    yesButton.addActionListener(e -> {
+	        // Close both dialogs
 	        confirmed[0] = true;
-            confirmationDialog.dispose();
+	        confirmationDialog.dispose();
+	    });
 
-        });
+	    // Action for "No" button
+	    noButton.addActionListener(e -> {
+	        // Close the confirmation dialog and reopen the first dialog
+	        confirmationDialog.dispose();
+	        if (firstDialog != null) {
+	            firstDialog.setVisible(true);
+	        }
+	        confirmed[0] = false;
+	    });
 
-        // Action for "No" button
-        noButton.addActionListener(e -> {
-            // Close the confirmation dialog and reopen the first dialog
-            confirmationDialog.dispose();
-            firstDialog.setVisible(true);
-			confirmed[0] = false;
-        });
+	    // Center the dialog on the screen and make it visible
+	    confirmationDialog.setLocationRelativeTo(this);
+	    confirmationDialog.setVisible(true);
 
-        // Center the dialog on the screen and make it visible
-        confirmationDialog.setLocationRelativeTo(this);
-        confirmationDialog.setVisible(true);
-
-		return confirmed[0];
-    }
+	    return confirmed[0];
+	}
 
 	private void fieldUpdate() {
 

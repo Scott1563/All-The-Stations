@@ -15,6 +15,7 @@ public class Start extends JFrame {
     private Start self;
 	private boolean editMore = false;
 	private boolean canceled;
+	private boolean createNew = false;
 
     public Start() {
 
@@ -28,40 +29,55 @@ public class Start extends JFrame {
 
         EditStationButton.addActionListener(e -> {
 
-	        do {
-		        StationSelect selection = new StationSelect(self, stationList);
-		        selection.setContentPane(selection.StationSelectPanel);
-		        selection.setTitle("Station Selection");
-		        selection.setSize(600, 400);
-		        selection.setVisible(true);
-		        selection.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			boolean exit = false;
 
-				StationInfo stationDisplay = new StationInfo(self, getSelectedStation(), stationList, countryList, areaList, operatorList);
-		        stationDisplay.setContentPane(stationDisplay.StationInfoMainPanel);
-			    stationDisplay.setTitle("Station Info");
-			    stationDisplay.setSize(700, 600);
-		        stationDisplay.setVisible(true);
-		        stationDisplay.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	        } while (getEditMore());
+			do {
+				do {
+			        selectStation();
+					editStation();
+	            } while (getEditMore());
+
+				if (getNew()) {
+					do {
+						newStation();
+						if (isCanceled()) {
+							setNew(false);
+						} else {
+							editStation();
+						}
+					} while (getNew());
+				}
+
+				if (!getEditMore() && !getNew()) {
+					exit = true;
+				}
+			} while (!exit);
         });
 
 		NewStationButton.addActionListener(e -> {
 
-		        StationCreator creation = new StationCreator(self, stationList, countryList, areaList, operatorList);
-		        creation.setContentPane(creation.StationCreatorMainPanel);
-		        creation.setTitle("Station Creator");
-		        creation.setSize(600, 400);
-		        creation.setVisible(true);
-		        creation.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			boolean exit = false;
 
-				if (!isCanceled()) {
-					StationInfo stationDisplay = new StationInfo(self, getSelectedStation(), stationList, countryList, areaList, operatorList);
-			        stationDisplay.setContentPane(stationDisplay.StationInfoMainPanel);
-				    stationDisplay.setTitle("Station Info");
-				    stationDisplay.setSize(700, 600);
-			        stationDisplay.setVisible(true);
-			        stationDisplay.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			do {
+				do {
+					newStation();
+					if (!isCanceled()) {
+						editStation();
+					} else {
+						setNew(false);
+					}
+				} while (getNew());
+
+				if (getEditMore()) {
+					do {
+			            selectStation();
+						editStation();
+					} while (getEditMore());
 				}
+				if (!getEditMore() && !getNew()) {
+					exit = true;
+				}
+			} while (!exit);
         });
     }
 
@@ -100,13 +116,39 @@ public class Start extends JFrame {
         self.setUp(self);
     }
 
-    public Station getSelectedStation() {
-        return selectedStation;
-    }
+	public void newStation() {
 
-    public void setSelectedStation(Station selectedStation) {
-        this.selectedStation = selectedStation;
-    }
+		StationCreator creation = new StationCreator(self, stationList, countryList, areaList, operatorList);
+		creation.setContentPane(creation.StationCreatorMainPanel);
+		creation.setTitle("Station Creator");
+		creation.setSize(600, 400);
+		creation.setVisible(true);
+		creation.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	}
+
+	public void editStation() {
+
+		StationInfo stationDisplay = new StationInfo(self, getSelectedStation(), stationList, countryList, areaList, operatorList);
+		stationDisplay.setContentPane(stationDisplay.StationInfoMainPanel);
+		stationDisplay.setTitle("Station Info");
+		stationDisplay.setSize(875, 600);
+		stationDisplay.setVisible(true);
+		stationDisplay.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	}
+
+	public void selectStation() {
+
+		StationSelect selection = new StationSelect(self, stationList);
+		selection.setContentPane(selection.StationSelectPanel);
+		selection.setTitle("Station Selection");
+		selection.setSize(600, 400);
+		selection.setVisible(true);
+		selection.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	}
+
+    public Station getSelectedStation() {return selectedStation; }
+
+    public void setSelectedStation(Station selectedStation) { this.selectedStation = selectedStation; }
 
 	public boolean getEditMore() { return editMore; }
 
@@ -115,4 +157,8 @@ public class Start extends JFrame {
 	public boolean isCanceled() { return canceled; }
 
 	public void setCanceled(boolean canceled) { this.canceled = canceled; }
+
+	public void setNew(boolean createNew) { this.createNew = createNew; }
+
+	public boolean getNew() { return createNew; }
 }

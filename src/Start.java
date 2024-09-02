@@ -7,17 +7,23 @@ public class Start extends JFrame {
     private JPanel StartPanel;
     private JButton EditStationButton;
 	private JButton NewStationButton;
-	private Stations stationList;
+	private JButton ShowStatsButton;
+
+	private final Stations stationList;
     private Station selectedStation;
     private final ArrayList<String> countryList = new ArrayList<>();
 	private final ArrayList<String> areaList = new ArrayList<>();
 	private final ArrayList<String> operatorList = new ArrayList<>();
+	private final ArrayList<ArrayList<String>> countryAreaLink = new ArrayList<>();
     private Start self;
 	private boolean editMore = false;
 	private boolean canceled;
 	private boolean createNew = false;
 
-    public Start() {
+    public Start(Stations stationList) {
+
+		this.stationList = stationList;
+		arraySetUp();
 
 		addWindowListener(new WindowAdapter() {
             @Override
@@ -52,6 +58,9 @@ public class Start extends JFrame {
 					exit = true;
 				}
 			} while (!exit);
+			areaList.clear();
+			countryAreaLink.clear();
+			arraySetUp();
         });
 
 		NewStationButton.addActionListener(e -> {
@@ -78,7 +87,12 @@ public class Start extends JFrame {
 					exit = true;
 				}
 			} while (!exit);
+			areaList.clear();
+			countryAreaLink.clear();
+			arraySetUp();
         });
+
+		ShowStatsButton.addActionListener(e -> statsShower());
     }
 
     public void setUp(Start self) {
@@ -88,11 +102,10 @@ public class Start extends JFrame {
         self.setSize(500, 500);
         self.setVisible(true);
         self.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        stationList = Stations.getStationsInstance();
-        arraySetUp();
     }
 
     private void arraySetUp() {
+
         for (Station station : stationList.getStationList()) {
 			if (!(countryList.contains(station.getCountry()) || station.getCountry().isEmpty())) {
 				countryList.add(station.getCountry());
@@ -100,6 +113,10 @@ public class Start extends JFrame {
 
 			if (!(areaList.contains(station.getArea()) || station.getArea().isEmpty())) {
 				areaList.add(station.getArea());
+				ArrayList<String> tempArraylist = new ArrayList<>();
+				tempArraylist.add(station.getArea());
+				tempArraylist.add(station.getCountry());
+				countryAreaLink.add(tempArraylist);
 			}
 
 			if (!(operatorList.contains(station.getManager()) || station.getManager().isEmpty())) {
@@ -109,11 +126,6 @@ public class Start extends JFrame {
 		Collections.sort(countryList);
 		Collections.sort(areaList);
 		Collections.sort(operatorList);
-    }
-
-    public static void main(String[] args) {
-        Start self = new Start();
-        self.setUp(self);
     }
 
 	public void newStation() {
@@ -138,12 +150,27 @@ public class Start extends JFrame {
 
 	public void selectStation() {
 
+		self.setVisible(false);
 		StationSelect selection = new StationSelect(self, stationList);
 		selection.setContentPane(selection.StationSelectPanel);
 		selection.setTitle("Station Selection");
 		selection.setSize(600, 400);
 		selection.setVisible(true);
 		selection.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		self.setVisible(true);
+	}
+
+	public void statsShower() {
+
+		self.setVisible(false);
+		StatsOptionSelector stats = new StatsOptionSelector(self, stationList, countryList, areaList, countryAreaLink);
+		stats.setSelf(stats);
+		stats.setContentPane(stats.StatsOptionSelectMainPanel);
+		stats.setTitle("Stats Option Selection");
+		stats.setSize(350, 150);
+		stats.setVisible(true);
+		stats.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		self.setVisible(true);
 	}
 
     public Station getSelectedStation() {return selectedStation; }

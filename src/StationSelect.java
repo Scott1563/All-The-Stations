@@ -94,6 +94,12 @@ public class StationSelect extends JDialog {
 				Station9.setEnabled(!Station9.getText().isEmpty());
 				Station10.setText((9 < len) ? stationChoices.get(9).stationChoiceDisplay() : "");
 				Station10.setEnabled(!Station10.getText().isEmpty());
+
+				if (len == 1) {
+					Station1.setSelected(true);
+				} else {
+					StationSelection.clearSelection();
+				}
 			}
 		} else {
 			JOptionPane.showMessageDialog(StationSelect.this, "Field cannot be left blank", "Error!", JOptionPane.ERROR_MESSAGE);

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -16,13 +17,17 @@ public class StationSelect extends JDialog {
 	private final Stations stationList;
 	private ArrayList<Station> stationChoices;
 
-    public StationSelect(Start start, Stations stationList) {
+	public StationSelect(Start start, Stations stationList, boolean delete) {
 
 		super(start, "Station Selection", true);
 		selectionReset();
 		this.stationList = stationList;
 
-        StationInputLabel.setText("Which station would you like to modify (ID or name):");
+		if (delete) {
+			StationInputLabel.setText("Which station would you like to delete (ID or name):");
+		} else {
+			StationInputLabel.setText("Which station would you like to modify (ID or name):");
+		}
         Station1.setMnemonic(1);
         Station2.setMnemonic(2);
         Station3.setMnemonic(3);
@@ -49,9 +54,20 @@ public class StationSelect extends JDialog {
         enterButton.addActionListener(e -> {
 
 	        if (StationSelection.getSelection() != null) {
-		        int selected = StationSelection.getSelection().getMnemonic() - 1;
-		        start.setSelectedStation(stationChoices.get(selected));
-		        closeWindow();
+				int selected = StationSelection.getSelection().getMnemonic() - 1;
+				if (!delete) {
+					start.setSelectedStation(stationChoices.get(selected));
+					closeWindow();
+				} else {
+
+					String name = stationChoices.get(selected).getName() + " (" + stationChoices.get(selected).getId() + ")";
+
+					if (showDeletionConfirmation(name)) {
+						JOptionPane.showMessageDialog(StationSelect.this, (name + " has been removed"));
+						stationList.removeStation(stationChoices.get(selected));
+						closeWindow();
+					}
+				}
 	        } else {
 		        JOptionPane.showMessageDialog(StationSelect.this, "Please select a station!");
 	        }
@@ -59,6 +75,55 @@ public class StationSelect extends JDialog {
 
 		cancelButton.addActionListener(e -> closeWindow());
     }
+
+	private boolean showDeletionConfirmation(String name) {
+
+		final boolean[] confirmed = new boolean[1];
+		JDialog confirmationDialog = new JDialog(this, "Station Deleter", true);
+		confirmationDialog.setSize(300, 150);
+		confirmationDialog.setLayout(new GridBagLayout());
+
+		// Components for the confirmation dialog
+		JLabel confirmationLabel = new JLabel("Are you sure you want to delete " + name + "?");
+		JButton yesButton = new JButton("Yes");
+		JButton noButton = new JButton("No");
+
+		// GridBagLayout setup
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.insets = new Insets(5, 5, 5, 5);
+
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 2;
+		confirmationDialog.add(confirmationLabel, gbc);
+
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.CENTER;
+		confirmationDialog.add(yesButton, gbc);
+
+		gbc.gridx = 1;
+		confirmationDialog.add(noButton, gbc);
+
+		// Action for "Yes" button
+		yesButton.addActionListener(e -> {
+			confirmed[0] = true;
+			confirmationDialog.dispose();
+
+		});
+
+		// Action for "No" button
+		noButton.addActionListener(e -> {
+			confirmationDialog.dispose();
+			confirmed[0] = false;
+		});
+
+		// Center the dialog on the screen and make it visible
+		confirmationDialog.setLocationRelativeTo(this);
+		confirmationDialog.setVisible(true);
+
+		return confirmed[0];
+	}
 
 	private void stationSearch() {
 

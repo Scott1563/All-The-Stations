@@ -9,6 +9,9 @@ public class Stations {
 	private static Stations stationsInstance;
 	private final ArrayList<Station> stationList;
 	private final File stationFile;
+	private int maxAreaLength = "Area ".length();
+	private int maxCountryLength = "Country ".length();
+	private final ArrayList<ArrayList<String>> areas = new ArrayList<>();
 
 	private Stations() {
 		stationList = new ArrayList<>();
@@ -26,9 +29,15 @@ public class Stations {
 
 	public ArrayList<Station> getStationList() { return stationList; }
 
+	public void removeStation(Station station) { stationList.remove(station); }
+
 	public void addStation(Station station) {
+		maxAreaLength = Math.max(maxAreaLength, station.getArea().length());
+		maxCountryLength = Math.max(maxCountryLength, station.getCountry().length());
 		stationList.add(station);
 		quickSort(0, stationList.size()-1);
+		areaList(station);
+		sortAreas();
 	}
 
 	private void quickSort(int low, int high) {
@@ -89,12 +98,48 @@ public class Stations {
 			br.readLine();
 			while ((line = br.readLine()) != null) {
 				String[] stationInfo = line.split(",");
-				addStation(new Station(stationInfo[0], stationInfo[1], stationInfo[2], stationInfo[3], stationInfo[4], stationInfo[5], Integer.parseInt(stationInfo[6]), stationInfo[7], stationInfo[8], stationInfo[9], stationInfo[10], stationInfo[11], stationInfo[12]));
+				Station newStation = new Station(stationInfo[0], stationInfo[1], stationInfo[2], stationInfo[3], stationInfo[4], stationInfo[5], Integer.parseInt(stationInfo[6]), stationInfo[7], stationInfo[8], stationInfo[9], stationInfo[10], stationInfo[11], stationInfo[12]);
+				addStation(newStation);
+				maxAreaLength = Math.max(maxAreaLength, newStation.getArea().length());
+				maxCountryLength = Math.max(maxCountryLength, newStation.getCountry().length());
+				areaList(newStation);
 			}
 			br.close();
 		} catch(IOException e) {
 			System.out.println("File not found!");
 		}
+		sortAreas();
+	}
+
+	private void areaList(Station newStation) {
+
+		if (!newStation.getArea().isEmpty()) {
+			boolean found = false;
+			for (ArrayList<String> area : areas) {
+				if (area.get(0).equals(newStation.getArea())) {
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				ArrayList<String> newArea = new ArrayList<>();
+				newArea.add(newStation.getArea()); // Area 0
+				newArea.add(newStation.getCountry()); // Country 1
+				newArea.add("0"); // Total 2
+				newArea.add("0"); // Explored 3
+				newArea.add("0"); // Stopped 4
+				newArea.add("0"); // Passed Stopping 5
+				newArea.add("0"); // Passed 6
+				newArea.add("0"); // Visited 7
+				newArea.add("0"); // Total Platforms visited 8
+				newArea.add("0"); // Total Platforms 9
+				areas.add(newArea);
+			}
+		}
+	}
+
+	private void sortAreas() {
+		areas.sort(Comparator.comparing((ArrayList<String> o) -> o.get(1)).thenComparing(o -> o.get(0)));
 	}
 
 	public void saveFile() {
@@ -292,6 +337,157 @@ public class Stations {
 		return totals;
 	}
 
+	public void showAreaList(String stationType, JTextArea display) {
+
+		StringBuilder headers = new StringBuilder();
+		headers.append("|");
+		headers.append(String.format("%-" + maxCountryLength + "s","Country")).append(" |");
+		headers.append(String.format("%-" + maxAreaLength + "s","Area")).append(" |");
+
+		int maxTotalLength = "Total".length();
+		int maxExploredLength = "Explored".length();
+		int maxStoppedLength = "Stopped".length();
+		int maxPassedStoppingLength = "Passed Stopping".length();
+		int maxPassedLength = "Passed".length();
+		int maxVisitedLength = "Visited".length();
+		int maxPlatformVisited = "Platform Count".length();
+
+		for (Station station : stationList) {
+			if (!station.getStoppedAt().equals("NULL") && (station.getStopType().equalsIgnoreCase(stationType) || stationType.equalsIgnoreCase("ALL"))) {
+
+				int index = 0;
+
+				for (ArrayList<String> area : areas) {
+					if (area.get(0).equals(station.getArea()) && area.get(1).equals(station.getCountry())) {
+						break;
+					}
+					index++;
+				}
+
+				areas.get(index).set(2, String.valueOf(Integer.parseInt(areas.get(index).get(2)) + 1));
+				maxTotalLength = Math.max(maxTotalLength, areas.get(index).get(2).length());
+
+				if (!station.getStoppedAt().equals("N/A")) {
+
+					areas.get(index).set(4, String.valueOf(Integer.parseInt(areas.get(index).get(4)) + 1));
+					maxStoppedLength = Math.max(maxStoppedLength, areas.get(index).get(4).length());
+
+					areas.get(index).set(8, String.valueOf(Integer.parseInt(areas.get(index).get(8)) + station.getPlatformsVisitedList().size()));
+
+					if (!station.getExplored().equals("N/A")) {
+						areas.get(index).set(3, String.valueOf(Integer.parseInt(areas.get(index).get(3)) + 1));
+						maxExploredLength = Math.max(maxExploredLength, areas.get(index).get(3).length());
+					}
+				} else if (!station.getPassedThroughStopping().equals("N/A")) {
+
+					areas.get(index).set(5, String.valueOf(Integer.parseInt(areas.get(index).get(5)) + 1));
+					maxPassedStoppingLength = Math.max(maxPassedStoppingLength, areas.get(index).get(5).length());
+
+				} else if (!station.getPassedThrough().equals("N/A")) {
+
+					areas.get(index).set(6, String.valueOf(Integer.parseInt(areas.get(index).get(6)) + 1));
+					maxPassedLength = Math.max(maxPassedLength, areas.get(index).get(6).length());
+
+				} else if (!station.getVisited().equals("N/A")) {
+
+					areas.get(index).set(7, String.valueOf(Integer.parseInt(areas.get(index).get(7)) + 1));
+					maxVisitedLength = Math.max(maxVisitedLength, areas.get(index).get(7).length());
+
+				}
+				areas.get(index).set(9, String.valueOf(Integer.parseInt(areas.get(index).get(9)) + station.getNumberOfPlatforms()));
+				maxPlatformVisited = Math.max(maxPlatformVisited, (areas.get(index).get(8) + "/" + areas.get(index).get(9)).length());
+			}
+		}
+		headers.append(String.format("%-" + maxTotalLength + "s","Total")).append(" |");
+		headers.append(String.format("%-" + maxExploredLength + "s","Explored")).append(" |");
+		headers.append(String.format("%-" + maxStoppedLength + "s","Stopped")).append(" |");
+		headers.append(String.format("%-" + maxPassedStoppingLength + "s","Passed Stopping")).append(" |");
+		headers.append(String.format("%-" + maxPassedLength + "s","Passed")).append(" |");
+		headers.append(String.format("%-" + maxVisitedLength + "s","Visited")).append(" |");
+		headers.append(String.format("%-" + maxPlatformVisited + "s","Platform Count")).append(" |\n");
+
+		display.append(headers.toString());
+		StringBuilder splitter = new StringBuilder();
+
+		splitter.append("+");
+		splitter.append(String.format("%-" + maxCountryLength + "s", "").replace(' ', '-')).append("-+");
+		splitter.append(String.format("%-" + maxAreaLength + "s", "").replace(' ', '-')).append("-+");
+		splitter.append(String.format("%-" + maxTotalLength + "s", "").replace(' ', '-')).append("-+");
+		splitter.append(String.format("%-" + maxExploredLength + "s", "").replace(' ', '-')).append("-+");
+		splitter.append(String.format("%-" + maxStoppedLength + "s", "").replace(' ', '-')).append("-+");
+		splitter.append(String.format("%-" + maxPassedStoppingLength + "s", "").replace(' ', '-')).append("-+");
+		splitter.append(String.format("%-" + maxPassedLength + "s", "").replace(' ', '-')).append("-+");
+		splitter.append(String.format("%-" + maxVisitedLength + "s", "").replace(' ', '-')).append("-+");
+		splitter.append(String.format("%-" + maxPlatformVisited + "s", "").replace(' ', '-')).append("-+\n");
+
+		String previousCountry = null;
+
+		for (ArrayList<String> areaInfo : areas) {
+
+			if (previousCountry == null || !previousCountry.equals(areaInfo.get(1))) {
+				display.append(splitter.toString());
+			}
+
+			StringBuilder info = new StringBuilder();
+
+			String countryLocation = areaInfo.get(1);
+			countryLocation = String.format("%-" + maxCountryLength + "s", countryLocation);
+			info.append("|").append(countryLocation);
+
+			String areaLocation = areaInfo.get(0);
+			areaLocation = String.format("%-" + maxAreaLength + "s", areaLocation);
+			info.append(" |").append(areaLocation);
+
+			String total = areaInfo.get(2);
+			total = String.format("%-" + maxTotalLength + "s", total);
+			info.append(" |").append(total);
+
+			String explored = areaInfo.get(3);
+			explored = String.format("%-" + maxExploredLength + "s", explored);
+			info.append(" |").append(explored);
+
+			String stopped = areaInfo.get(4);
+			stopped = String.format("%-" + maxStoppedLength + "s", stopped);
+			info.append(" |").append(stopped);
+
+			String passedStopping = areaInfo.get(5);
+			passedStopping = String.format("%-" + maxPassedStoppingLength + "s", passedStopping);
+			info.append(" |").append(passedStopping);
+
+			String passed = areaInfo.get(6);
+			passed = String.format("%-" + maxPassedLength + "s", passed);
+			info.append(" |").append(passed);
+
+			String visited = areaInfo.get(7);
+			visited = String.format("%-" + maxVisitedLength + "s", visited);
+			info.append(" |").append(visited);
+
+			String platformCount = areaInfo.get(8) + "/" + areaInfo.get(9);
+			platformCount = String.format("%-" + maxPlatformVisited + "s", platformCount);
+			info.append(" |").append(platformCount);
+
+			info.append(" |\n");
+			display.append(info.toString());
+			previousCountry = areaInfo.get(1);
+	    }
+		display.append(splitter.toString());
+		reset();
+	}
+
+	private void reset() {
+
+		for (ArrayList<String> area : areas) {
+			area.set(2, "0");
+			area.set(3, "0");
+			area.set(4, "0");
+			area.set(5, "0");
+			area.set(6, "0");
+			area.set(7, "0");
+			area.set(8, "0");
+			area.set(9, "0");
+		}
+	}
+
 	// Pages decides stations included: ALL, Train, Tram, Underground
 	public void showList(String stationType, String country, String area, JTextArea display) {
 
@@ -300,6 +496,7 @@ public class Stations {
 	    int areaLength = 0;
 	    int managerLength = 0;
 		int dateLength = 0;
+		int platformLength = 0;
 
 	    for (Station station : stationList) {
 	        if (!station.getStoppedAt().equals("NULL") && (station.getStopType().equalsIgnoreCase(stationType) || stationType.equalsIgnoreCase("ALL")) && (station.getCountry().equals(country) || country.equalsIgnoreCase("World")) && (station.getArea().equals(area) || area.equalsIgnoreCase("All Areas") || area.equalsIgnoreCase("Null"))) {
@@ -323,6 +520,9 @@ public class Stations {
 				} else {
 					dateLength = Math.max(dateLength, "Visited".length());
 				}
+
+				String platformStat = station.getNumberOfPlatforms() + "/" + station.getPlatformsVisitedList().size();
+				platformLength = Math.max(platformLength, platformStat.length());
 	        }
 	    }
 
@@ -356,24 +556,42 @@ public class Stations {
 	            info.append(" |Managed by: ").append(manager)
 	                .append(" |Is Request Stop: ").append(station.getRequestStop() ? "Yes" : "No ")
 			        .append(" |Explored: ").append(station.getExplored().equals("N/A") ? "No " : "Yes")
-			        .append(" |Station Status: "); //Stopped, Passed Stopping, Passed, Visited
+			        .append(" |Station Status: ").append(getStatus(station, dateLength)) //Stopped, Passed Stopping, Passed, Visited
+			        .append(" |Platform Count: ");
 
-		        String status;
+				String platformCount = "";
 
-		        if (!station.getStoppedAt().equals("N/A")) {
-					status = "Stopped";
-				} else if (!station.getPassedThroughStopping().equals("N/A")) {
-					status = "Passed Stopping";
-				} else if (!station.getPassedThrough().equals("N/A")) {
-					status = "Passed";
+				if (station.getPlatformsVisitedList().get(0).equals("N/A")) {
+					platformCount += "0";
 				} else {
-					status = "Visited";
+					platformCount += station.getPlatformsVisitedList().size();
 				}
-				status = String.format("%-" + dateLength + "s", status);
-	            info.append(status).append(" |\n");
+
+				platformCount += ("/" + station.getNumberOfPlatforms());
+
+				platformCount = String.format("%-" + platformLength + "s", platformCount);
+	            info.append(platformCount).append(" |\n");
 
 	            display.append(info.toString());
 	        }
 	    }
+	}
+
+	private String getStatus(Station station, int dateLength) {
+
+		String status;
+
+		if (!station.getStoppedAt().equals("N/A")) {
+			status = "Stopped";
+		} else if (!station.getPassedThroughStopping().equals("N/A")) {
+			status = "Passed Stopping";
+		} else if (!station.getPassedThrough().equals("N/A")) {
+			status = "Passed";
+		} else {
+			status = "Visited";
+		}
+		status = String.format("%-" + dateLength + "s", status);
+
+		return status;
 	}
 }

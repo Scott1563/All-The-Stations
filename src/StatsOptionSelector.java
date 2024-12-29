@@ -9,6 +9,7 @@ public class StatsOptionSelector extends JDialog {
 	private JComboBox<String> AreaSelectField;
 	private JButton EnterButton;
 	private JButton CancelButton;
+	private JButton AreaComparisonButton;
 
 	private StatsOptionSelector self;
 
@@ -52,6 +53,18 @@ public class StatsOptionSelector extends JDialog {
 			StatsShower show = new StatsShower(self, stationList, selectedCountry, selectedArea);
 			show.setContentPane(show.StatsShowerMainPanel);
 			show.setTitle("Area Stats Display");
+			show.setSize(1200, 600);
+			show.setVisible(true);
+			show.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			self.setVisible(true);
+		});
+
+		AreaComparisonButton.addActionListener(e -> {
+
+			self.setVisible(false);
+			AreaStats show = new AreaStats(self, stationList);
+			show.setContentPane(show.AreaStatsMainPanel);
+			show.setTitle("Area Comparison Display");
 			show.setSize(1200, 600);
 			show.setVisible(true);
 			show.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

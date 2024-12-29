@@ -8,6 +8,7 @@ public class Start extends JFrame {
     private JButton EditStationButton;
 	private JButton NewStationButton;
 	private JButton ShowStatsButton;
+	private JButton DeleteButton;
 
 	private final Stations stationList;
     private Station selectedStation;
@@ -39,7 +40,7 @@ public class Start extends JFrame {
 
 			do {
 				do {
-			        selectStation();
+			        selectStation(false);
 					editStation();
 	            } while (getEditMore());
 
@@ -79,7 +80,7 @@ public class Start extends JFrame {
 
 				if (getEditMore()) {
 					do {
-			            selectStation();
+			            selectStation(false);
 						editStation();
 					} while (getEditMore());
 				}
@@ -93,6 +94,8 @@ public class Start extends JFrame {
         });
 
 		ShowStatsButton.addActionListener(e -> statsShower());
+
+		DeleteButton.addActionListener(e -> selectStation(true));
     }
 
     public void setUp(Start self) {
@@ -148,10 +151,10 @@ public class Start extends JFrame {
 		stationDisplay.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
-	public void selectStation() {
+	public void selectStation(Boolean delete) {
 
 		self.setVisible(false);
-		StationSelect selection = new StationSelect(self, stationList);
+		StationSelect selection = new StationSelect(self, stationList, delete);
 		selection.setContentPane(selection.StationSelectPanel);
 		selection.setTitle("Station Selection");
 		selection.setSize(600, 400);
@@ -167,7 +170,7 @@ public class Start extends JFrame {
 		stats.setSelf(stats);
 		stats.setContentPane(stats.StatsOptionSelectMainPanel);
 		stats.setTitle("Stats Option Selection");
-		stats.setSize(350, 150);
+		stats.setSize(550, 150);
 		stats.setVisible(true);
 		stats.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		self.setVisible(true);

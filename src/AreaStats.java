@@ -2,9 +2,9 @@ import javax.swing.*;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class StatsShower extends JDialog {
+public class AreaStats extends JDialog {
 
-	public JPanel StatsShowerMainPanel;
+	public JPanel AreaStatsMainPanel;
 	private JLabel Title;
 	private JLabel TitleImage;
 	private JTextField TotalField;
@@ -13,7 +13,7 @@ public class StatsShower extends JDialog {
 	private JTextField PassedStoppingField;
 	private JTextField PassedField;
 	private JTextField VisitedField;
-	public JTextArea StationList;
+	public JTextArea areaList;
 	private JButton backButton;
 	private JButton previousButton;
 	private JButton nextButton;
@@ -21,16 +21,11 @@ public class StatsShower extends JDialog {
 
 	private int pageIndex = 0;
 	private final Stations stationList;
-	private final String country;
-	private final String area;
 
+	public AreaStats(StatsOptionSelector selector, Stations stationList) {
 
-	public StatsShower(StatsOptionSelector selector, Stations stationList, String country, String area) {
-
-		super(selector, "Area Stats Display", true);
+		super(selector, "Compare Area Display", true);
 		this.stationList = stationList;
-		this.country = country;
-		this.area = area;
 		updateFields(generateText());
 
 		nextButton.addActionListener(e -> {
@@ -49,14 +44,6 @@ public class StatsShower extends JDialog {
 	private String generateText() {
 
 		String text = "";
-
-		if (country.equals("World")) {
-			text += "World";
-		} else {
-			text += country + ", " + area;
-		}
-
-		text += " - ";
 
 		switch (pageIndex) {
 			case 0 -> text += "All Stations\n";
@@ -80,13 +67,12 @@ public class StatsShower extends JDialog {
 			default -> type = "Underground";
 		}
 
-		ArrayList<Integer> info = stationList.totalStations(country, area, type);
-		StationList.setText("");
-		StationList.setText("Selection: " + text);
-		stationList.showList(type, country, area, StationList);
+		ArrayList<Integer> info = stationList.totalStations("World", "All Areas", type);
+		areaList.setText("");
+		stationList.showAreaList(type, areaList);
 
-		if (StationList.getText().equals("Selection: " + text)) {
-			StationList.append("No Stations were found for the selection!");
+		if (areaList.getText().isEmpty()) {
+			areaList.append("No Stations were found for the selection!");
 		}
 
 		TotalField.setText(info.get(0).toString());

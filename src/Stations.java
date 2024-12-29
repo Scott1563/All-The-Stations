@@ -351,6 +351,7 @@ public class Stations {
 		int maxPassedLength = "Passed".length();
 		int maxVisitedLength = "Visited".length();
 		int maxPlatformVisited = "Platform Count".length();
+		int maxCompletedLength = "Completed".length();
 
 		for (Station station : stationList) {
 			if (!station.getStoppedAt().equals("NULL") && (station.getStopType().equalsIgnoreCase(stationType) || stationType.equalsIgnoreCase("ALL"))) {
@@ -404,7 +405,8 @@ public class Stations {
 		headers.append(String.format("%-" + maxPassedStoppingLength + "s","Passed Stopping")).append(" |");
 		headers.append(String.format("%-" + maxPassedLength + "s","Passed")).append(" |");
 		headers.append(String.format("%-" + maxVisitedLength + "s","Visited")).append(" |");
-		headers.append(String.format("%-" + maxPlatformVisited + "s","Platform Count")).append(" |\n");
+		headers.append(String.format("%-" + maxPlatformVisited + "s","Platform Count")).append(" |");
+		headers.append(String.format("%-" + maxCompletedLength + "s","Completed")).append(" |\n");
 
 		display.append(headers.toString());
 		StringBuilder splitter = new StringBuilder();
@@ -418,7 +420,8 @@ public class Stations {
 		splitter.append(String.format("%-" + maxPassedStoppingLength + "s", "").replace(' ', '-')).append("-+");
 		splitter.append(String.format("%-" + maxPassedLength + "s", "").replace(' ', '-')).append("-+");
 		splitter.append(String.format("%-" + maxVisitedLength + "s", "").replace(' ', '-')).append("-+");
-		splitter.append(String.format("%-" + maxPlatformVisited + "s", "").replace(' ', '-')).append("-+\n");
+		splitter.append(String.format("%-" + maxPlatformVisited + "s", "").replace(' ', '-')).append("-+");
+		splitter.append(String.format("%-" + maxCompletedLength + "s", "").replace(' ', '-')).append("-+\n");
 
 		String previousCountry = null;
 
@@ -465,6 +468,14 @@ public class Stations {
 			String platformCount = areaInfo.get(8) + "/" + areaInfo.get(9);
 			platformCount = String.format("%-" + maxPlatformVisited + "s", platformCount);
 			info.append(" |").append(platformCount);
+
+			String completed;
+			if (areaInfo.get(2).equals(areaInfo.get(4)) && areaInfo.get(8).equals(areaInfo.get(9))) {
+				completed = String.format("%-" + maxCompletedLength + "s", "done");
+			} else {
+				completed = String.format("%-" + maxCompletedLength + "s", "");
+			}
+			info.append(" |").append(completed);
 
 			info.append(" |\n");
 			display.append(info.toString());

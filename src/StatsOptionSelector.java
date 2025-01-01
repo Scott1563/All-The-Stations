@@ -13,13 +13,16 @@ public class StatsOptionSelector extends JDialog {
 
 	private StatsOptionSelector self;
 
-	public StatsOptionSelector(Start start, Stations stationList, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<ArrayList<String>> countryAreaLink) {
+	public StatsOptionSelector(Start start, Stations stationList, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<ArrayList<String>> countryAreaLink, Boolean random) {
 
 		super(start, "Stats Option Selection", true);
 
 		AreaSelectField.setVisible(false);
 		AreaLabel.setVisible(false);
 		dropDownFiller(CountrySelectField, countryList, null, "World", null);
+		if (random) {
+			AreaComparisonButton.setVisible(false);
+		}
 
 
 		CountrySelectField.addActionListener(e -> {
@@ -37,7 +40,10 @@ public class StatsOptionSelector extends JDialog {
 			}
 		});
 
-		CancelButton.addActionListener(e -> closeWindow());
+		CancelButton.addActionListener(e -> {
+			start.setCanceled(true);
+			closeWindow();
+		});
 
 		EnterButton.addActionListener(e -> {
 
@@ -49,14 +55,39 @@ public class StatsOptionSelector extends JDialog {
 				selectedArea = (String) AreaSelectField.getSelectedItem();
 			}
 
-			self.setVisible(false);
-			StatsShower show = new StatsShower(self, stationList, selectedCountry, selectedArea);
-			show.setContentPane(show.StatsShowerMainPanel);
-			show.setTitle("Area Stats Display");
-			show.setSize(1200, 600);
-			show.setVisible(true);
-			show.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			self.setVisible(true);
+			if (random) {
+				ArrayList<Station> stationOptions = new ArrayList<>();
+
+				for (Station station : stationList.getStationList()) {
+					if (station.getExplored().equals("N/A") && ((station.getArea().equals(selectedArea) || Objects.equals(selectedArea, "All Areas")) && station.getCountry().equals(selectedCountry)) || selectedCountry.equals("World")) {
+						stationOptions.add(station);
+					}
+				}
+
+				if (!stationOptions.isEmpty()) {
+					Random rand = new Random();
+					Station selectedStation = stationOptions.get(rand.nextInt(stationOptions.size()));
+
+					if (selectedStation != null) {
+						start.setSelectedStation(selectedStation);
+						start.setCanceled(false);
+						closeWindow();
+					}
+				} else {
+		            JOptionPane.showMessageDialog(this, "There is no unexplored stations for your selection!");
+				}
+
+			} else {
+				self.setVisible(false);
+				StatsShower show = new StatsShower(self, stationList, selectedCountry, selectedArea);
+				show.setContentPane(show.StatsShowerMainPanel);
+				show.setTitle("Area Stats Display");
+				show.setSize(1200, 600);
+				show.setVisible(true);
+				show.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				self.setVisible(true);
+				start.setCanceled(false);
+			}
 		});
 
 		AreaComparisonButton.addActionListener(e -> {
@@ -69,6 +100,7 @@ public class StatsOptionSelector extends JDialog {
 			show.setVisible(true);
 			show.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			self.setVisible(true);
+			start.setCanceled(false);
 		});
 	}
 

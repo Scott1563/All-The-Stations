@@ -28,7 +28,7 @@ public class StationInfo extends JDialog {
 	private JButton NewButton;
 	private final Station station;
 
-	public StationInfo(Start start, Station station, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<String> operatorList) {
+	public StationInfo(Start start, Station station, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<String> operatorList, boolean random) {
 
 		super(start, "Station Info", true);
 		this.station = station;
@@ -39,6 +39,23 @@ public class StationInfo extends JDialog {
 		dropDownFiller(TOCField, operatorList, "TOC");
 
 		fieldUpdate();
+
+		if (random) {
+			EditButton.setVisible(false);
+			NewButton.setVisible(false);
+			IDField.setEditable(false);
+			NameField.setEditable(false);
+			CountryField.setEditable(false);
+			AreaField.setEditable(false);
+			TOCField.setEditable(false);
+			NumPlatformField.setEditable(false);
+			PlatformListField.setEditable(false);
+			ExploredField.setEditable(false);
+			StoppedAtField.setEditable(false);
+			PassedStoppingField.setEditable(false);
+			PassedNotStoppingField.setEditable(false);
+			VisitedField.setEditable(false);
+		}
 
 		CountryField.addActionListener(e -> {
 		    String selectedCountry = (String) CountryField.getSelectedItem();
@@ -169,9 +186,12 @@ public class StationInfo extends JDialog {
 
 			boolean failed = false;
 
-			if (showCreatorConfirmation(null, "Save", "Would you like to save the changes made to this station?")) {
-				failed = save(list);
+			if (!random) {
+				if (showCreatorConfirmation(null, "Save", "Would you like to save the changes made to this station?")) {
+					failed = save(list);
+				}
 			}
+
 			if (!failed) {
 				start.setEditMore(false);
 				start.setNew(false);

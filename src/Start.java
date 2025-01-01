@@ -9,6 +9,7 @@ public class Start extends JFrame {
 	private JButton NewStationButton;
 	private JButton ShowStatsButton;
 	private JButton DeleteButton;
+	private JButton RandomStationButton;
 
 	private final Stations stationList;
     private Station selectedStation;
@@ -41,7 +42,7 @@ public class Start extends JFrame {
 			do {
 				do {
 			        selectStation(false);
-					editStation();
+					editStation(false);
 	            } while (getEditMore());
 
 				if (getNew()) {
@@ -50,7 +51,7 @@ public class Start extends JFrame {
 						if (isCanceled()) {
 							setNew(false);
 						} else {
-							editStation();
+							editStation(false);
 						}
 					} while (getNew());
 				}
@@ -72,7 +73,7 @@ public class Start extends JFrame {
 				do {
 					newStation();
 					if (!isCanceled()) {
-						editStation();
+						editStation(false);
 					} else {
 						setNew(false);
 					}
@@ -81,7 +82,7 @@ public class Start extends JFrame {
 				if (getEditMore()) {
 					do {
 			            selectStation(false);
-						editStation();
+						editStation(false);
 					} while (getEditMore());
 				}
 				if (!getEditMore() && !getNew()) {
@@ -96,6 +97,13 @@ public class Start extends JFrame {
 		ShowStatsButton.addActionListener(e -> statsShower());
 
 		DeleteButton.addActionListener(e -> selectStation(true));
+
+		RandomStationButton.addActionListener(e -> {
+			randomStation();
+			if (!isCanceled()) {
+				editStation(true);
+			}
+		});
     }
 
     public void setUp(Start self) {
@@ -141,9 +149,9 @@ public class Start extends JFrame {
 		creation.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
-	public void editStation() {
+	public void editStation(boolean random) {
 
-		StationInfo stationDisplay = new StationInfo(self, getSelectedStation(), stationList, countryList, areaList, operatorList);
+		StationInfo stationDisplay = new StationInfo(self, getSelectedStation(), stationList, countryList, areaList, operatorList, random);
 		stationDisplay.setContentPane(stationDisplay.StationInfoMainPanel);
 		stationDisplay.setTitle("Station Info");
 		stationDisplay.setSize(875, 600);
@@ -166,10 +174,23 @@ public class Start extends JFrame {
 	public void statsShower() {
 
 		self.setVisible(false);
-		StatsOptionSelector stats = new StatsOptionSelector(self, stationList, countryList, areaList, countryAreaLink);
+		StatsOptionSelector stats = new StatsOptionSelector(self, stationList, countryList, areaList, countryAreaLink, false);
 		stats.setSelf(stats);
 		stats.setContentPane(stats.StatsOptionSelectMainPanel);
 		stats.setTitle("Stats Option Selection");
+		stats.setSize(550, 150);
+		stats.setVisible(true);
+		stats.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		self.setVisible(true);
+	}
+
+	public void randomStation() {
+
+		self.setVisible(false);
+		StatsOptionSelector stats = new StatsOptionSelector(self, stationList, countryList, areaList, countryAreaLink, true);
+		stats.setSelf(stats);
+		stats.setContentPane(stats.StatsOptionSelectMainPanel);
+		stats.setTitle("Random Option Selection");
 		stats.setSize(550, 150);
 		stats.setVisible(true);
 		stats.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -16,6 +16,7 @@ public class Start extends JFrame {
     private final ArrayList<String> countryList = new ArrayList<>();
 	private final ArrayList<String> areaList = new ArrayList<>();
 	private final ArrayList<String> operatorList = new ArrayList<>();
+	private final ArrayList<String> stopTypes = new ArrayList<>();
 	private final ArrayList<ArrayList<String>> countryAreaLink = new ArrayList<>();
     private Start self;
 	private boolean editMore = false;
@@ -25,6 +26,10 @@ public class Start extends JFrame {
     public Start(Stations stationList) {
 
 		this.stationList = stationList;
+		stopTypes.add("Train");
+		stopTypes.add("Tram");
+		stopTypes.add("Underground");
+		stopTypes.add("Heritage");
 		arraySetUp();
 
 		addWindowListener(new WindowAdapter() {
@@ -133,15 +138,20 @@ public class Start extends JFrame {
 			if (!(operatorList.contains(station.getManager()) || station.getManager().isEmpty())) {
 				operatorList.add(station.getManager());
 			}
+
+			if (!(stopTypes.contains(station.getStopType()) || station.getStopType().isEmpty())) {
+				stopTypes.add(station.getStopType());
+			}
 		}
 		Collections.sort(countryList);
 		Collections.sort(areaList);
 		Collections.sort(operatorList);
+		Collections.sort(stopTypes);
     }
 
 	public void newStation() {
 
-		StationCreator creation = new StationCreator(self, stationList, countryList, areaList, operatorList);
+		StationCreator creation = new StationCreator(self, stationList, countryList, areaList, operatorList, stopTypes);
 		creation.setContentPane(creation.StationCreatorMainPanel);
 		creation.setTitle("Station Creator");
 		creation.setSize(600, 400);

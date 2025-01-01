@@ -572,12 +572,12 @@ public class StationInfo extends JDialog {
 		ImageIcon icon = null;
 		String url = "Images/";
 
-		if (station.getStopType().equals("Train")) {
-			url += "Train";
-		} else if (station.getStopType().equals("Tram")) {
-			url += "Tram";
-		} else {
-			url += "Underground";
+		switch (station.getStopType()) {
+			case "Train" -> url += "Train";
+			case "Tram" -> url += "Tram";
+			case "Underground" -> url += "Underground";
+			case "Heritage" -> url += "Heritage";
+			default -> url += "Other";
 		}
 
 		// Updates Icon depending on station status

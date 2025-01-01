@@ -85,7 +85,8 @@ public class Stations {
 			case "Train" -> 1;
 			case "Tram" -> 2;
 			case "Underground" -> 3;
-			default -> 4; // For any other types, if they exist
+			case "Heritage" -> 4;
+			default -> 5; // For any other types, if they exist
 		};
 	}
 
@@ -314,7 +315,7 @@ public class Stations {
 		totals.add(0); // Visited
 
 		for (Station station : stationList) {
-			if (station.getStopType().equalsIgnoreCase(stationType) || stationType.equalsIgnoreCase("ALL")) {
+			if (stationType.equalsIgnoreCase("ALL") || station.getStopType().equalsIgnoreCase(stationType) || (getStopTypePriority(stationType) == 5 && getStopTypePriority(station.getStopType()) == 5)) {
 				if (!station.getStoppedAt().equals("NULL")) {
 					if (station.getArea().equals(areaFilter) || ((areaFilter.equals("All Areas") && station.getCountry().equals(countryFilter)) || countryFilter.equals("World"))) {
 						totals.set(0, totals.get(0) + 1);
@@ -354,7 +355,7 @@ public class Stations {
 		int maxCompletedLength = "Completed".length();
 
 		for (Station station : stationList) {
-			if (!station.getStoppedAt().equals("NULL") && (station.getStopType().equalsIgnoreCase(stationType) || stationType.equalsIgnoreCase("ALL"))) {
+			if (!station.getStoppedAt().equals("NULL") && (stationType.equalsIgnoreCase("ALL") || station.getStopType().equalsIgnoreCase(stationType) || (getStopTypePriority(stationType) == 5 && getStopTypePriority(station.getStopType()) == 5))) {
 
 				int index = 0;
 
@@ -373,7 +374,9 @@ public class Stations {
 					areas.get(index).set(4, String.valueOf(Integer.parseInt(areas.get(index).get(4)) + 1));
 					maxStoppedLength = Math.max(maxStoppedLength, areas.get(index).get(4).length());
 
-					areas.get(index).set(8, String.valueOf(Integer.parseInt(areas.get(index).get(8)) + station.getPlatformsVisitedList().size()));
+					if (!station.getPlatformsVisitedList().get(0).equals("N/A")) {
+						areas.get(index).set(8, String.valueOf(Integer.parseInt(areas.get(index).get(8)) + station.getPlatformsVisitedList().size()));
+					}
 
 					if (!station.getExplored().equals("N/A")) {
 						areas.get(index).set(3, String.valueOf(Integer.parseInt(areas.get(index).get(3)) + 1));
@@ -470,7 +473,7 @@ public class Stations {
 			info.append(" |").append(platformCount);
 
 			String completed;
-			if (areaInfo.get(2).equals(areaInfo.get(4)) && areaInfo.get(8).equals(areaInfo.get(9))) {
+			if (areaInfo.get(2).equals(areaInfo.get(4)) && areaInfo.get(8).equals(areaInfo.get(9)) && !areaInfo.get(2).equals("0")) {
 				completed = String.format("%-" + maxCompletedLength + "s", "done");
 			} else {
 				completed = String.format("%-" + maxCompletedLength + "s", "");
@@ -510,7 +513,7 @@ public class Stations {
 		int platformLength = 0;
 
 	    for (Station station : stationList) {
-	        if (!station.getStoppedAt().equals("NULL") && (station.getStopType().equalsIgnoreCase(stationType) || stationType.equalsIgnoreCase("ALL")) && (station.getCountry().equals(country) || country.equalsIgnoreCase("World")) && (station.getArea().equals(area) || area.equalsIgnoreCase("All Areas") || area.equalsIgnoreCase("Null"))) {
+	        if (!station.getStoppedAt().equals("NULL") && (stationType.equalsIgnoreCase("ALL") || station.getStopType().equalsIgnoreCase(stationType) || (getStopTypePriority(stationType) == 5 && getStopTypePriority(station.getStopType()) == 5)) && (station.getCountry().equals(country) || country.equalsIgnoreCase("World")) && (station.getArea().equals(area) || area.equalsIgnoreCase("All Areas") || area.equalsIgnoreCase("Null"))) {
 
 	            typeLength = Math.max(typeLength, station.getStopType().length());
 	            nameLength = Math.max(nameLength, station.getName().length());
@@ -538,11 +541,11 @@ public class Stations {
 	    }
 
 	    for (Station station : stationList) {
-	        if (!station.getStoppedAt().equals("NULL") && (station.getStopType().equalsIgnoreCase(stationType) || stationType.equalsIgnoreCase("ALL")) && (station.getCountry().equals(country) || country.equalsIgnoreCase("World")) && (station.getArea().equals(area) || area.equalsIgnoreCase("All Areas") || area.equalsIgnoreCase("Null"))) {
+	        if (!station.getStoppedAt().equals("NULL") && (stationType.equalsIgnoreCase("ALL") || station.getStopType().equalsIgnoreCase(stationType) || (getStopTypePriority(stationType) == 5 && getStopTypePriority(station.getStopType()) == 5)) && (station.getCountry().equals(country) || country.equalsIgnoreCase("World")) && (station.getArea().equals(area) || area.equalsIgnoreCase("All Areas") || area.equalsIgnoreCase("Null"))) {
 
 	            StringBuilder info = new StringBuilder();
 
-	            if (stationType.equalsIgnoreCase("ALL")) {
+	            if (stationType.equalsIgnoreCase("ALL") || getStopTypePriority(stationType) == 5) {
 	                String stopType = String.format("%-" + typeLength + "s", station.getStopType());
 	                info.append("|").append(stopType);
 	            }

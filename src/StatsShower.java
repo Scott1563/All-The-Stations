@@ -62,7 +62,9 @@ public class StatsShower extends JDialog {
 			case 0 -> text += "All Stations\n";
 			case 1 -> text += "Train Stations\n";
 			case 2 -> text += "Tram Stations\n";
-			default -> text += "Underground Stations\n";
+			case 3 -> text += "Underground Stations\n";
+			case 4 -> text += "Heritage Stations\n";
+			default -> text += "Other Stations\n" ;
 		}
 
 		return text;
@@ -77,7 +79,9 @@ public class StatsShower extends JDialog {
 			case 0 -> type = "ALL";
 			case 1 -> type = "Train";
 			case 2 -> type = "Tram";
-			default -> type = "Underground";
+			case 3 -> type = "Underground";
+			case 4 -> type = "Heritage";
+			default -> type = "Other";
 		}
 
 		ArrayList<Integer> info = stationList.totalStations(country, area, type);
@@ -96,7 +100,7 @@ public class StatsShower extends JDialog {
 		PassedField.setText(info.get(4).toString() + "/" + info.get(0).toString() + " = " + percentageCalc(info.get(4), info.get(0)) + "%");
 		VisitedField.setText(info.get(5).toString() + "/" + info.get(0).toString() + " = " + percentageCalc(info.get(5), info.get(0)) + "%");
 		previousButton.setEnabled(pageIndex != 0);
-		nextButton.setEnabled(pageIndex != 3);
+		nextButton.setEnabled(pageIndex != 5);
 
 		String url = "Images/";
 
@@ -104,7 +108,9 @@ public class StatsShower extends JDialog {
 			case 0 -> url += "Info.png";
 			case 1 -> url += "Train.png";
 			case 2 -> url += "Tram.png";
-			default -> url += "Underground.png";
+			case 3 -> url += "Underground.png";
+			case 4 -> url += "Heritage.png";
+			default -> url += "Other.png";
 		}
 
 		ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(url)));

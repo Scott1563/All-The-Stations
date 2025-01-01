@@ -25,7 +25,7 @@ public class StationCreator extends JDialog {
 	private boolean requestStop;
 
 
-	public StationCreator(Start start, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<String> operatorList) {
+	public StationCreator(Start start, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<String> operatorList, ArrayList<String> stationTypeList) {
 
 		super(start, "Station Creator", true);
 
@@ -33,11 +33,7 @@ public class StationCreator extends JDialog {
 		dropDownFiller(CountryField, countryList, "country", country);
 		dropDownFiller(AreaField, areaList, "area", area);
 		dropDownFiller(TOCField, operatorList, "TOC", toc);
-
-		StationType.addItem("Select station type");
-		StationType.addItem("Train");
-		StationType.addItem("Tram");
-		StationType.addItem("Underground");
+		dropDownFiller(StationType, stationTypeList, "type", stopType);
 
 		CountryField.addActionListener(e -> {
 			String selectedCountry = (String) CountryField.getSelectedItem();
@@ -115,34 +111,31 @@ public class StationCreator extends JDialog {
 		});
 
 		StationType.addActionListener(e -> {
-			String selectedStationType = (String) StationType.getSelectedItem();
+			String selectedType = (String) StationType.getSelectedItem();
 
-			if (selectedStationType != null) {
+			if (selectedType != null) {
+				if (selectedType.equals("Add new type")) {
+					String newStationType = showCreatorPopUp("station type");
+					if (!newStationType.equals("NULL")) {
+						stationTypeList.add(newStationType);
+						Collections.sort(stationTypeList);
+						stopType = newStationType;
+						StationType.removeAllItems();
+						dropDownFiller(StationType, stationTypeList, "type", stopType);
+						StationType.setSelectedItem(stopType);
+					} else {
+						StationType.setSelectedItem("Select station type");
+					}
+				} else if (!selectedType.equals("Select station type")) {
+					if (stopType == null) {
+						StationType.removeItemAt(0);
+					}
+					stopType = selectedType;
+				}
 
-				switch (selectedStationType) {
-					case "Train" -> {
-						if (stopType == null) {
-							StationType.removeItemAt(0);
-						}
-						stopType = "Train";
-					}
-					case "Tram" -> {
-						if (stopType == null) {
-							StationType.removeItemAt(0);
-						}
-						stopType = "Tram";
-						IDField.setText("N/A");
-						ID = "N/A";
-					}
-					case "Underground" -> {
-						if (stopType == null) {
-							StationType.removeItemAt(0);
-						}
-						stopType = "Underground";
-						IDField.setText("N/A");
-						ID = "N/A";
-					}
-					default -> StationType.setSelectedItem("Select station type");
+				if (!stopType.equals("Train")) {
+					IDField.setText("N/A");
+					ID = "N/A";
 				}
 			}
 		});
@@ -237,7 +230,7 @@ public class StationCreator extends JDialog {
 		}
 
 		if (!valid) {
-			if (stopType.equals("Tram") || stopType.equals("Underground")) {
+			if (!stopType.equals("Train")) {
 				IDField.setText("N/A");
 			}
 			IDField.setText("");
@@ -260,7 +253,7 @@ public class StationCreator extends JDialog {
 	private String showCreatorPopUp(String option) {
 
 		JDialog firstDialog = new JDialog(this, "New " + option + " creator", true);
-		firstDialog.setSize(300, 150);
+		firstDialog.setSize(400, 150);
 		firstDialog.setLayout(new GridBagLayout());
 
 		// Form Components

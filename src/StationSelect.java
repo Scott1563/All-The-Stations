@@ -73,7 +73,10 @@ public class StationSelect extends JDialog {
 	        }
         });
 
-		cancelButton.addActionListener(e -> closeWindow());
+		cancelButton.addActionListener(e -> {
+			start.setCanceled(true);
+			closeWindow();
+		});
     }
 
 	private boolean showDeletionConfirmation(String name) {

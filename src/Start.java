@@ -47,7 +47,9 @@ public class Start extends JFrame {
 			do {
 				do {
 			        selectStation(false);
-					editStation(false);
+					if (!isCanceled()) {
+						editStation(false);
+					}
 	            } while (getEditMore());
 
 				if (getNew()) {

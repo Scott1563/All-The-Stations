@@ -9,13 +9,27 @@ public class Stations {
 	private static Stations stationsInstance;
 	private final ArrayList<Station> stationList;
 	private final File stationFile;
+	private String path = System.getProperty("user.home");
+	private boolean fileFound = false;
 	private int maxAreaLength = "Area ".length();
 	private int maxCountryLength = "Country ".length();
 	private final ArrayList<ArrayList<String>> areas = new ArrayList<>();
 
 	private Stations() {
 		stationList = new ArrayList<>();
-		stationFile = new File("Data/Stations.csv");
+
+		String OS = System.getProperty("os.name").toLowerCase();
+
+		if (OS.contains("mac")) {
+			path += "/Library/Application Support/AllTheStations/";
+		} else if (OS.contains("windows")) {
+			path += "\\Application Data\\AllTheStations\\";
+		} else if (OS.contains("linux")) {
+			path += "/AllTheStations/";
+		} else {
+			throw new RuntimeException("Unsupported OS: " + OS);
+		}
+		stationFile = new File(path + "Stations.csv");
 		loadFile();
 	}
 
@@ -106,6 +120,7 @@ public class Stations {
 				areaList(newStation);
 			}
 			br.close();
+			fileFound = true;
 		} catch(IOException e) {
 			System.out.println("File not found!");
 		}
@@ -146,6 +161,12 @@ public class Stations {
 	public void saveFile() {
 
 		try {
+			if (!fileFound) {
+				if (!new File(path).mkdirs()) {
+					throw new RuntimeException("Directory not made");
+				}
+			}
+
 			FileWriter outputFile = new FileWriter(stationFile);
 			CSVWriter writer = new CSVWriter(outputFile);
 

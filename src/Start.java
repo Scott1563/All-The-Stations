@@ -67,6 +67,7 @@ public class Start extends JFrame {
 					exit = true;
 				}
 			} while (!exit);
+			setCanceled(false);
 			areaList.clear();
 			countryAreaLink.clear();
 			arraySetUp();
@@ -96,6 +97,7 @@ public class Start extends JFrame {
 					exit = true;
 				}
 			} while (!exit);
+			setCanceled(false);
 			areaList.clear();
 			countryAreaLink.clear();
 			arraySetUp();
@@ -153,7 +155,7 @@ public class Start extends JFrame {
 
 	public void newStation() {
 
-		StationCreator creation = new StationCreator(self, stationList, countryList, areaList, operatorList, stopTypes);
+		StationCreator creation = new StationCreator(self, stationList, countryList, areaList, countryAreaLink, operatorList, stopTypes);
 		creation.setContentPane(creation.StationCreatorMainPanel);
 		creation.setTitle("Station Creator");
 		creation.setSize(600, 400);

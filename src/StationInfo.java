@@ -195,9 +195,19 @@ public class StationInfo extends JDialog {
 			if (!failed) {
 				start.setEditMore(false);
 				start.setNew(false);
+				start.setCanceled(false);
 				closeWindow();
 			}
 		});
+
+		addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+				start.setEditMore(false);
+				start.setNew(false);
+				start.setCanceled(false);
+            }
+        });
 
 		EditButton.addActionListener(e -> {
 

@@ -528,6 +528,7 @@ public class Stations {
 
 	    int typeLength = 0;
 	    int nameLength = 0;
+		int idLength = 0;
 	    int areaLength = 0;
 	    int managerLength = 0;
 		int dateLength = 0;
@@ -538,6 +539,7 @@ public class Stations {
 
 	            typeLength = Math.max(typeLength, station.getStopType().length());
 	            nameLength = Math.max(nameLength, station.getName().length());
+				idLength = Math.max(idLength, station.getId().length());
 
 	            if (country.equals("World")) {
 	                areaLength = Math.max(areaLength, (station.getArea() + ", " + station.getCountry()).length());
@@ -571,7 +573,7 @@ public class Stations {
 	                info.append("|").append(stopType);
 	            }
 
-	            info.append(stationType.equals("ALL") ? " |ID: " : "|ID: ").append(station.getId()).append(" |Name: ");
+	            info.append(stationType.equals("ALL") ? " |ID: " : "|ID: ").append(String.format("%-" + idLength + "s", station.getId())).append(" |Name: ");
 
 	            String name = String.format("%-" + nameLength + "s", station.getName());
 	            info.append(name);

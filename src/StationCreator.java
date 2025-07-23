@@ -21,19 +21,21 @@ public class StationCreator extends JDialog {
 	private String name;
 	private String country;
 	private String area;
+	private ArrayList<ArrayList<String>> countryAreaLink;
 	private String toc;
 	private boolean requestStop;
 
 
-	public StationCreator(Start start, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<String> operatorList, ArrayList<String> stationTypeList) {
+	public StationCreator(Start start, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<ArrayList<String>> countryAreaLink, ArrayList<String> operatorList, ArrayList<String> stationTypeList) {
 
 		super(start, "Station Creator", true);
 
 		// Country, Area, TOC & Stop Type
 		dropDownFiller(CountryField, countryList, "country", country);
-		dropDownFiller(AreaField, areaList, "area", area);
+		AreaField.setEditable(false);
 		dropDownFiller(TOCField, operatorList, "TOC", toc);
 		dropDownFiller(StationType, stationTypeList, "type", stopType);
+		this.countryAreaLink = countryAreaLink;
 
 		CountryField.addActionListener(e -> {
 			String selectedCountry = (String) CountryField.getSelectedItem();
@@ -48,6 +50,7 @@ public class StationCreator extends JDialog {
 						CountryField.removeAllItems();
 						dropDownFiller(CountryField, countryList, "country", country);
 						CountryField.setSelectedItem(country);
+						dropDownFiller(AreaField, areaList, "area", area);
 					} else {
 						CountryField.setSelectedItem("Select station country");
 					}
@@ -56,6 +59,7 @@ public class StationCreator extends JDialog {
 						CountryField.removeItemAt(0);
 					}
 					country = selectedCountry;
+					dropDownFiller(AreaField, areaList, "area", area);
 				}
 			}
 		});
@@ -70,6 +74,10 @@ public class StationCreator extends JDialog {
 						areaList.add(newArea);
 						Collections.sort(areaList);
 						area = newArea;
+						ArrayList<String> tempArraylist = new ArrayList<>();
+						tempArraylist.add(area);
+						tempArraylist.add(country);
+						countryAreaLink.add(tempArraylist);
 						AreaField.removeAllItems();
 						dropDownFiller(AreaField, areaList, "area", area);
 						AreaField.setSelectedItem(area);
@@ -360,14 +368,34 @@ public class StationCreator extends JDialog {
 
 	private void dropDownFiller(JComboBox<String> dropDown, ArrayList<String> contents, String type, String item) {
 
+		if (type.equals("area")) {
+			dropDown.removeAllItems();
+		}
+
 		if (item == null) {
 			dropDown.addItem("Select station " + type);
 		}
 
-		for (String content : contents) {
-			dropDown.addItem(content);
+		if (type.equals("area")) {
+			ArrayList<String> areas = new ArrayList<>();
+			for (ArrayList<String> pair : countryAreaLink) {
+
+				if (pair.get(1).equals(country)){
+					areas.add(pair.get(0));
+				}
+			}
+			Collections.sort(areas);
+			for (String area : areas) {
+				dropDown.addItem(area);
+			}
+			dropDown.addItem("Add new " + type);
+		} else {
+			for (String content : contents) {
+				dropDown.addItem(content);
+			}
+			dropDown.addItem("Add new " + type);
 		}
-		dropDown.addItem("Add new " + type);
+
 	}
 
 	public void closeWindow() { this.dispose(); }

@@ -73,8 +73,18 @@ public class StationSelect extends JDialog {
 	        }
         });
 
+		addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+				start.setEditMore(false);
+				start.setNew(false);
+				start.setCanceled(false);
+            }
+        });
+
 		cancelButton.addActionListener(e -> {
 			start.setCanceled(true);
+			start.setEditMore(false);
 			closeWindow();
 		});
     }

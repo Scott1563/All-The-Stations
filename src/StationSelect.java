@@ -60,7 +60,8 @@ public class StationSelect extends JDialog {
 					closeWindow();
 				} else {
 
-					String name = stationChoices.get(selected).getName() + " (" + stationChoices.get(selected).getId() + ")";
+					Station stationChoice = stationChoices.get(selected);
+					String name = stationChoice.getName() + " (" + stationChoice.getCode() + "-" + stationChoice.getBasicId() + ")";
 
 					if (showDeletionConfirmation(name)) {
 						JOptionPane.showMessageDialog(StationSelect.this, (name + " has been removed"));
@@ -93,7 +94,7 @@ public class StationSelect extends JDialog {
 
 		final boolean[] confirmed = new boolean[1];
 		JDialog confirmationDialog = new JDialog(this, "Station Deleter", true);
-		confirmationDialog.setSize(300, 150);
+		confirmationDialog.setSize(500, 150);
 		confirmationDialog.setLayout(new GridBagLayout());
 
 		// Components for the confirmation dialog
@@ -142,7 +143,7 @@ public class StationSelect extends JDialog {
 
 		if (!StationInput.getText().isEmpty()) {
 
-			stationChoices = stationList.findStationByID(StationInput.getText());
+			stationChoices = stationList.findStationByBasicID(StationInput.getText());
 
 			if (stationChoices.isEmpty()) {
 				stationChoices = stationList.findStationByName(StationInput.getText());

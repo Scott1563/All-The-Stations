@@ -20,20 +20,19 @@ public class StationCreator extends JDialog {
 	private String ID;
 	private String name;
 	private String country;
+	private String countryID;
 	private String area;
-	private ArrayList<ArrayList<String>> countryAreaLink;
+	private final ArrayList<ArrayList<String>> countryAreaLink;
 	private String toc;
+	private String tocID;
 	private boolean requestStop;
 
 
-	public StationCreator(Start start, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<ArrayList<String>> countryAreaLink, ArrayList<String> operatorList, ArrayList<String> stationTypeList) {
+	public StationCreator(Start start, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<ArrayList<String>> countryAreaLink, ArrayList<ArrayList<String>> countryIDLink, ArrayList<ArrayList<String>> tocIDLink, ArrayList<String> operatorList, ArrayList<String> stationTypeList) {
 
 		super(start, "Station Creator", true);
 
 		// Country, Area, TOC & Stop Type
-		dropDownFiller(CountryField, countryList, "country", country);
-		AreaField.setEditable(false);
-		dropDownFiller(TOCField, operatorList, "TOC", toc);
 		dropDownFiller(StationType, stationTypeList, "type", stopType);
 		this.countryAreaLink = countryAreaLink;
 
@@ -44,13 +43,20 @@ public class StationCreator extends JDialog {
 				if (selectedCountry.equals("Add new country")) {
 					String newCountry = showCreatorPopUp("country");
 					if (!newCountry.equals("NULL")) {
-						countryList.add(newCountry);
-						Collections.sort(countryList);
-						country = newCountry;
-						CountryField.removeAllItems();
-						dropDownFiller(CountryField, countryList, "country", country);
-						CountryField.setSelectedItem(country);
-						dropDownFiller(AreaField, areaList, "area", area);
+						String newCountryID = showCreatorIDPopUp("country", newCountry);
+						if (!newCountryID.equals("NULL")) {
+							countryList.add(newCountry);
+							Collections.sort(countryList);
+							country = newCountry;
+							countryID = newCountryID;
+							start.addNewCountryIDLink(newCountry, newCountryID);
+							CountryField.removeAllItems();
+							dropDownFiller(CountryField, countryList, "country", country);
+							CountryField.setSelectedItem(country);
+							dropDownFiller(AreaField, areaList, "area", area);
+						} else {
+							CountryField.setSelectedItem("Select station country");
+						}
 					} else {
 						CountryField.setSelectedItem("Select station country");
 					}
@@ -59,6 +65,11 @@ public class StationCreator extends JDialog {
 						CountryField.removeItemAt(0);
 					}
 					country = selectedCountry;
+					for (ArrayList<String> link : countryIDLink) {
+						if (link.get(0).equals(country)) {
+							countryID = link.get(1);
+						}
+					}
 					dropDownFiller(AreaField, areaList, "area", area);
 				}
 			}
@@ -100,12 +111,26 @@ public class StationCreator extends JDialog {
 				if (selectedTOC.equals("Add new TOC")) {
 					String newTOC = showCreatorPopUp("TOC");
 					if (!newTOC.equals("NULL")) {
-						operatorList.add(newTOC);
-						Collections.sort(operatorList);
-						toc = newTOC;
-						TOCField.removeAllItems();
-						dropDownFiller(TOCField, operatorList, "TOC", toc);
-						TOCField.setSelectedItem(toc);
+						if (!stopType.equals("Train")) {
+							String newTOCID = showCreatorIDPopUp("TOC", newTOC);
+							if (!newTOCID.equals("NULL")) {
+								operatorList.add(newTOC);
+								Collections.sort(operatorList);
+								toc = newTOC;
+								tocID = newTOCID;
+								start.addNewTOCIDLink(newTOC, newTOCID);
+								TOCField.removeAllItems();
+								dropDownFiller(TOCField, operatorList, "TOC", toc);
+								TOCField.setSelectedItem(toc);
+							}
+						} else {
+							operatorList.add(newTOC);
+							Collections.sort(operatorList);
+							toc = newTOC;
+							TOCField.removeAllItems();
+							dropDownFiller(TOCField, operatorList, "TOC", toc);
+							TOCField.setSelectedItem(toc);
+						}
 					} else {
 						TOCField.setSelectedItem("Select station TOC");
 					}
@@ -114,6 +139,13 @@ public class StationCreator extends JDialog {
 						TOCField.removeItemAt(0);
 					}
 					toc = selectedTOC;
+					if (!stopType.equals("Train")) {
+						for (ArrayList<String> link : tocIDLink) {
+							if (link.get(0).equals(toc)) {
+								tocID = link.get(1);
+							}
+						}
+					}
 				}
 			}
 		});
@@ -139,11 +171,8 @@ public class StationCreator extends JDialog {
 						StationType.removeItemAt(0);
 					}
 					stopType = selectedType;
-				}
-
-				if (!stopType.equals("Train")) {
-					IDField.setText("N/A");
-					ID = "N/A";
+					dropDownFiller(CountryField, countryList, "country", country);
+					dropDownFiller(TOCField, operatorList, "TOC", toc);
 				}
 			}
 		});
@@ -159,12 +188,13 @@ public class StationCreator extends JDialog {
 			}
 		});
 
-		IDField.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				if (e.getKeyChar() == '\n') { idChecker(list); }
-			}
-		});
+		// Old enter key or ID check no longer required
+//		IDField.addKeyListener(new KeyAdapter() {
+//			@Override
+//			public void keyTyped(KeyEvent e) {
+//				if (e.getKeyChar() == '\n') { idChecker(list); }
+//			}
+//		});
 
 		// Buttons
 		CancelButton.addActionListener(e -> {start.setCanceled(true); closeWindow();});
@@ -227,8 +257,14 @@ public class StationCreator extends JDialog {
 		boolean valid = false;
 
 		if (IDField.getText().trim().length() == 3) {
-			if (list.findStationByID(IDField.getText().trim()).isEmpty() || IDField.getText().trim().equals("N/A")) {
-				ID = IDField.getText().trim().toUpperCase();
+			String stationID = IDField.getText().trim();
+			if (stopType.equals("Train")) {
+				stationID = countryID + stationID;
+			} else {
+				stationID = tocID + stationID;
+			}
+			if (list.findStationByID(stationID).isEmpty()) {
+				ID = stationID.toUpperCase();
 				valid = true;
 			} else {
 				JOptionPane.showMessageDialog(StationCreator.this, "The ID entered already exists", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -237,10 +273,8 @@ public class StationCreator extends JDialog {
 			JOptionPane.showMessageDialog(StationCreator.this, "The ID entered must be 3 characters", "Error!", JOptionPane.ERROR_MESSAGE);
 		}
 
+		// Resets textbox
 		if (!valid) {
-			if (!stopType.equals("Train")) {
-				IDField.setText("N/A");
-			}
 			IDField.setText("");
 		}
 		return valid;
@@ -314,15 +348,71 @@ public class StationCreator extends JDialog {
 		return confirmed[0] ? inputField.getText() : "NULL";
 	}
 
+	private String showCreatorIDPopUp(String option, String answer) {
+
+		JDialog firstDialog = new JDialog(this, "New " + option + " ID creator", true);
+		firstDialog.setSize(400, 150);
+		firstDialog.setLayout(new GridBagLayout());
+
+		// Form Components
+		JLabel promptLabel = new JLabel("Enter " + answer + "'s new ID here:");
+		JTextField inputField = new JTextField(10);
+		JButton enterButton = new JButton("Enter");
+		JButton cancelButton = new JButton("Cancel");
+
+		// Form Layout
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.insets = new Insets(5, 5, 5, 5);
+
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		firstDialog.add(promptLabel, gbc);
+
+		gbc.gridx = 1;
+		firstDialog.add(inputField, gbc);
+
+		// Create a panel to hold the buttons side by side
+		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		buttonPanel.add(enterButton);
+		buttonPanel.add(cancelButton);
+
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.gridwidth = 2;
+		firstDialog.add(buttonPanel, gbc);
+
+		// Action for "Enter" button
+		final boolean[] confirmed = new boolean[1];
+		enterButton.addActionListener(e -> {
+			// Show the second dialog for confirmation
+			confirmed[0] = showCreatorConfirmation(inputField.getText(), firstDialog, (option + " ID"));
+			if (confirmed[0]) {
+				firstDialog.dispose();
+			}
+		});
+
+		// Action for "Cancel" button
+		cancelButton.addActionListener(e -> {
+			confirmed[0] = false;
+			firstDialog.dispose();
+		});
+
+		// Center the dialog on the screen and make it visible
+		firstDialog.setLocationRelativeTo(this);
+		firstDialog.setVisible(true);
+
+		return confirmed[0] ? inputField.getText() : "NULL";
+	}
+
 	private boolean showCreatorConfirmation(String inputValue, JDialog firstDialog, String option) {
 
 		final boolean[] confirmed = new boolean[1];
 		JDialog confirmationDialog = new JDialog(this, "New " + option + " creator", true);
-		confirmationDialog.setSize(300, 150);
+		confirmationDialog.setSize(500, 150);
 		confirmationDialog.setLayout(new GridBagLayout());
 
 		// Components for the confirmation dialog
-		JLabel confirmationLabel = new JLabel("Is " + inputValue + " the correct " + option + "?");
+		JLabel confirmationLabel = new JLabel("Is " + inputValue + " the correct " + option + " this cannot be changed later?");
 		JButton yesButton = new JButton("Yes");
 		JButton noButton = new JButton("No");
 

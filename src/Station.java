@@ -65,6 +65,22 @@ public class Station {
 
 	public String getId() { return id; }
 
+	public String getBasicId() {
+		if (stopType.equals("Train")) {
+			return id.substring(3, 6);
+		} else {
+			return id.substring(2, 5);
+		}
+	}
+
+	public String getCode() {
+		if (stopType.equals("Train")) {
+			return id.substring(0, 3);
+		} else {
+			return id.substring(0, 2);
+		}
+	}
+
 	public String getName() { return name; }
 
 	public String getStopType() { return stopType; }
@@ -204,7 +220,7 @@ public class Station {
 		}
 	}
 
-	public String stationChoiceDisplay() { return name + " " + id + " (" + stopType + ")"; }
+	public String stationChoiceDisplay() { return name + " " + getCode() + "-" + getBasicId() + " (" + stopType + ")"; }
 
 	@Override
 	public String toString() { return id + "  " + name + "  " + stopType + "  " + requestStop + " " + explored + "  " + stoppedAt + "  " + passedThroughStopping + "  " + passedThrough + " " + visited; }

@@ -28,10 +28,13 @@ public class StationInfo extends JDialog {
 	private JButton NewButton;
 	private final Station station;
 
-	public StationInfo(Start start, Station station, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<String> operatorList, boolean random) {
+	private String countryID;
+
+	public StationInfo(Start start, Station station, Stations list, ArrayList<String> countryList, ArrayList<String> areaList, ArrayList<String> operatorList, ArrayList<ArrayList<String>> countryAreaLink, ArrayList<ArrayList<String>> countryIDLink, ArrayList<ArrayList<String>> tocIDLink, boolean random) {
 
 		super(start, "Station Info", true);
 		this.station = station;
+		this.countryID = station.getCode();
 
 		// Country/Area & TOC
 		dropDownFiller(CountryField, countryList, "country");
@@ -61,19 +64,28 @@ public class StationInfo extends JDialog {
 		    String selectedCountry = (String) CountryField.getSelectedItem();
 
 			if (selectedCountry != null) {
-				if (selectedCountry.equals("Add new country")) {
-					String newCountry = showCreatorPopUp("country");
-					if (!newCountry.equals("NULL")) {
-						countryList.add(newCountry);
-						Collections.sort(countryList);
-						station.setCountry(newCountry);
-						CountryField.removeAllItems();
-						dropDownFiller(CountryField, countryList, "country");
+				if (station.getStopType().equals("Train")) {
+					String newCountryID = "";
+					for (ArrayList<String> link : countryIDLink) {
+						if (link.get(0).equals(selectedCountry)) {
+							newCountryID = link.get(1);
+						}
 					}
-					CountryField.setSelectedItem(station.getCountry());
-				} else if (!selectedCountry.equals(station.getCountry())) {
+
+					if (!selectedCountry.equals(station.getCountry())) {
+						if (list.findStationByID(newCountryID + station.getBasicId()).isEmpty()) {
+							station.setCountry(selectedCountry);
+							countryID = newCountryID;
+							station.setId(countryID + station.getBasicId());
+							fieldUpdate();
+						} else {
+							JOptionPane.showMessageDialog(StationInfo.this, "The ID already exists", "Error!", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				} else {
 					station.setCountry(selectedCountry);
 				}
+				CountryField.setSelectedItem(station.getCountry());
 			}
 		});
 
@@ -81,19 +93,7 @@ public class StationInfo extends JDialog {
 		    String selectedArea = (String) AreaField.getSelectedItem();
 
 			if (selectedArea != null) {
-				if (selectedArea.equals("Add new area")) {
-					String newArea = showCreatorPopUp("area");
-					if (!newArea.equals("NULL")) {
-						areaList.add(newArea);
-						Collections.sort(areaList);
-						station.setArea(newArea);
-						AreaField.removeAllItems();
-						dropDownFiller(AreaField, areaList, "area");
-					}
-					AreaField.setSelectedItem(station.getArea());
-				} else if (!selectedArea.equals(station.getArea())) {
-					station.setArea(selectedArea);
-				}
+				station.setArea(selectedArea);
 			}
 		});
 
@@ -101,20 +101,28 @@ public class StationInfo extends JDialog {
 			String SelectedTOC = (String) TOCField.getSelectedItem();
 
 			if (SelectedTOC != null) {
-				if (SelectedTOC.equals("Add new TOC")) {
-					String newTOC = showCreatorPopUp("TOC");
-					if (!newTOC.equals("NULL")) {
-						operatorList.add(newTOC);
-						Collections.sort(operatorList);
-						station.setManager(newTOC);
-						TOCField.removeAllItems();
-						dropDownFiller(TOCField, operatorList, "TOC");
-					}
-					TOCField.setSelectedItem(station.getManager());
-				} else if (!SelectedTOC.equals(station.getManager())) {
+				if (station.getStopType().equals("Train")) {
 					station.setManager(SelectedTOC);
+				} else {
+					String newTOCID = "";
+					for (ArrayList<String> link : tocIDLink) {
+						if (link.get(0).equals(SelectedTOC)) {
+							newTOCID = link.get(1);
+						}
+					}
+
+					if (!SelectedTOC.equals(station.getManager())) {
+						if (list.findStationByID(newTOCID + station.getBasicId()).isEmpty()) {
+							station.setManager(SelectedTOC);
+							station.setId(newTOCID + station.getBasicId());
+							fieldUpdate();
+						} else {
+							JOptionPane.showMessageDialog(StationInfo.this, "The ID already exists", "Error!", JOptionPane.ERROR_MESSAGE);
+						}
+					}
 				}
 			}
+			TOCField.setSelectedItem(station.getManager());
 		});
 
 		// Request Stop
@@ -241,20 +249,28 @@ public class StationInfo extends JDialog {
 	private boolean idChecker(Stations list) {
 
 		boolean valid = false;
+		String enteredID = IDField.getText().trim();
 
-		if (!IDField.getText().equals(station.getId())) {
-			if (IDField.getText().length() == 3) {
-				if (list.findStationByID(IDField.getText()).isEmpty() || IDField.getText().equals("N/A")) {
-					station.setId(IDField.getText());
+		if (!enteredID.equals(station.getBasicId())) {
+			if (enteredID.length() == 3) {
+				String stationID = station.getCode() + enteredID;
+				System.out.println(list.findStationByID(stationID).isEmpty());
+				if (list.findStationByID(stationID).isEmpty()) {
+					station.setId(station.getCode() + IDField.getText().toUpperCase());
 					fieldUpdate();
 					valid = true;
 				} else {
+					System.out.println(list.findStationByID(stationID).isEmpty());
 					JOptionPane.showMessageDialog(StationInfo.this, "The ID entered already exists", "Error!", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
 				JOptionPane.showMessageDialog(StationInfo.this, "The ID entered must be 3 characters", "Error!", JOptionPane.ERROR_MESSAGE);
 			}
-			IDField.setText(station.getId());
+
+			// Resets textbox
+			if (!valid) {
+				IDField.setText(station.getBasicId());
+			}
 		}
 		return valid;
 	}
@@ -371,7 +387,7 @@ public class StationInfo extends JDialog {
 		fields[8] = VisitedField.getText();
 
 		IDField.setText(fields[0]);
-		if (!IDField.getText().equals(station.getId())) {
+		if (!IDField.getText().equals(station.getBasicId())) {
 			if (!idChecker(list)) {
 				failed = true;
 			}
@@ -437,7 +453,6 @@ public class StationInfo extends JDialog {
 		for (String content : contents) {
             dropDown.addItem(content);
         }
-		dropDown.addItem("Add new " + type);
 	}
 
 	private String showCreatorPopUp(String option) {
@@ -496,6 +511,62 @@ public class StationInfo extends JDialog {
 		return confirmed[0] ? inputField.getText() : "NULL";
     }
 
+	private String showCreatorIDPopUp(String option, String answer) {
+
+		JDialog firstDialog = new JDialog(this, "New " + option + " ID creator", true);
+		firstDialog.setSize(400, 150);
+		firstDialog.setLayout(new GridBagLayout());
+
+		// Form Components
+		JLabel promptLabel = new JLabel("Enter " + answer + "'s new ID here:");
+		JTextField inputField = new JTextField(10);
+		JButton enterButton = new JButton("Enter");
+		JButton cancelButton = new JButton("Cancel");
+
+		// Form Layout
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+		gbc.gridx = 0;
+        gbc.gridy = 0;
+        firstDialog.add(promptLabel, gbc);
+
+        gbc.gridx = 1;
+        firstDialog.add(inputField, gbc);
+
+        // Create a panel to hold the buttons side by side
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        buttonPanel.add(enterButton);
+        buttonPanel.add(cancelButton);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        firstDialog.add(buttonPanel, gbc);
+
+        // Action for "Enter" button
+		final boolean[] confirmed = new boolean[1];
+        enterButton.addActionListener(e -> {
+            // Show the second dialog for confirmation
+            confirmed[0] = showCreatorConfirmation(firstDialog, ("New " + option + " ID creator"), ("Is " + inputField.getText() + " the correct " + option + " ID?"));
+			if (confirmed[0]) {
+				firstDialog.dispose();
+			}
+        });
+
+        // Action for "Cancel" button
+        cancelButton.addActionListener(e -> {
+			confirmed[0] = false;
+            firstDialog.dispose();
+        });
+
+        // Center the dialog on the screen and make it visible
+        firstDialog.setLocationRelativeTo(this);
+        firstDialog.setVisible(true);
+
+		return confirmed[0] ? inputField.getText() : "NULL";
+	}
+
     private boolean showCreatorConfirmation(JDialog firstDialog, String title, String question) {
 
 	    final boolean[] confirmed = new boolean[1];
@@ -522,7 +593,7 @@ public class StationInfo extends JDialog {
 
 	    // Create a panel to hold the buttons
 	    JPanel buttonPanel = new JPanel();
-	    buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0)); // Center with 10px gap
+	    buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0)); // Center with 10 px gap
 
 	    // Add buttons to the panel
 	    buttonPanel.add(yesButton);
@@ -562,9 +633,9 @@ public class StationInfo extends JDialog {
 	private void fieldUpdate() {
 
 		// Sets fields on form
-		StationName.setText(station.getName() + " (" + station.getId() + ")");
+		StationName.setText(station.getName() + " (" + station.getCode() + "-" + station.getBasicId() + ")");
 		NameField.setText(station.getName());
-		IDField.setText(station.getId());
+		IDField.setText(station.getBasicId());
 		CountryField.setSelectedItem(station.getCountry());
 		AreaField.setSelectedItem(station.getArea());
 		TOCField.setSelectedItem(station.getManager());

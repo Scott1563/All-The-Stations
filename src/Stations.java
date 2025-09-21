@@ -188,6 +188,18 @@ public class Stations {
 		}
 	}
 
+	public ArrayList<Station> findStationByBasicID(String id) {
+
+		ArrayList<Station> stations = new ArrayList<>();
+
+		for (Station station : stationList) {
+			if (station.getBasicId().equalsIgnoreCase(id)) {
+				stations.add(station);
+			}
+		}
+		return stations;
+	}
+
 	public ArrayList<Station> findStationByID(String id) {
 
 		ArrayList<Station> stations = new ArrayList<>();
@@ -539,7 +551,7 @@ public class Stations {
 
 	            typeLength = Math.max(typeLength, station.getStopType().length());
 	            nameLength = Math.max(nameLength, station.getName().length());
-				idLength = Math.max(idLength, station.getId().length());
+				idLength = Math.max(idLength, station.getBasicId().length());
 
 	            if (country.equals("World")) {
 	                areaLength = Math.max(areaLength, (station.getArea() + ", " + station.getCountry()).length());
@@ -573,7 +585,7 @@ public class Stations {
 	                info.append("|").append(stopType);
 	            }
 
-	            info.append(stationType.equals("ALL") ? " |ID: " : "|ID: ").append(String.format("%-" + idLength + "s", station.getId())).append(" |Name: ");
+	            info.append(stationType.equals("ALL") ? " |ID: " : "|ID: ").append(String.format("%-" + idLength + "s", station.getBasicId())).append(" |Name: ");
 
 	            String name = String.format("%-" + nameLength + "s", station.getName());
 	            info.append(name);

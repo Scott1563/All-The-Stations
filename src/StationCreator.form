@@ -71,7 +71,7 @@
         </constraints>
         <properties>
           <labelFor value="fab6c"/>
-          <text value="ID:"/>
+          <text value="ID (3 Letters):"/>
         </properties>
       </component>
       <component id="90c9" class="javax.swing.JLabel">

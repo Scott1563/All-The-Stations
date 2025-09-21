@@ -18,6 +18,8 @@ public class Start extends JFrame {
 	private final ArrayList<String> operatorList = new ArrayList<>();
 	private final ArrayList<String> stopTypes = new ArrayList<>();
 	private final ArrayList<ArrayList<String>> countryAreaLink = new ArrayList<>();
+	private final ArrayList<ArrayList<String>> tocIDLink = new ArrayList<>();
+	private final ArrayList<ArrayList<String>> countryIDLink = new ArrayList<>();
     private Start self;
 	private boolean editMore = false;
 	private boolean canceled;
@@ -126,9 +128,18 @@ public class Start extends JFrame {
 
     private void arraySetUp() {
 
+		boolean countryRun = countryIDLink.isEmpty();
+		boolean tocRun = tocIDLink.isEmpty();
+
         for (Station station : stationList.getStationList()) {
 			if (!(countryList.contains(station.getCountry()) || station.getCountry().isEmpty())) {
 				countryList.add(station.getCountry());
+				if (station.getStopType().equals("Train") && countryRun) {
+					ArrayList<String> tempArraylist = new ArrayList<>();
+					tempArraylist.add(station.getCountry());
+					tempArraylist.add(station.getCode());
+					countryIDLink.add(tempArraylist);
+				}
 			}
 
 			if (!(areaList.contains(station.getArea()) || station.getArea().isEmpty())) {
@@ -141,6 +152,12 @@ public class Start extends JFrame {
 
 			if (!(operatorList.contains(station.getManager()) || station.getManager().isEmpty())) {
 				operatorList.add(station.getManager());
+				if (!station.getStopType().equals("Train") && tocRun) {
+					ArrayList<String> tempArraylist = new ArrayList<>();
+					tempArraylist.add(station.getManager());
+					tempArraylist.add(station.getCode());
+					tocIDLink.add(tempArraylist);
+				}
 			}
 
 			if (!(stopTypes.contains(station.getStopType()) || station.getStopType().isEmpty())) {
@@ -155,7 +172,7 @@ public class Start extends JFrame {
 
 	public void newStation() {
 
-		StationCreator creation = new StationCreator(self, stationList, countryList, areaList, countryAreaLink, operatorList, stopTypes);
+		StationCreator creation = new StationCreator(self, stationList, countryList, areaList, countryAreaLink, countryIDLink, tocIDLink, operatorList, stopTypes);
 		creation.setContentPane(creation.StationCreatorMainPanel);
 		creation.setTitle("Station Creator");
 		creation.setSize(600, 400);
@@ -165,7 +182,7 @@ public class Start extends JFrame {
 
 	public void editStation(boolean random) {
 
-		StationInfo stationDisplay = new StationInfo(self, getSelectedStation(), stationList, countryList, areaList, operatorList, random);
+		StationInfo stationDisplay = new StationInfo(self, getSelectedStation(), stationList, countryList, areaList, operatorList, countryAreaLink, countryIDLink, tocIDLink, random);
 		stationDisplay.setContentPane(stationDisplay.StationInfoMainPanel);
 		stationDisplay.setTitle("Station Info");
 		stationDisplay.setSize(875, 600);
@@ -187,6 +204,8 @@ public class Start extends JFrame {
 
 	public void statsShower() {
 
+		System.out.println(countryIDLink);
+		System.out.println(tocIDLink);
 		self.setVisible(false);
 		StatsOptionSelector stats = new StatsOptionSelector(self, stationList, countryList, areaList, countryAreaLink, false);
 		stats.setSelf(stats);
@@ -226,4 +245,28 @@ public class Start extends JFrame {
 	public void setNew(boolean createNew) { this.createNew = createNew; }
 
 	public boolean getNew() { return createNew; }
+
+	public void addNewCountryIDLink(String country, String id) {
+
+		ArrayList<String> tempArraylist = new ArrayList<>();
+		tempArraylist.add(country);
+		tempArraylist.add(id);
+		countryIDLink.add(tempArraylist);
+	}
+
+	public void addNewTOCIDLink(String toc, String id) {
+
+		ArrayList<String> tempArraylist = new ArrayList<>();
+		tempArraylist.add(toc);
+		tempArraylist.add(id);
+		tocIDLink.add(tempArraylist);
+	}
+
+	public void addNewCountryAreaLink(String country, String area) {
+
+		ArrayList<String> tempArraylist = new ArrayList<>();
+		tempArraylist.add(country);
+		tempArraylist.add(area);
+		countryAreaLink.add(tempArraylist);
+	}
 }
